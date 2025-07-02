@@ -113,8 +113,8 @@ export default function CompletedProjects() {
           ))}
         </Marquee>
 
-        <div className="mt-8 right-4 absolute border-b mx-8 -my-8">
-          <Link href={"/projects"}>
+        <div className="mt-8 flex  justify-end mx-8 -my-8">
+          <Link href={"/projects"} className="border-b">
             <button className="flex items-center space-x-2 text-white hover:opacity-70 transition-opacity">
               <span>ALL COMPLETED PROJECTS</span>
               <ArrowRight className="w-4 h-4" />
