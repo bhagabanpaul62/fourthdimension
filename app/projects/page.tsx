@@ -1,7 +1,10 @@
+"use client";
+
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
+import { motion } from "motion/react";
 
 export default function ProjectsPage() {
   const projects = [
@@ -42,7 +45,12 @@ export default function ProjectsPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <motion.section
+        className="relative h-screen flex items-end py-28 px-8 overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.1, type: "decay" }}
+      >
         <Image
           src="/img5.jpg"
           alt="Modern interior with entertainment center"
@@ -51,14 +59,16 @@ export default function ProjectsPage() {
           priority
         />
         <div className="absolute inset-0 bg-black/40" />
-        <div className="relative z-10 text-white">
-          <h1 className="text-6xl lg:text-8xl font-light mb-8">Projects.</h1>
+        <div className=" left-0 z-10 text-white">
+          <h1 className="text-6xl lg:text-8xl font-light mb-8 text-left">
+            Projects.
+          </h1>
         </div>
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center">
           <p className="text-xs tracking-wider mb-2">SCROLL DOWN</p>
           <ChevronDown className="w-4 h-4 mx-auto animate-bounce" />
         </div>
-      </section>
+      </motion.section>
 
       {/* Projects Grid */}
       <section className="py-20 bg-white">
