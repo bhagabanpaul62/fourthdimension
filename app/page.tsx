@@ -3,7 +3,7 @@
 import NavigationBar from "@/components/navigation";
 import Footer from "@/components/footer";
 import Image from "next/image";
-import { ChevronDown, ArrowRight } from "lucide-react";
+import { ChevronDown, ArrowRight, ArrowUpRight } from "lucide-react";
 import BackgroundSlider from "react-background-slider";
 import { motion } from "motion/react";
 import Marquee from "react-fast-marquee";
@@ -257,66 +257,100 @@ export default function HomePage() {
       </section>
 
       {/* Step by Step Process */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl lg:text-5xl font-light mb-16">
+      <section className="py-20 bg-neutral-100 h-screen">
+        <div className=" h-full px-8">
+          <h2 className="text-4xl text-black lg:text-5xl font-light mb-16">
             Step-by-step project
             <br />
-            implementation <span className="text-gray-400">process</span> at MN
+            implementation <span className="text-gray-400">process</span> at
+            Fourth Dimension
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-            <div className="relative h-64">
+          <div className="grid grid-cols-4 grid-rows-4 gap-4">
+            <div className="col-span-2 row-span-2 row-start-1 relative min-h-80 overflow-hidden group">
               <Image
-                src="/images/completed-projects.png"
+                src="/img7.jpg"
                 alt="Project implementation"
                 fill
-                className="object-cover rounded-lg"
+                className="object-cover h-full transition-transform duration-500 group-hover:scale-105"
               />
             </div>
-            <div className="lg:col-span-2 grid grid-cols-2 gap-8">
-              {[
-                {
-                  number: "01",
-                  title: "CONSULTATION",
-                  desc: "Understanding client needs and project requirements",
-                },
-                {
-                  number: "02",
-                  title: "TECHNICAL PLANNING",
-                  desc: "Detailed technical drawings and specifications",
-                },
-                {
-                  number: "03",
-                  title: "DESIGN PROJECT",
-                  desc: "Complete design development and visualization",
-                },
-                {
-                  number: "04",
-                  title: "AUTHOR SUPERVISION",
-                  desc: "Professional oversight during implementation",
-                },
-                {
-                  number: "05",
-                  title: "OBJECT PROCUREMENT",
-                  desc: "Sourcing and delivery of materials and furniture",
-                },
-                {
-                  number: "06",
-                  title: "PROJECT COMPLETION",
-                  desc: "Final installation and project handover",
-                },
-              ].map((step) => (
-                <div key={step.number} className="bg-white p-6 rounded-lg">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm text-gray-400">{step.number}</span>
-                    <ArrowRight className="w-4 h-4 text-gray-400" />
-                  </div>
-                  <h3 className="font-medium mb-2">{step.title}</h3>
-                  <p className="text-sm text-gray-600">{step.desc}</p>
+
+            {[
+              {
+                number: "01",
+                title: "CONSULTATION",
+                desc: "Understanding client needs and project requirements",
+              },
+              {
+                number: "02",
+                title: "TECHNICAL PLANNING",
+                desc: "Detailed technical drawings and specifications",
+              },
+            ].map((step, i) => (
+              <div
+                key={step.number}
+                className="row-span-2 row-start-1 flex flex-col justify-between bg-neutral-200 p-6  hover:bg-black hover:text-white transition-colors group duration-300"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-sm text-gray-400 roup-hover:text-white transition-colors">
+                    {step.number}
+                  </span>
+                  <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
                 </div>
-              ))}
-            </div>
+                <div>
+                  <h3 className="font-medium mb-2 text-black group-hover:text-white transition-colors">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 group-hover:text-gray-400 transition-colors ">
+                    {step.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+
+            {[
+              {
+                number: "03",
+                title: "DESIGN PROJECT",
+                desc: "Complete design development and visualization",
+              },
+              {
+                number: "04",
+                title: "AUTHOR SUPERVISION",
+                desc: "Professional oversight during implementation",
+              },
+              {
+                number: "05",
+                title: "OBJECT PROCUREMENT",
+                desc: "Sourcing and delivery of materials and furniture",
+              },
+              {
+                number: "06",
+                title: "PROJECT COMPLETION",
+                desc: "Final installation and project handover",
+              },
+            ].map((step, i) => (
+              <div
+                key={step.number}
+                className="row-span-2 row-start-3 flex flex-col justify-between bg-neutral-200 p-6  hover:bg-black hover:text-white transition-colors group duration-300"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-sm text-gray-400 roup-hover:text-white transition-colors">
+                    {step.number}
+                  </span>
+                  <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
+                </div>
+                <div>
+                  <h3 className="font-medium mb-2 text-black group-hover:text-white transition-colors">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 group-hover:text-gray-400 transition-colors ">
+                    {step.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
