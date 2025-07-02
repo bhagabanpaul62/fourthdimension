@@ -5,6 +5,7 @@ import Footer from "@/components/footer";
 import Image from "next/image";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import BackgroundSlider from "react-background-slider";
+import { motion } from "motion/react";
 
 import img1 from "../public/img1.jpg";
 import img2 from "../public/img2.jpg";
@@ -19,13 +20,6 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* <Image
-          src="/images/hero-house.png"
-          alt="Modern house exterior"
-          fill
-          className="object-cover"
-          priority
-        /> */}
         <BackgroundSlider
           images={[img1.src, img2.src, img3.src, img4.src, img5.src]}
           duration={5}
@@ -35,13 +29,23 @@ export default function HomePage() {
         <div className="relative z-10 text-white px-6 flex justify-between w-full">
           <div className="flex flex-row items-center justify-between w-full">
             <div>
-              <h1 className="text-6xl lg:text-8xl font-black mb-20 text-shadow-2xl">
+              <motion.h1
+                className="text-6xl lg:text-8xl font-black mb-20 text-shadow-2xl origin-left"
+                initial={{ scale: 0.8, x: 0 }}
+                animate={{ scale: 1, x: 0 }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+              >
                 Fourth
                 <br />
                 Dimension
                 {/* <sup className="text-2xl">N</sup> */}
-              </h1>
-              <p className="text-sm opacity-80 max-w-xs leading-relaxed">
+              </motion.h1>
+              <motion.p
+                className="text-sm opacity-80 max-w-xs leading-relaxed"
+                initial={{ transform: "translateX(-500px)" }}
+                animate={{ transform: "translateX(0px)" }}
+                transition={{ duration: 1.5, type: "decay", ease: "easeInOut" }}
+              >
                 AN INTERIOR DESIGN STUDIO
                 <br />
                 THAT CREATES COMFORTABLE
@@ -49,23 +53,33 @@ export default function HomePage() {
                 AND PREMIUM SPACES
                 <br />
                 USING CONTEMPORARY DESIGN.
-              </p>
+              </motion.p>
             </div>
             <div className="text-right">
-              <p className="text-lg  max-w-sm ml-auto leading-relaxed">
+              <motion.p
+                className="text-lg  max-w-sm ml-auto leading-relaxed"
+                initial={{ transform: "translateX(500px)" }}
+                animate={{ transform: "translateX(0px)" }}
+                transition={{ duration: 1.5, type: "decay", ease: "easeInOut" }}
+              >
                 OUR PHILOSOPHY IS RESTRAINED
                 <br />
                 AESTHETICS, PURE FORMS, NATURAL
                 <br />
                 MATERIALS AND DEPTH IN EVERY DETAIL.
-              </p>
+              </motion.p>
             </div>
           </div>
         </div>
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center">
+        <motion.div
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center"
+          initial={{ transform: "translateY(-1000px)" }}
+          animate={{ transform: "translateY(0px)" }}
+          transition={{ duration: 2.0, type: "tween", ease: "easeInOut" }}
+        >
           <p className="text-xs tracking-wider mb-2">SCROLL DOWN</p>
           <ChevronDown className="w-4 h-4 mx-auto animate-bounce" />
-        </div>
+        </motion.div>
       </section>
 
       {/* Design Process Section */}
