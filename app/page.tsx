@@ -1,103 +1,280 @@
+"use client";
+
+import Navigation from "@/components/navigation";
+import Footer from "@/components/footer";
 import Image from "next/image";
+import { ChevronDown, ArrowRight } from "lucide-react";
+import BackgroundSlider from "react-background-slider";
 
-export default function Home() {
+import img1 from "../public/img1.jpg";
+import img2 from "../public/img2.jpg";
+import img3 from "../public/img3.jpg";
+import img4 from "../public/img4.jpg";
+import img5 from "../public/img5.jpg";
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen">
+      <Navigation />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* <Image
+          src="/images/hero-house.png"
+          alt="Modern house exterior"
+          fill
+          className="object-cover"
+          priority
+        /> */}
+        <BackgroundSlider
+          images={[img1.src, img2.src, img3.src, img4.src, img5.src]}
+          duration={5}
+          transition={2}
+        />
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="relative z-10 text-white px-6 flex justify-between w-full">
+          <div className="flex flex-row items-center justify-between w-full">
+            <div>
+              <h1 className="text-6xl lg:text-8xl font-black mb-20 text-shadow-2xl">
+                Fourth
+                <br />
+                Dimension
+                {/* <sup className="text-2xl">N</sup> */}
+              </h1>
+              <p className="text-sm opacity-80 max-w-xs leading-relaxed">
+                AN INTERIOR DESIGN STUDIO
+                <br />
+                THAT CREATES COMFORTABLE
+                <br />
+                AND PREMIUM SPACES
+                <br />
+                USING CONTEMPORARY DESIGN.
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="text-lg  max-w-sm ml-auto leading-relaxed">
+                OUR PHILOSOPHY IS RESTRAINED
+                <br />
+                AESTHETICS, PURE FORMS, NATURAL
+                <br />
+                MATERIALS AND DEPTH IN EVERY DETAIL.
+              </p>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center">
+          <p className="text-xs tracking-wider mb-2">SCROLL DOWN</p>
+          <ChevronDown className="w-4 h-4 mx-auto animate-bounce" />
+        </div>
+      </section>
+
+      {/* Design Process Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="mb-16">
+              <p className="text-sm text-gray-500 mb-4 max-w-md">
+                MINIMAL SPACES BRING A SENSE WELCOME TO EVERY
+                <br />
+                CORNER. THEY ALSO BRING A SENSE OF CALM TO
+                <br />
+                EVERYDAY LIFE.
+              </p>
+              <h2 className="text-4xl lg:text-5xl font-light">
+                Our comprehensive{" "}
+                <span className="text-gray-400">interior</span>
+                <br />
+                design <span className="text-gray-400">process</span> includes
+              </h2>
+            </div>
+
+            <div className="space-y-8">
+              {[
+                { number: "01", title: "SPACE PLANNING" },
+                { number: "02", title: "DESIGN DEVELOPMENT" },
+                { number: "03", title: "AUTHOR SUPERVISION" },
+                { number: "04", title: "FURNITURE & MATERIAL SOURCING" },
+              ].map((item) => (
+                <div
+                  key={item.number}
+                  className="border-b border-gray-200 pb-6"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-8">
+                      <span className="text-sm text-gray-400">
+                        {item.number}
+                      </span>
+                      <h3 className="text-lg font-medium">{item.title}</h3>
+                    </div>
+                    <ChevronDown className="w-5 h-5 text-gray-400" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Completed Projects Section */}
+      <section className="py-20 bg-black text-white">
+        <div className="container mx-auto px-6">
+          <div className="flex items-start justify-between mb-12">
+            <h2 className="text-4xl lg:text-5xl font-light max-w-md">
+              Completed <span className="text-gray-400">projects</span> that
+              <br />
+              speak for themselves
+            </h2>
+            <div className="text-right text-sm">
+              <p className="text-gray-400 mb-2">IN EVERY PROJECT</p>
+              <p className="text-gray-400 mb-2">WE AIM TO FIND</p>
+              <p className="text-gray-400 mb-2">THE UNIQUE AESTHETIC</p>
+              <p className="text-gray-400">FEELING OF THE SPACE</p>
+              <div className="mt-8">
+                <button className="flex items-center space-x-2 text-white hover:opacity-70 transition-opacity">
+                  <span>ALL COMPLETED PROJECTS</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="relative h-96">
+              <Image
+                src="/images/completed-projects.png"
+                alt="Interior design project"
+                fill
+                className="object-cover rounded-lg"
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="relative h-44">
+                <Image
+                  src="/placeholder.svg?height=200&width=300"
+                  alt="Interior project"
+                  fill
+                  className="object-cover rounded-lg"
+                />
+              </div>
+              <div className="relative h-44">
+                <Image
+                  src="/placeholder.svg?height=200&width=300"
+                  alt="Interior project"
+                  fill
+                  className="object-cover rounded-lg"
+                />
+              </div>
+              <div className="relative h-44">
+                <Image
+                  src="/placeholder.svg?height=200&width=300"
+                  alt="Interior project"
+                  fill
+                  className="object-cover rounded-lg"
+                />
+              </div>
+              <div className="relative h-44">
+                <Image
+                  src="/placeholder.svg?height=200&width=300"
+                  alt="Interior project"
+                  fill
+                  className="object-cover rounded-lg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Step by Step Process */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl lg:text-5xl font-light mb-16">
+            Step-by-step project
+            <br />
+            implementation <span className="text-gray-400">process</span> at MN
+          </h2>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <div className="relative h-64">
+              <Image
+                src="/images/completed-projects.png"
+                alt="Project implementation"
+                fill
+                className="object-cover rounded-lg"
+              />
+            </div>
+            <div className="lg:col-span-2 grid grid-cols-2 gap-8">
+              {[
+                {
+                  number: "01",
+                  title: "CONSULTATION",
+                  desc: "Understanding client needs and project requirements",
+                },
+                {
+                  number: "02",
+                  title: "TECHNICAL PLANNING",
+                  desc: "Detailed technical drawings and specifications",
+                },
+                {
+                  number: "03",
+                  title: "DESIGN PROJECT",
+                  desc: "Complete design development and visualization",
+                },
+                {
+                  number: "04",
+                  title: "AUTHOR SUPERVISION",
+                  desc: "Professional oversight during implementation",
+                },
+                {
+                  number: "05",
+                  title: "OBJECT PROCUREMENT",
+                  desc: "Sourcing and delivery of materials and furniture",
+                },
+                {
+                  number: "06",
+                  title: "PROJECT COMPLETION",
+                  desc: "Final installation and project handover",
+                },
+              ].map((step) => (
+                <div key={step.number} className="bg-white p-6 rounded-lg">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-sm text-gray-400">{step.number}</span>
+                    <ArrowRight className="w-4 h-4 text-gray-400" />
+                  </div>
+                  <h3 className="font-medium mb-2">{step.title}</h3>
+                  <p className="text-sm text-gray-600">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <Image
+          src="/images/exterior-view.png"
+          alt="Modern house exterior view"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="relative z-10 text-white text-center">
+          <h2 className="text-4xl lg:text-6xl font-light mb-8">
+            See what your <span className="text-gray-300">interior</span> will
+            <br />
+            look <span className="text-gray-300">like</span>
+          </h2>
+        </div>
+        <div className="absolute bottom-8 right-8 text-white">
+          <button className="flex items-center space-x-2 hover:opacity-70 transition-opacity">
+            <span className="text-sm">VIEW DESIGN</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 }
