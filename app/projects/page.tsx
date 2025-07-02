@@ -41,12 +41,12 @@ export default function ProjectsPage() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="mandatory-scroll-snapping h-screen overflow-y-scroll scroll-smooth">
       <Navigation />
 
       {/* Hero Section */}
       <motion.section
-        className="relative h-screen flex items-end py-28 px-8 overflow-hidden"
+        className="snap-start relative h-screen flex items-end py-28 px-8 overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.1, type: "decay" }}
@@ -71,7 +71,7 @@ export default function ProjectsPage() {
       </motion.section>
 
       {/* Projects Grid */}
-      <section className="py-20 bg-white">
+      <section className="snap-start py-20 bg-white">
         <div className="container mx-auto px-6">
           {/* Filter Tabs */}
           <div className="flex items-center justify-between mb-12">
