@@ -22,6 +22,7 @@ import img3 from "../public/img3.jpg";
 import img4 from "../public/img4.jpg";
 import img5 from "../public/img5.jpg";
 import Link from "next/link";
+import ProjectProcessSection from "@/section/ImplementationProcess";
 
 const slidesData = [
   {
@@ -193,7 +194,7 @@ export default function HomePage() {
             pauseOnHover
             gradient={false}
             speed={50}
-            className="h-[65vh]"
+            className="h-[65vh] overflow-hidden"
           >
             {slidesData.map((slide, index) => (
               // <SwiperSlide key={index} className="h-fit">
@@ -259,113 +260,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Step by Step Process */}
-      <section className="py-20 bg-neutral-100 h-screen">
-        <div className=" h-full px-8">
-          <h2 className="text-4xl text-black lg:text-5xl font-light mb-16">
-            Step-by-step project
-            <br />
-            implementation <span className="text-gray-400">process</span> at
-            Fourth Dimension
-          </h2>
-
-          <div className="grid grid-cols-4 grid-rows-4 gap-4">
-            <div className="col-span-2 row-span-2 row-start-1 relative min-h-80 overflow-hidden group">
-              <Image
-                src="/img7.jpg"
-                alt="Project implementation"
-                fill
-                className="object-cover h-full transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-
-            {[
-              {
-                number: "01",
-                title: "CONSULTATION",
-                desc: "Understanding client needs and project requirements",
-              },
-              {
-                number: "02",
-                title: "TECHNICAL PLANNING",
-                desc: "Detailed technical drawings and specifications",
-              },
-            ].map((step, i) => (
-              <div
-                key={step.number}
-                className="row-span-2 row-start-1 flex flex-col justify-between bg-neutral-200 p-6  hover:bg-black hover:text-white transition-colors group duration-300"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm text-gray-400 roup-hover:text-white transition-colors">
-                    {step.number}
-                  </span>
-                  <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
-                </div>
-                <div>
-                  <h3 className="font-medium mb-2 text-black group-hover:text-white transition-colors">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 group-hover:text-gray-400 transition-colors ">
-                    {step.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-
-            {[
-              {
-                number: "03",
-                title: "DESIGN PROJECT",
-                desc: "Complete design development and visualization",
-              },
-              {
-                number: "04",
-                title: "AUTHOR SUPERVISION",
-                desc: "Professional oversight during implementation",
-              },
-              {
-                number: "05",
-                title: "OBJECT PROCUREMENT",
-                desc: "Sourcing and delivery of materials and furniture",
-              },
-              {
-                number: "06",
-                title: "PROJECT COMPLETION",
-                desc: "Final installation and project handover",
-              },
-            ].map((step, i) => (
-              <div
-                key={step.number}
-                className="row-span-2 row-start-3 flex flex-col justify-between bg-neutral-200 p-6  hover:bg-black hover:text-white transition-colors group duration-300"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm text-gray-400 roup-hover:text-white transition-colors">
-                    {step.number}
-                  </span>
-                  <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
-                </div>
-                <div>
-                  <h3 className="font-medium mb-2 text-black group-hover:text-white transition-colors">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 group-hover:text-gray-400 transition-colors ">
-                    {step.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ProjectProcessSection />
 
       {/* Final CTA Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <Image
-          src="/images/exterior-view.png"
+        {/* <Image
+          src="/img8.jpg"
           alt="Modern house exterior view"
           fill
           className="object-cover"
-        />
+        /> */}
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 text-white text-center">
           <h2 className="text-4xl lg:text-6xl font-light mb-8">
