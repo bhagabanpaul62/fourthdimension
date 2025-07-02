@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import BackgroundSlider from "react-background-slider";
 import { motion } from "motion/react";
+import Marquee from "react-fast-marquee";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -187,113 +188,64 @@ export default function HomePage() {
             </div>
           </div>
 
-          <Swiper
-            pagination={{ clickable: true }}
-            navigation
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            modules={[Pagination, Navigation, Autoplay, Grid]}
-            className="mySwiper min-h-fit h-[65vh]"
+          <Marquee
+            pauseOnHover
+            gradient={false}
+            speed={50}
+            className="h-[65vh]"
           >
             {slidesData.map((slide, index) => (
-              <SwiperSlide key={index} className="h-fit">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
-                  {/* Left Large Image */}
-                  <div className="relative w-full h-full min-h-[300px]">
-                    <Image
-                      src={slide.main}
-                      alt="Main project"
-                      fill
-                      className="object-cover rounded-lg"
-                    />
-                  </div>
-
-                  {/* Right Complex Grid */}
-                  <div className="grid grid-cols-2 grid-rows-4 gap-4 w-full h-full">
-                    {/* Large top image (spans 2 columns) */}
-                    <div className="col-span-2 row-span-2 relative min-h-[150px]">
-                      <Image
-                        src={slide.topRight}
-                        alt="Top right large"
-                        fill
-                        className="object-cover rounded-lg"
-                      />
-                    </div>
-
-                    {/* Bottom left small image */}
-                    <div className="col-span-1 row-span-2 relative min-h-[100px]">
-                      <Image
-                        src={slide.bottomLeft}
-                        alt="Bottom left small"
-                        fill
-                        className="object-cover rounded-lg"
-                      />
-                    </div>
-
-                    {/* Bottom right small image */}
-                    <div className="col-span-1 row-span-2 relative min-h-[100px]">
-                      <Image
-                        src={slide.bottomRight}
-                        alt="Bottom right small"
-                        fill
-                        className="object-cover rounded-lg"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-
-            {/* <SwiperSlide className="h-fit">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
-                {/* Left Large Image 
-                <div className="relative w-full min-h-fit h-full ">
+              // <SwiperSlide key={index} className="h-fit">
+              <div
+                key={index}
+                className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full w-[1000px] px-2 "
+              >
+                {/* Left Large Image */}
+                <div className="relative w-full h-full min-h-[300px]">
                   <Image
-                    src="/img1.jpg"
+                    src={slide.main}
                     alt="Main project"
                     fill
-                    className="object-cover"
+                    className="object-cover "
                   />
                 </div>
 
-                {/* Right Complex Grid 
-                <div className="grid grid-cols-2 grid-rows-4 gap-4 w-full h-full">
-                  {/* Large top image 
-                  <div className="col-span-2 row-span-2 col-start-1 row-start-1 relative">
+                {/* Right Complex Grid */}
+                <div className="grid grid-cols-2 grid-rows-4 gap-4 w-full h-full aspect-[3/4]">
+                  {/* Large top image (spans 2 columns) */}
+                  <div className="col-span-2 row-span-2 relative min-h-[150px]">
                     <Image
-                      src="/img2.jpg"
+                      src={slide.topRight}
                       alt="Top right large"
                       fill
-                      className="object-cover "
+                      className="object-cover"
                     />
                   </div>
 
-                  {/* Bottom left small image 
-                  <div className="col-start-1 row-start-3 row-span-2 relative">
+                  {/* Bottom left small image */}
+                  <div className="col-span-1 row-span-2 relative min-h-[100px]">
                     <Image
-                      src="/img3.jpg"
+                      src={slide.bottomLeft}
                       alt="Bottom left small"
                       fill
-                      className="object-cover "
+                      className="object-cover"
                     />
                   </div>
 
-                  {/* Bottom right small image 
-                  <div className="col-start-2 row-start-3 row-span-2 relative">
+                  {/* Bottom right small image */}
+                  <div className="col-span-1 row-span-2 relative min-h-[100px]">
                     <Image
-                      src="/img4.jpg"
+                      src={slide.bottomRight}
                       alt="Bottom right small"
                       fill
-                      className="object-cover "
+                      className="object-cover"
                     />
                   </div>
                 </div>
               </div>
-            </SwiperSlide> */}
-          </Swiper>
+              // </SwiperSlide>
+            ))}
+          </Marquee>
 
           <div className="mt-8 right-4 absolute border-b mx-8 -my-8">
             <button className="flex items-center space-x-2 text-white hover:opacity-70 transition-opacity">
