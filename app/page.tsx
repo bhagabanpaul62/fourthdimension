@@ -8,19 +8,20 @@ import BackgroundSlider from "react-background-slider";
 import { motion } from "motion/react";
 import Marquee from "react-fast-marquee";
 
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css/autoplay";
-import "swiper/css/grid";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation, Autoplay, Grid } from "swiper/modules";
+// import "swiper/css";
+// import "swiper/css/pagination";
+// import "swiper/css/navigation";
+// import "swiper/css/autoplay";
+// import "swiper/css/grid";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import { Pagination, Navigation, Autoplay, Grid } from "swiper/modules";
 
 import img1 from "../public/img1.jpg";
 import img2 from "../public/img2.jpg";
 import img3 from "../public/img3.jpg";
 import img4 from "../public/img4.jpg";
 import img5 from "../public/img5.jpg";
+import Link from "next/link";
 
 const slidesData = [
   {
@@ -248,10 +249,12 @@ export default function HomePage() {
           </Marquee>
 
           <div className="mt-8 right-4 absolute border-b mx-8 -my-8">
-            <button className="flex items-center space-x-2 text-white hover:opacity-70 transition-opacity">
-              <span>ALL COMPLETED PROJECTS</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <Link href={"/projects"}>
+              <button className="flex items-center space-x-2 text-white hover:opacity-70 transition-opacity">
+                <span>ALL COMPLETED PROJECTS</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </Link>
           </div>
         </div>
       </section>
