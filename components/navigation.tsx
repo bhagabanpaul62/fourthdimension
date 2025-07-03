@@ -23,7 +23,10 @@ export default function Navigation() {
     >
       <div className="px-6 py-4 w-full">
         <div className="flex items-center justify-between">
-          <Link href="/" className=" text-4xl font-black">
+          <Link
+            href="/"
+            className=" text-4xl font-black text-shadow-xs text-shadow-black"
+          >
             F
             <sup>
               <sup className="text-lg">D</sup>
@@ -36,7 +39,7 @@ export default function Navigation() {
                 href={item.href}
                 className={`${
                   pathname === "/contact" ? "text-black" : "text-white"
-                } text-sm tracking-wider hover:opacity-70 hover:backdrop-blur-3xl duration-150 px-4 py-2 transition-opacity ${
+                } text-sm tracking-wider hover:opacity-70 hover:backdrop-blur-3xl duration-150 px-4 py-2 transition-opacity text-shadow-2xs text-shadow-black ${
                   pathname === item.href && "bg-neutral-400/40"
                 }`}
               >
