@@ -2,11 +2,10 @@
 
 import NavigationBar from "@/components/navigation";
 import Footer from "@/components/footer";
-import Image from "next/image";
 import { ChevronDown, ArrowRight, ArrowUpRight } from "lucide-react";
 import BackgroundSlider from "react-background-slider";
 import { motion } from "motion/react";
-import Marquee from "react-fast-marquee";
+import DesignProcess from "@/section/DesignProcess";
 
 // import "swiper/css";
 // import "swiper/css/pagination";
@@ -21,7 +20,6 @@ import img2 from "../public/img2.jpg";
 import img3 from "../public/img3.jpg";
 import img4 from "../public/img4.jpg";
 import img5 from "../public/img5.jpg";
-import Link from "next/link";
 import ProjectProcessSection from "@/section/ImplementationProcess";
 import CompletedProjects from "@/section/CompletedProjects";
 
@@ -95,51 +93,7 @@ export default function HomePage() {
       </section>
 
       {/* Design Process Section */}
-      <section className="snap-start py-20 bg-gray-50 h-screen">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="mb-16">
-              <p className="text-sm text-gray-500 mb-4 max-w-md">
-                MINIMAL SPACES BRING A SENSE WELCOME TO EVERY
-                <br />
-                CORNER. THEY ALSO BRING A SENSE OF CALM TO
-                <br />
-                EVERYDAY LIFE.
-              </p>
-              <h2 className="text-4xl lg:text-5xl font-light">
-                Our comprehensive{" "}
-                <span className="text-gray-400">interior</span>
-                <br />
-                design <span className="text-gray-400">process</span> includes
-              </h2>
-            </div>
-
-            <div className="space-y-8">
-              {[
-                { number: "01", title: "SPACE PLANNING" },
-                { number: "02", title: "DESIGN DEVELOPMENT" },
-                { number: "03", title: "AUTHOR SUPERVISION" },
-                { number: "04", title: "FURNITURE & MATERIAL SOURCING" },
-              ].map((item) => (
-                <div
-                  key={item.number}
-                  className="border-b border-gray-200 pb-6"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-8">
-                      <span className="text-sm text-gray-400">
-                        {item.number}
-                      </span>
-                      <h3 className="text-lg font-medium">{item.title}</h3>
-                    </div>
-                    <ChevronDown className="w-5 h-5 text-gray-400" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <DesignProcess />
 
       <CompletedProjects />
 
