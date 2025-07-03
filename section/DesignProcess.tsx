@@ -47,7 +47,13 @@ const DesignProcess = (props: Props) => {
           </h2>
         </div>
 
-        <div className="space-y-16 text-black h-full border-t border-gray-400">
+        <motion.div
+          className="space-y-16 text-black h-full border-t border-gray-400"
+          initial={{ x: -1300, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
           {designSteps.map((item, index) => {
             const isHovered = hoveredIndex === index;
 
@@ -80,16 +86,21 @@ const DesignProcess = (props: Props) => {
                 </div>
                 <AnimatePresence initial={false}>
                   {isHovered && (
-                    <motion.div
-                      className=" pl-24 pr-8 text-md flex items-center justify-center"
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      style={{ overflow: "hidden" }}
-                    >
-                      {item.description}
-                    </motion.div>
+                    <>
+                      <div className="w-full flex justify-center">
+                        <div className="w-1/2" />
+                        <motion.div
+                          className="w-1/2 text-md flex items-center justify-start"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          style={{ overflow: "hidden" }}
+                        >
+                          {item.description}
+                        </motion.div>
+                      </div>
+                    </>
                   )}
                 </AnimatePresence>
 
@@ -97,7 +108,7 @@ const DesignProcess = (props: Props) => {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
