@@ -22,10 +22,11 @@ import img4 from "../public/img4.jpg";
 import img5 from "../public/img5.jpg";
 import ProjectProcessSection from "@/section/ImplementationProcess";
 import CompletedProjects from "@/section/CompletedProjects";
+import TestimonialsCarousel from "@/section/TestimonialsCarousel";
 
 export default function HomePage() {
   return (
-    <div className="mandatory-scroll-snapping h-screen overflow-y-scroll scroll-smooth">
+    <div className="mandatory-scroll-snapping h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
       <NavigationBar />
 
       {/* Hero Section */}
@@ -98,6 +99,8 @@ export default function HomePage() {
       <CompletedProjects />
 
       <ProjectProcessSection />
+
+      <TestimonialsCarousel />
 
       {/* Final CTA Section */}
       <section className="snap-start relative h-screen flex items-center justify-center overflow-hidden">
