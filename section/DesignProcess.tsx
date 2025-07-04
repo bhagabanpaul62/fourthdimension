@@ -1,5 +1,5 @@
 import { ArrowDownRight } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 const designSteps = [
@@ -86,8 +86,27 @@ const DesignProcess = (props: Props) => {
     "interior"
   );
 
+  const [isMobile, setIsMobile] = useState(false);
+
   const currentSteps = tabs[activeTab];
 
+  // Detect mobile view
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const toggleIndex = (index: number) => {
+    if (hoveredIndex === index) {
+      setHoveredIndex(null);
+    } else {
+      setHoveredIndex(index);
+    }
+  };
   return (
     <section className="snap-start py-20 bg-stone-100 md:h-screen min-h-screen">
       <div className="flex  md:flex-row flex-col-reverse justify-between items-start md:items-center md:mb-14 md:px-8 px-4">
@@ -148,8 +167,9 @@ const DesignProcess = (props: Props) => {
                 className={`border-b border-gray-400 md:px-8 px-4 md:py-10 py-2 transition-colors duration-300 m-0 ${
                   isHovered ? "bg-black text-white" : "bg-stone-300 text-black"
                 }`}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
+                onMouseEnter={() => !isMobile && setHoveredIndex(index)}
+                onMouseLeave={() => !isMobile && setHoveredIndex(null)}
+                onClick={() => isMobile && toggleIndex(index)}
                 initial={false}
                 animate={{ backgroundColor: isHovered ? "#000" : "#f2f2f2" }}
                 transition={{ duration: 0.2 }}
@@ -174,7 +194,7 @@ const DesignProcess = (props: Props) => {
                       <div className="w-full flex justify-center">
                         <div className="w-1/2" />
                         <motion.div
-                          className="w-1/2 text-md flex items-center justify-start"
+                          className="w-1/2 pb-3 text-md flex items-center justify-start"
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
