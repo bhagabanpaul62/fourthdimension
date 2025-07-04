@@ -279,7 +279,7 @@ export default function TestimonialsCarousel() {
                 )}
               </div>
 
-              <div className="p-6">
+              <div className="p-6 px-12">
                 <h3 className="font-medium text-lg mb-1">{testimonial.name}</h3>
                 <p className="text-sm text-gray-500 mb-4">
                   {testimonial.location}
