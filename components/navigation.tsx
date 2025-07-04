@@ -2,10 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 export default function Navigation() {
   const pathname = usePathname();
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
     { href: "/projects", label: "PROJECTS" },
@@ -13,9 +17,11 @@ export default function Navigation() {
     { href: "/contact", label: "CONTACT" },
   ];
 
+  const isContact = pathname === "/contact";
+
   return (
     <motion.nav
-      className={`absolute top-2 left-0 right-0 z-50 ${
+      className={`fixed top-2 left-0 right-0 z-50 ${
         pathname === "/contact" ? "text-black" : "text-white"
       }`}
       initial={{ transform: "translateY(-100px)" }}
@@ -48,7 +54,51 @@ export default function Navigation() {
               </Link>
             ))}
           </div>
+          {/* Mobile Toggle Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden focus:outline-none z-50"
+          >
+            {isOpen ? (
+              <X
+                className={`w-6 h-6 ${isContact ? "text-black" : "text-white"}`}
+              />
+            ) : (
+              <Menu
+                className={`w-6 h-6 ${isContact ? "text-black" : "text-white"}`}
+              />
+            )}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -10, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className={`md:hidden px-6 pb-4 pt-2 bg-black/80 backdrop-blur text-white`}
+            >
+              <div className="flex flex-col space-y-4">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`text-sm tracking-wider hover:opacity-70 transition-opacity ${
+                      pathname === item.href && "bg-white/10 px-3 py-2 rounded"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        {/* </div> */}
       </div>
     </motion.nav>
   );
