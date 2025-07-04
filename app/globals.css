@@ -24,3 +24,16 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.mandatory-scroll-snapping {
+  scroll-snap-type: y mandatory;
+}
+.proximity-scroll-snapping {
+  scroll-snap-type: proximity;
+}
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+.scroll-snap-start {
+  scroll-snap-align: start;
+}

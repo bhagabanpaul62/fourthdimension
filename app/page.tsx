@@ -1,103 +1,126 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import NavigationBar from "@/components/navigation";
+import Footer from "@/components/footer";
+import { ChevronDown, ArrowRight, ArrowUpRight } from "lucide-react";
+import BackgroundSlider from "react-background-slider";
+import { motion } from "motion/react";
+import DesignProcess from "@/section/DesignProcess";
+
+// import "swiper/css";
+// import "swiper/css/pagination";
+// import "swiper/css/navigation";
+// import "swiper/css/autoplay";
+// import "swiper/css/grid";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import { Pagination, Navigation, Autoplay, Grid } from "swiper/modules";
+
+import img1 from "../public/img1.jpg";
+import img2 from "../public/img2.jpg";
+import img3 from "../public/img3.jpg";
+import img4 from "../public/img4.jpg";
+import img5 from "../public/img5.jpg";
+import ProjectProcessSection from "@/section/ImplementationProcess";
+import CompletedProjects from "@/section/CompletedProjects";
+import TestimonialsCarousel from "@/section/TestimonialsCarousel";
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="mandatory-scroll-snapping h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
+      <NavigationBar />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Hero Section */}
+      <section className="snap-start relative h-screen flex items-center justify-center overflow-hidden">
+        <BackgroundSlider
+          images={[img1.src, img2.src, img3.src, img4.src, img5.src]}
+          duration={5}
+          transition={2}
+        />
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="relative z-10 text-white px-6 flex justify-between w-full">
+          <div className="flex flex-row items-center justify-between w-full">
+            <div>
+              <motion.h1
+                className="text-6xl lg:text-8xl font-black mb-20 text-shadow-2xl origin-left"
+                initial={{ scale: 0.8, x: 0 }}
+                animate={{ scale: 1, x: 0 }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+              >
+                Fourth
+                <br />
+                Dimension
+                {/* <sup className="text-2xl">N</sup> */}
+              </motion.h1>
+              <motion.p
+                className="text-sm opacity-80 max-w-xs leading-relaxed"
+                initial={{ transform: "translateX(-500px)" }}
+                animate={{ transform: "translateX(0px)" }}
+                transition={{ duration: 1.5, type: "decay", ease: "easeInOut" }}
+              >
+                AN INTERIOR DESIGN STUDIO
+                <br />
+                THAT CREATES COMFORTABLE
+                <br />
+                AND PREMIUM SPACES
+                <br />
+                USING CONTEMPORARY DESIGN.
+              </motion.p>
+            </div>
+            <div className="text-right">
+              <motion.p
+                className="text-lg  max-w-sm ml-auto leading-relaxed"
+                initial={{ transform: "translateX(500px)" }}
+                animate={{ transform: "translateX(0px)" }}
+                transition={{ duration: 1.5, type: "decay", ease: "easeInOut" }}
+              >
+                OUR PHILOSOPHY IS RESTRAINED
+                <br />
+                AESTHETICS, PURE FORMS, NATURAL
+                <br />
+                MATERIALS AND DEPTH IN EVERY DETAIL.
+              </motion.p>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+        <motion.div
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center"
+          initial={{ transform: "translateY(-1000px)" }}
+          animate={{ transform: "translateY(0px)" }}
+          transition={{ duration: 2.0, type: "tween", ease: "easeInOut" }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <p className="text-xs tracking-wider mb-2">SCROLL DOWN</p>
+          <ChevronDown className="w-4 h-4 mx-auto animate-bounce" />
+        </motion.div>
+      </section>
+
+      {/* Design Process Section */}
+      <DesignProcess />
+
+      <CompletedProjects />
+
+      <ProjectProcessSection />
+
+      <TestimonialsCarousel />
+
+      {/* Final CTA Section */}
+      <section className="snap-start relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="relative z-10 text-white text-center">
+          <h2 className="text-4xl lg:text-6xl font-light mb-8">
+            See what your <span className="text-gray-300">interior</span> will
+            <br />
+            look <span className="text-gray-300">like</span>
+          </h2>
+        </div>
+        <div className="absolute bottom-8 right-8 text-white">
+          <button className="flex items-center space-x-2 hover:opacity-70 transition-opacity">
+            <span className="text-sm">VIEW DESIGN</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 }
