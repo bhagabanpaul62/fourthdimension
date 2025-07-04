@@ -28,7 +28,7 @@ export default function Navigation() {
       animate={{ transform: "translateY(0px)" }}
       transition={{ duration: 1.1, type: "decay" }}
     >
-      <div className="px-6 py-4 w-full">
+      <div className="px-8 py-4 w-full">
         <div className="flex items-center justify-between">
           <Link
             href="/"
