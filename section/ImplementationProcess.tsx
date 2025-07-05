@@ -83,11 +83,11 @@ export default function ProjectProcessSection() {
   const currentData = tabData[activeTab];
 
   return (
-    <section className="snap-start py-16 bg-neutral-100 min-h-screen px-8">
+    <section className="snap-start py-18 bg-neutral-100 min-h-screen px-8">
       {/* Header */}
-      <div className="flex justify-between items-end mb-8 text-sm uppercase tracking-wider font-medium">
+      <div className="flex flex-col md:flex-row  justify-between md:items-end items-center mb-8 text-sm uppercase tracking-wider font-medium">
         <div>
-          <h2 className="text-3xl text-black lg:text-4xl font-light mb-4">
+          <h2 className="md:text-3xl text-xl text-black lg:text-4xl font-light mb-4">
             Step-by-step project
             <br />
             implementation <span className="text-gray-400">process</span> at
@@ -113,7 +113,7 @@ export default function ProjectProcessSection() {
 
       {/* Grid Layout */}
       <motion.div
-        className="grid grid-cols-4 grid-rows-1 gap-4"
+        className="md:grid hidden grid-cols-4 grid-rows-1 gap-4"
         initial={{ x: -1000, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
         transition={{ duration: 1 }}
@@ -153,7 +153,7 @@ export default function ProjectProcessSection() {
         ))}
       </motion.div>
       <motion.div
-        className="grid grid-cols-4 grid-rows-1 gap-4 mt-4 min-h-80"
+        className="hidden md:grid grid-cols-4 grid-rows-1 gap-4 mt-4 min-h-80"
         initial={{ x: 1000, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
         transition={{ duration: 1 }}
@@ -182,6 +182,42 @@ export default function ProjectProcessSection() {
           </div>
         ))}
       </motion.div>
+
+      {/* MOBILE VERSION */}
+      <div className="grid grid-cols-1 gap-6 md:hidden">
+        {/* Image */}
+        <div className="relative w-full h-64 overflow-hidden">
+          <Image
+            src="/img5.jpg"
+            alt="Project implementation"
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+
+        {/* All cards in a single vertical list */}
+        {currentData.map((step) => (
+          <div
+            key={step.number}
+            className="flex flex-col justify-between bg-neutral-200 p-4 hover:bg-black hover:text-white transition-colors group duration-300"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm text-gray-400 group-hover:text-white transition-colors">
+                {step.number}
+              </span>
+              <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
+            </div>
+            <div>
+              <h3 className="font-medium mb-1 text-black group-hover:text-white transition-colors">
+                {step.title}
+              </h3>
+              <p className="text-sm text-gray-600 group-hover:text-gray-400 transition-colors">
+                {step.desc}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
