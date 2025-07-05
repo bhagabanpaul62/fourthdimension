@@ -105,7 +105,7 @@ export default function ProjectProcessSection() {
                   : "border-transparent text-gray-400 hover:text-black"
               }`}
             >
-              {tab === "interior" ? "Interior" : "Construction"}
+              {tab === "interior" ? "INTERIOR" : "CONSTRUCTION"}
             </button>
           ))}
         </div>

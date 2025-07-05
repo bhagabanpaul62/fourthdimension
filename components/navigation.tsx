@@ -65,7 +65,11 @@ export default function Navigation() {
               />
             ) : (
               <Menu
-                className={`w-6 h-6 ${isContact ? "text-black" : "text-white"}`}
+                className={`w-6 h-6  ${
+                  isContact
+                    ? "text-black"
+                    : "text-white drop-shadow-sm drop-shadow-black"
+                }`}
               />
             )}
           </button>
