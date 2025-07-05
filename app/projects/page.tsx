@@ -194,7 +194,7 @@ export default function ProjectsPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-16"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-y-16"
           >
             {filteredProjects.map((project, index) => (
               <div
@@ -205,7 +205,7 @@ export default function ProjectsPage() {
                 }}
                 className="group cursor-pointer overflow-hidden"
               >
-                <div className="relative h-130 w-full mb-1 overflow-hidden aspect-square">
+                <div className="relative md:h-130 w-full mb-1 overflow-hidden aspect-square">
                   <Image
                     src={project.images[0] || "/placeholder.svg"}
                     alt={project.title}
@@ -236,7 +236,7 @@ export default function ProjectsPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4"
+              className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex  items-center justify-center px-4"
               onClick={() => setSelectedProject(null)}
             >
               <motion.div
@@ -244,17 +244,26 @@ export default function ProjectsPage() {
                 animate={{ scale: 1 }}
                 exit={{ scale: 0.98 }}
                 transition={{ duration: 0.3 }}
-                className="bg-white w-[90vw] h-[90vh] flex overflow-hidden"
+                className="bg-white w-[90vw] h-[90vh] flex md:flex-row flex-col overflow-hidden"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Left: Large Image */}
-                <div className="relative h-full w-2/3">
+
+                <div className="relative md:h-full md:w-2/3 h-2/3  w-full">
                   <Image
                     src={selectedProject.images[currentImageIndex]}
                     alt={selectedProject.title}
                     fill
-                    className="object-contain"
+                    className="md:object-contain "
                   />
+                  <div className="md:hidden absolute right-2 top-2 z-50  justify-end">
+                    <button
+                      onClick={() => setSelectedProject(null)}
+                      className="text-white drop-shadow-sm drop-shadow-black text-xl text-right"
+                    >
+                      <X />
+                    </button>
+                  </div>
 
                   {/* Navigation Buttons */}
                   {selectedProject.images.length > 1 && (
@@ -269,9 +278,9 @@ export default function ProjectsPage() {
                               selectedProject.images.length
                           );
                         }}
-                        className="absolute left-4 top-1/2 -translate-y-1/2  text-black px-3 py-1  transition cursor-pointer"
+                        className="absolute left-4 top-1/2 -translate-y-1/2  text-black md:px-3 py-1  transition cursor-pointer"
                       >
-                        <ArrowLeft className="h-8 w-8 text-white drop-shadow-sm drop-shadow-black  transition" />
+                        <ArrowLeft className="md:h-8 md:w-8 text-white drop-shadow-sm drop-shadow-black  transition" />
                       </button>
                       <button
                         onClick={(e) => {
@@ -281,19 +290,19 @@ export default function ProjectsPage() {
                               selectedProject.images.length
                           );
                         }}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-black px-3 py-1 transition cursor-pointer"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-black md:px-3 py-1 transition cursor-pointer"
                       >
-                        <ArrowRight className="h-8 w-8 text-white drop-shadow-sm drop-shadow-black" />
+                        <ArrowRight className="md:h-8 md:w-8 text-white drop-shadow-sm drop-shadow-black" />
                       </button>
                     </>
                   )}
                 </div>
 
                 {/* Right: Info + Thumbnails */}
-                <div className="flex flex-col w-1/3  h-full px-6 py-4 overflow-y-auto">
+                <div className="flex flex-col md:w-1/3 h-1/3 md:h-full px-6 py-4 overflow-y-auto">
                   {/* Close Button */}
                   <div className="flex flex-col justify-end mb-2">
-                    <div className="flex justify-end">
+                    <div className="hidden md:flex justify-end">
                       <button
                         onClick={() => setSelectedProject(null)}
                         className="text-gray-600 text-xl text-right f hover:text-black"
@@ -305,15 +314,14 @@ export default function ProjectsPage() {
 
                     {/* Title & Description */}
                     {/* <div> */}
-                    <h2 className="text-3xl text-black font-semibold mb-2">
+                    <h2 className="md:text-3xl text-xl text-black font-semibold mb-2">
                       {selectedProject.title}
                     </h2>
-                    <p className="text-sm text-gray-500 mb-4">
+                    <p className="md:text-sm text-xs text-gray-500 mb-4">
                       {selectedProject.category}
                     </p>
                     <p className="text-gray-800 leading-relaxed text-sm">
-                      {selectedProject.description ||
-                        "This is a sample project description. It showcases the aesthetic and functionality of the space designed with care."}
+                      {selectedProject.description}
                     </p>
                   </div>
 
