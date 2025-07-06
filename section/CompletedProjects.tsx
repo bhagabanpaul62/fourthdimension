@@ -38,19 +38,22 @@ const slidesData = [
 
 export default function CompletedProjects() {
   return (
-    <section className="snap-start py-20 h-screen bg-black text-white">
-      <div className=" mx-auto px-8">
-        <div className="flex items-start justify-between mb-8">
-          <h2 className="text-4xl lg:text-5xl font-light max-w-lg">
+    <section className="snap-start py-20 md:h-screen bg-black text-white">
+      <div className="  px-8">
+        <div className="flex md:flex-row flex-col items-start justify-between md:mb-8 mb-2">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-light mb-2">
             Completed <span className="text-gray-400">projects</span> that
             <br />
             speak for themselves
           </h2>
-          <div className="text-right text-xs">
-            <p className="text-gray-400 mb-2">IN EVERY PROJECT</p>
-            <p className="text-gray-400 mb-2">WE AIM TO FIND</p>
-            <p className="text-gray-400 mb-2">THE UNIQUE AESTHETIC</p>
-            <p className="text-gray-400">FEELING OF THE SPACE</p>
+          <div className="md:text-right text-xs my-2">
+            <p className="text-gray-400">
+              IN EVERY PROJECT WE AIM TO FIND
+              <br className="hidden md:block" />
+              THE UNIQUE AESTHETIC
+              <br className="hidden md:block" />
+              FEELING OF THE SPACE
+            </p>
           </div>
         </div>
 
@@ -58,58 +61,105 @@ export default function CompletedProjects() {
           pauseOnHover
           gradient={false}
           speed={50}
-          className="h-[65vh] overflow-hidden"
+          className="md:h-[65vh] min-h-[55vh] overflow-hidden"
         >
           {slidesData.map((slide, index) => (
-            // <SwiperSlide key={index} className="h-fit">
-            <div
-              key={index}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full w-[1000px] px-2 "
-            >
-              {/* Left Large Image */}
-              <div className="relative w-full h-full min-h-[300px]">
-                <Image
-                  src={slide.main}
-                  alt="Main project"
-                  fill
-                  className="object-cover "
-                />
-              </div>
+            <div key={index} className="w-[90vw] max-w-[1000px] mx-auto">
+              {/* Desktop version */}
+              <Link
+                href={"/projects"}
+                className="hidden md:grid grid-cols-1 lg:grid-cols-2 md:gap-4 gap-2 h-full px-2"
+              >
+                {/* Left Large Image */}
+                <div className="relative w-full h-full min-h-[300px]">
+                  <Image
+                    src={slide.main}
+                    alt="Main project"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
 
-              {/* Right Complex Grid */}
-              <div className="grid grid-cols-2 grid-rows-4 gap-4 w-full h-full aspect-[3/4]">
-                {/* Large top image (spans 2 columns) */}
-                <div className="col-span-2 row-span-2 relative min-h-[150px]">
+                {/* Right Complex Grid */}
+                <div className="grid grid-cols-2 grid-rows-4 gap-4 w-full h-full aspect-[3/4]">
+                  {/* Large top image (spans 2 columns) */}
+                  <div className="col-span-2 row-span-2 relative min-h-[150px]">
+                    <Image
+                      src={slide.topRight}
+                      alt="Top right large"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+
+                  {/* Bottom left small image */}
+                  <div className="col-span-1 row-span-2 relative min-h-[100px]">
+                    <Image
+                      src={slide.bottomLeft}
+                      alt="Bottom left small"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+
+                  {/* Bottom right small image */}
+                  <div className="col-span-1 row-span-2 relative min-h-[100px]">
+                    <Image
+                      src={slide.bottomRight}
+                      alt="Bottom right small"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              </Link>
+
+              {/* Mobile version */}
+              <Link
+                href={"/projects"}
+                className="md:hidden grid grid-cols-2 grid-rows-2 gap-4 px-2"
+              >
+                {/* Main image */}
+                <div className="relative w-full aspect-[4/3] overflow-hidden">
+                  <Image
+                    src={slide.main}
+                    alt="Main project mobile"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+
+                {/* Top right image */}
+                <div className="relative w-full aspect-[4/3] overflow-hidden">
                   <Image
                     src={slide.topRight}
-                    alt="Top right large"
+                    alt="Top right mobile"
                     fill
                     className="object-cover"
                   />
                 </div>
 
-                {/* Bottom left small image */}
-                <div className="col-span-1 row-span-2 relative min-h-[100px]">
+                {/* Bottom left image */}
+                <div className="relative w-full aspect-[4/3] overflow-hidden">
                   <Image
                     src={slide.bottomLeft}
-                    alt="Bottom left small"
+                    alt="Bottom left mobile"
                     fill
                     className="object-cover"
                   />
                 </div>
 
-                {/* Bottom right small image */}
-                <div className="col-span-1 row-span-2 relative min-h-[100px]">
+                {/* Bottom right image */}
+                <div className="relative w-full aspect-[4/3] overflow-hidden">
                   <Image
                     src={slide.bottomRight}
-                    alt="Bottom right small"
+                    alt="Bottom right mobile"
                     fill
                     className="object-cover"
                   />
                 </div>
-              </div>
+              </Link>
             </div>
-            // </SwiperSlide>
           ))}
         </Marquee>
 

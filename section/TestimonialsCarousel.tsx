@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import {
   Play,
@@ -10,17 +10,9 @@ import {
   VolumeX,
   Maximize,
   Minimize,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
-import { AnimatePresence } from "motion/react";
-import { motion } from "motion/react";
-
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css/autoplay";
-import "swiper/css/grid";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation, Autoplay, Grid } from "swiper/modules";
 
 interface Testimonial {
   id: number;
@@ -92,7 +84,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 7,
-    name: "Amit Patel",
+    name: "Amit ",
     location: "Satellite, Ahmedabad",
     content:
       "Professional service from start to finish. The quality of materials and craftsmanship is outstanding. Highly recommended!",
@@ -115,28 +107,83 @@ export default function TestimonialsCarousel() {
   const [duration, setDuration] = useState(0);
   const popupVideoRef = useRef<HTMLVideoElement | null>(null);
 
-  const swiperRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [startIndex, setStartIndex] = useState(0);
 
-  // const [direction, setDirection] = useState<"left" | "right">("right");
+  const [cardWidthPx, setCardWidthPx] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(3);
 
-  // const totalSlides = Math.ceil(testimonials.length / 3);
+  const totalSlides = Math.ceil(testimonials.length / visibleCount);
 
-  // const nextSlide = () => {
-  //   setDirection("right");
-  //   setCurrentSlide((prev) => (prev + 1) % totalSlides);
-  // };
+  const canGoPrev = currentSlide > 0;
+  const canGoNext = currentSlide < totalSlides - 1;
 
-  // const prevSlide = () => {
-  //   setDirection("left");
-  //   setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-  // };
+  const prev = () => {
+    if (canGoPrev) setCurrentSlide(currentSlide - 1);
+  };
 
-  // const goToSlide = (index: number) => {
-  //   setCurrentSlide((prev) => {
-  //     setDirection(index > prev ? "right" : "left");
-  //     return index;
-  //   });
-  // };
+  const next = () => {
+    if (canGoNext) setCurrentSlide(currentSlide + 1);
+  };
+
+  const goToSlide = (index: number) => {
+    if (index >= 0 && index < totalSlides) {
+      setCurrentSlide(index);
+    }
+  };
+
+  useEffect(() => {
+    const updateVisibleCount = () => {
+      const width = window.innerWidth;
+      if (width < 640) setVisibleCount(1); // mobile
+      else if (width < 1024) setVisibleCount(2); // tablet
+      else setVisibleCount(3); // desktop
+    };
+
+    updateVisibleCount();
+    window.addEventListener("resize", updateVisibleCount);
+    return () => window.removeEventListener("resize", updateVisibleCount);
+  }, []);
+
+  // Calculate max start index (so we don't scroll past end)
+  const maxStartIndex = testimonials.length - visibleCount;
+
+  // Scroll container to the start of current slide group
+  useEffect(() => {
+    if (containerRef.current && cardWidthPx) {
+      containerRef.current.scrollTo({
+        left: currentSlide * visibleCount * cardWidthPx,
+        behavior: "smooth",
+      });
+    }
+  }, [currentSlide, cardWidthPx, visibleCount]);
+
+  // Measure container width on mount and resize
+  useEffect(() => {
+    function updateCardWidth() {
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        setCardWidthPx(containerWidth / visibleCount);
+      }
+    }
+
+    updateCardWidth();
+    window.addEventListener("resize", updateCardWidth);
+
+    return () => {
+      window.removeEventListener("resize", updateCardWidth);
+    };
+  }, [visibleCount]);
+
+  // Scroll the container to the desired position on index change
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        left: startIndex * cardWidthPx,
+        behavior: "auto", // no smooth scroll, instant jump
+      });
+    }
+  }, [startIndex]);
 
   const openVideoPopup = (testimonial: Testimonial) => {
     setPopupVideo(testimonial);
@@ -208,107 +255,22 @@ export default function TestimonialsCarousel() {
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
-  // const currentTestimonials = testimonials.slice(
-  //   currentSlide * 3,
-  //   (currentSlide + 1) * 3
-  // );
-
   return (
-    <section className="py-28 px-8 snap-start h-screen max-h-screen  bg-stone-100">
-      <h2 className="text-3xl text-black lg:text-4xl font-light text-left mb-16">
+    <section className="md:py-28 pt-16 pb-4 px-8 snap-start md:h-screen min-h-screen bg-stone-100">
+      <h2 className="text-3xl text-black lg:text-4xl font-light text-left md:mb-16 mb-4">
         Client Testimonials
       </h2>
 
-      <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
-        slidesPerView={3}
-        spaceBetween={30}
-        loop={true}
-        pagination={{ clickable: true }}
-        navigation
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
-        breakpoints={{
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-        }}
-        className="!pb-16 "
-      >
-        {testimonials.map((testimonial) => (
-          <SwiperSlide key={testimonial.id}>
-            <motion.div
-              className="bg-white rounded-lg overflow-hidden text-black shadow-lg h-[35rem]"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.9, ease: "easeOut" }}
-            >
-              <div className="relative h-64">
-                {testimonial.hasVideo ? (
-                  <div className="relative w-full h-full">
-                    <video
-                      ref={(el) => {
-                        videoRefs.current[testimonial.id] = el;
-                      }}
-                      className="w-full h-full object-cover"
-                      poster={testimonial.image}
-                      onEnded={() => setPlayingVideo(null)}
-                    >
-                      <source src={testimonial.videoUrl} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                    <button
-                      onClick={() => openVideoPopup(testimonial)}
-                      className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
-                    >
-                      <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
-                        {playingVideo === testimonial.id ? (
-                          <Pause className="w-6 h-6 text-black ml-0.5" />
-                        ) : (
-                          <Play className="w-6 h-6 text-black ml-1" />
-                        )}
-                      </div>
-                    </button>
-                  </div>
-                ) : (
-                  <Image
-                    src={testimonial.image || "/placeholder.svg"}
-                    alt={testimonial.name}
-                    fill
-                    className="object-cover"
-                  />
-                )}
-              </div>
-
-              <div className="p-6 px-12">
-                <h3 className="font-medium text-lg mb-1">{testimonial.name}</h3>
-                <p className="text-sm text-gray-500 mb-4">
-                  {testimonial.location}
-                </p>
-                <p className="text-sm text-gray-700 leading-relaxed line-clamp-6">
-                  "{testimonial.content}"
-                </p>
-              </div>
-            </motion.div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
-      {/* <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={currentSlide}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
-          initial={{ x: direction === "right" ? 300 : -250, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: direction === "right" ? 250 : -300, opacity: 0 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
-        >
-          {currentTestimonials.map((testimonial) => (
+      {/* Carousel container */}
+      <div className="w-full  overflow-x-hidden" ref={containerRef}>
+        <div className="flex ">
+          {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className=" rounded-lg overflow-hidden border-gray-100 h-[35rem]"
+              className="flex-shrink-0 w-full md:w-1/3 overflow-hidden text-black md:h-[35rem] flex flex-col md:px-6 "
             >
-              <div className="relative h-64">
-                {testimonial.hasVideo ? (
+              <div className="relative md:h-80 h-48">
+                {testimonial.hasVideo && testimonial.videoUrl ? (
                   <div className="relative w-full h-full">
                     <video
                       ref={(el) => {
@@ -343,58 +305,63 @@ export default function TestimonialsCarousel() {
                   />
                 )}
               </div>
-
-              <div className="p-6">
+              <div className="py-2 flex flex-col ">
                 <h3 className="font-medium text-lg mb-1">{testimonial.name}</h3>
-                <p className="text-sm text-gray-500 mb-4">
+                <p className="text-xs text-gray-500 mb-4">
                   {testimonial.location}
                 </p>
-                <p className="text-sm text-gray-700 leading-relaxed line-clamp-6">
+                <p className="text-sm text-gray-700 leading-relaxed flex-grow">
                   "{testimonial.content}"
                 </p>
               </div>
             </div>
           ))}
-        </motion.div>
-      </AnimatePresence> */}
+        </div>
+      </div>
 
       {/* Navigation */}
-      {/* <div className="flex items-center justify-center space-x-8">
+      <div className="flex items-center justify-center space-x-8 text-black">
         <button
-          onClick={prevSlide}
-          className="p-2 rounded-full border border-gray-300 hover:border-gray-400 transition-colors"
-          disabled={currentSlide === 0}
+          onClick={prev}
+          disabled={!canGoPrev}
+          className={`p-2 rounded-full border border-gray-400 transition-colors ${
+            canGoPrev
+              ? "hover:bg-gray-200 cursor-pointer"
+              : "opacity-40 cursor-not-allowed"
+          }`}
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
 
         <div className="flex space-x-2">
-          {Array.from({ length: Math.ceil(testimonials.length / 3) }).map(
-            (_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  index === currentSlide ? "bg-red-500" : "bg-gray-300"
-                }`}
-              />
-            )
-          )}
+          {Array.from({ length: totalSlides }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-2 h-2 rounded-full transition-colors ${
+                index === currentSlide ? "bg-red-500" : "bg-gray-300"
+              }`}
+            />
+          ))}
         </div>
 
         <button
-          onClick={nextSlide}
-          className="p-2 rounded-full border border-gray-300 hover:border-gray-400 transition-colors"
-          disabled={currentSlide === Math.ceil(testimonials.length / 3) - 1}
+          onClick={next}
+          disabled={!canGoNext}
+          className={`p-2 rounded-full border border-gray-400 transition-colors ${
+            canGoNext
+              ? "hover:bg-gray-200 cursor-pointer"
+              : "opacity-40 cursor-not-allowed"
+          }`}
         >
           <ChevronRight className="w-5 h-5" />
         </button>
-      </div> */}
+      </div>
 
       {/* Video Popup Modal */}
       {isPopupOpen && popupVideo && (
         <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4">
-          <div className="relative w-full max-w-4xl bg-black rounded-lg overflow-hidden">
+          <div className="relative w-full max-w-5xl bg-black overflow-hidden">
             {/* Header */}
             <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent p-4">
               <div className="flex items-center justify-between text-white">

@@ -1,7 +1,6 @@
 "use client";
 
 import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
 import Image from "next/image";
 import { ArrowRight, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -15,26 +14,27 @@ export default function ContactPage() {
   const tabs = ["START A PROJECT", "WORK WITH US", "OTHER"];
 
   return (
-    <div className="min-h-screen w-full">
+    <div className="min-h-screen lg:h-screen w-full overflow-clip">
       <Navigation />
 
       {/* Contact Section */}
-      <section className="pt-32 pb-20 bg-neutral-200 h-screen">
+      <section className="md:pt-32 pt-20 md:pb-20 bg-neutral-200  h-full">
         {/* <div className=" px-6"> */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 py-28 px-8 align-middle w-full h-full">
+        <div className="grid grid-cols-1 lg:grid-cols-5 md:py-28 px-8 align-middle w-full h-full">
           <motion.div
             initial={{ transform: "translateX(-500px)" }}
             animate={{ transform: "translateX(0px)" }}
             transition={{ duration: 1.5, type: "decay" }}
+            className="md:col-span-2 mb-8"
           >
-            <h1 className="text-5xl lg:text-6xl font-light mb-8 text-black">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-light md:mb-8 mb-4 text-black">
               Hey,
               <br />
               can we talk?
             </h1>
 
             <button
-              className="flex items-center border-b space-x-2 mb-16 text-black hover:opacity-70 transition-opacity"
+              className="flex items-center border-b space-x-2 md:mb-16 text-black hover:opacity-70 transition-opacity"
               onClick={() => setShowDialog(!showDialog)}
             >
               <span className="text-xl  tracking-wider cursor-pointer">
@@ -43,19 +43,20 @@ export default function ContactPage() {
               <ArrowRight className="w-4 h-4 ml-2" />
             </button>
           </motion.div>
+
           <motion.div
             initial={{ transform: "translateX(1000px)" }}
             animate={{ transform: "translateX(0px)" }}
             transition={{ duration: 1.5, type: "decay" }}
-            className="space-y-12 text-black flex flex-row justify-between"
+            className="md:space-y-1 space-y-8 md:mb-0 mb-16 text-black flex flex-col-reverse lg:flex-row justify-between md:col-span-3 md:col-start-3"
           >
             <div className="m-2">
               <div className="flex flex-col mb-8">
-                <h3 className="text-lg tracking-wider text-gray-600 mb-10">
+                <h3 className="text-xl tracking-wider text-gray-600 md:mb-10 mb-4">
                   CONTACT INFORMATION
                 </h3>
-                <h4 className="font-black mb-4 ">EMAIL:</h4>
-                <div className="space-y-1 underline text-md ">
+                <h4 className="font-black mb-4 text-lg">EMAIL:</h4>
+                <div className="space-y-1 underline text-lg ">
                   <p className=" ">post@maison-noire.com</p>
                   <p className=" ">info@maison-noire.com</p>
                   <p className="">maison.noire@gmail.com</p>
@@ -63,8 +64,8 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <h4 className="font-black mb-4">NUMBER:</h4>
-                <div className="space-y-1 underline mb-8 text-md">
+                <h4 className="font-black mb-4 text-lg">NUMBER:</h4>
+                <div className="space-y-1 underline mb-8 text-lg">
                   <p className=" ">+ 123 456 78 90</p>
                   <p className=" ">+ 98 76 54 32 10</p>
                   <p className=" ">+ 01 234 567 890</p>
@@ -72,8 +73,8 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <h4 className="font-black mb-4">SOCIAL MEDIA:</h4>
-                <div className="grid grid-cols-2 space-x-2 space-y-2 text-md w-fit underline">
+                <h4 className="font-black mb-4 text-lg">SOCIAL MEDIA:</h4>
+                <div className="grid grid-cols-2 space-x-2 space-y-2 text-lg w-fit underline">
                   <a href="#" className="hover:opacity-70 transition-opacity">
                     Behance
                   </a>
@@ -89,7 +90,7 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
-            <div className="relative lg:h-full max-w-[35rem]  ">
+            <div className="relative lg:h-full max-w-[35rem] mb-4 ">
               <Image
                 src="/img5.jpg"
                 alt="Modern interior hallway"
@@ -111,10 +112,10 @@ export default function ContactPage() {
             animate={{ x: "0%" }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="fixed top-0 right-0 h-full w-1/2 bg-stone-300 text-black z-50 shadow-xl px-12 py-16 overflow-y-auto"
+            className="fixed top-0 right-0 h-full md:w-3/5 w-full bg-stone-300 text-black z-50 shadow-xl md:px-12 md:py-16 px-4 py-10 overflow-y-auto"
           >
             <div className="flex justify-between items-center mb-10">
-              <h2 className="text-5xl font-medium">Can we talk?</h2>
+              <h2 className="text-4xl md:text-5xl font-medium">Can we talk?</h2>
               <button
                 onClick={() => setShowDialog(false)}
                 className="cursor-pointer"
@@ -124,7 +125,7 @@ export default function ContactPage() {
             </div>
 
             {/* Tabs */}
-            <div className="flex space-x-20 mb-20 text-md tracking-widest uppercase font-medium">
+            <div className="flex md:space-x-20 md:mb-20 md:text-md space-x-2 mb-5 text-sm tracking-widest uppercase font-medium">
               {tabs.map((t) => (
                 <button
                   key={t}
@@ -194,7 +195,7 @@ export default function ContactPage() {
       </AnimatePresence>
 
       <motion.div
-        className="fixed w-full bottom-0 h-12 flex justify-between text-gray-600 opacity-80 px-8"
+        className="md:fixed w-full bottom-2 h-12 flex justify-between bg-neutral-200 md:bg-transparent text-gray-600 md:opacity-80 px-8 text-xs md:text-lg"
         initial={{ transform: "translateY(100px)" }}
         animate={{ transform: "translateY(0px)" }}
         transition={{ duration: 0.8, delay: 0.5, type: "decay" }}
@@ -202,28 +203,6 @@ export default function ContactPage() {
         <p>© 2025 | Fourth Dimension</p>
         <p>All rights reserved</p>
       </motion.div>
-      {/* 
-      <AnimatePresence>
-        {showDialog && (
-        <motion.div
-          initial={{ x: "100%" }}
-          animate={{ x: "50%" }}
-          exit={{ x: "100%" }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="fixed top-0 right-0 h-full w-full bg-stone-400 shadow-lg z-50 p-8 overflow-auto"
-        >
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-5xl text-black font-medium">Can we talk?</h2>
-            <button onClick={() => setShowDialog(false)}>
-              <X className="w-6 h-6 text-gray-600 hover:text-black transition" />
-            </button>
-          </div>
-          <p className="text-gray-600">
-            You can place your contact form or additional details here.
-          </p>
-        </motion.div>
-        )} 
-      </AnimatePresence> */}
     </div>
   );
 }
