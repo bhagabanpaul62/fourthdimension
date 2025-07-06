@@ -110,7 +110,9 @@ export default function TestimonialsCarousel() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [startIndex, setStartIndex] = useState(0);
 
-  const visibleCount = 3;
+  const [cardWidthPx, setCardWidthPx] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(3);
+
   const totalSlides = Math.ceil(testimonials.length / visibleCount);
 
   const canGoPrev = currentSlide > 0;
@@ -130,30 +132,31 @@ export default function TestimonialsCarousel() {
     }
   };
 
-  const [cardWidthPx, setCardWidthPx] = useState(0);
-
-  // Scroll effect for currentSlide
   useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.scrollTo({
-        left: currentSlide * visibleCount * cardWidthPx,
-        behavior: "smooth",
-      });
-    }
-  }, [currentSlide, cardWidthPx]);
+    const updateVisibleCount = () => {
+      const width = window.innerWidth;
+      if (width < 640) setVisibleCount(1); // mobile
+      else if (width < 1024) setVisibleCount(2); // tablet
+      else setVisibleCount(3); // desktop
+    };
+
+    updateVisibleCount();
+    window.addEventListener("resize", updateVisibleCount);
+    return () => window.removeEventListener("resize", updateVisibleCount);
+  }, []);
 
   // Calculate max start index (so we don't scroll past end)
   const maxStartIndex = testimonials.length - visibleCount;
 
   // Scroll container to the start of current slide group
   useEffect(() => {
-    if (containerRef.current) {
+    if (containerRef.current && cardWidthPx) {
       containerRef.current.scrollTo({
         left: currentSlide * visibleCount * cardWidthPx,
         behavior: "smooth",
       });
     }
-  }, [currentSlide, cardWidthPx]);
+  }, [currentSlide, cardWidthPx, visibleCount]);
 
   // Measure container width on mount and resize
   useEffect(() => {
@@ -170,7 +173,7 @@ export default function TestimonialsCarousel() {
     return () => {
       window.removeEventListener("resize", updateCardWidth);
     };
-  }, []);
+  }, [visibleCount]);
 
   // Scroll the container to the desired position on index change
   useEffect(() => {
@@ -253,23 +256,20 @@ export default function TestimonialsCarousel() {
   };
 
   return (
-    <section className="py-28 px-8 snap-start h-screen max-h-screen bg-stone-100">
-      <h2 className="text-3xl text-black lg:text-4xl font-light text-left mb-16">
+    <section className="md:py-28 pt-16 pb-4 px-8 snap-start md:h-screen min-h-screen bg-stone-100">
+      <h2 className="text-3xl text-black lg:text-4xl font-light text-left md:mb-16 mb-4">
         Client Testimonials
       </h2>
 
       {/* Carousel container */}
-      <div
-        className="w-full overflow-x-hidden" // 320px * 3 cards
-        ref={containerRef}
-      >
+      <div className="w-full  overflow-x-hidden" ref={containerRef}>
         <div className="flex ">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="flex-shrink-0  w-1/3 overflow-hidden text-black h-[35rem] flex flex-col px-6"
+              className="flex-shrink-0 w-full md:w-1/3 overflow-hidden text-black md:h-[35rem] flex flex-col md:px-6 "
             >
-              <div className="relative h-80">
+              <div className="relative md:h-80 h-48">
                 {testimonial.hasVideo && testimonial.videoUrl ? (
                   <div className="relative w-full h-full">
                     <video
@@ -305,7 +305,7 @@ export default function TestimonialsCarousel() {
                   />
                 )}
               </div>
-              <div className="py-2 flex flex-col flex-grow">
+              <div className="py-2 flex flex-col ">
                 <h3 className="font-medium text-lg mb-1">{testimonial.name}</h3>
                 <p className="text-xs text-gray-500 mb-4">
                   {testimonial.location}
