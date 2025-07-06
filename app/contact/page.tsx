@@ -18,7 +18,7 @@ export default function ContactPage() {
       <Navigation />
 
       {/* Contact Section */}
-      <section className="md:pt-32 pt-20 md:pb-20 bg-neutral-200 md:h-screen h-full">
+      <section className="md:pt-32 pt-20 md:pb-20 bg-neutral-200  h-full">
         {/* <div className=" px-6"> */}
         <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-16 gap-8 md:py-28 px-8 align-middle w-full h-full">
           <motion.div
