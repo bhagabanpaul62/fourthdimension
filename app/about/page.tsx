@@ -12,6 +12,15 @@ import {
   Target,
 } from "lucide-react";
 import { motion } from "motion/react";
+import ProjectProcessSection from "@/section/ImplementationProcess";
+
+import img1 from "../../public/img1.jpg";
+import img2 from "../../public/img2.jpg";
+import img3 from "../../public/img3.jpg";
+import img4 from "../../public/img4.jpg";
+import img5 from "../../public/img5.jpg";
+import BackgroundSlider from "react-background-slider";
+import Link from "next/link";
 
 export default function AboutPage() {
   const stats = [
@@ -48,26 +57,26 @@ export default function AboutPage() {
     },
   ];
 
-  const team = [
-    {
-      name: "Alexandra Dubois",
-      role: "Founder & Creative Director",
-      image: "/placeholder.svg?height=400&width=300",
-      bio: "With over 15 years of experience in luxury interior design, Alexandra founded Fourth Dimension with a vision to create spaces that embody sophistication and comfort.",
-    },
-    {
-      name: "Marcus Chen",
-      role: "Senior Interior Designer",
-      image: "/placeholder.svg?height=400&width=300",
-      bio: "Marcus brings a unique blend of contemporary and traditional design sensibilities, specializing in residential and commercial spaces.",
-    },
-    {
-      name: "Sofia Rodriguez",
-      role: "Project Manager",
-      image: "/placeholder.svg?height=400&width=300",
-      bio: "Sofia ensures every project runs seamlessly from conception to completion, maintaining our commitment to excellence and timely delivery.",
-    },
-  ];
+  // const team = [
+  //   {
+  //     name: "Alexandra Dubois",
+  //     role: "Founder & Creative Director",
+  //     image: "/placeholder.svg?height=400&width=300",
+  //     bio: "With over 15 years of experience in luxury interior design, Alexandra founded Fourth Dimension with a vision to create spaces that embody sophistication and comfort.",
+  //   },
+  //   {
+  //     name: "Marcus Chen",
+  //     role: "Senior Interior Designer",
+  //     image: "/placeholder.svg?height=400&width=300",
+  //     bio: "Marcus brings a unique blend of contemporary and traditional design sensibilities, specializing in residential and commercial spaces.",
+  //   },
+  //   {
+  //     name: "Sofia Rodriguez",
+  //     role: "Project Manager",
+  //     image: "/placeholder.svg?height=400&width=300",
+  //     bio: "Sofia ensures every project runs seamlessly from conception to completion, maintaining our commitment to excellence and timely delivery.",
+  //   },
+  // ];
 
   return (
     <div className="mandatory-scroll-snapping h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
@@ -206,7 +215,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 snap-start h-screen bg-white">
+      {/* <section className="py-20 snap-start h-screen bg-white">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-light mb-4">
             Our <span className="text-gray-400">Values</span>
@@ -230,9 +239,12 @@ export default function AboutPage() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
+
+      <ProjectProcessSection />
+
       {/* Team Section */}
-      <section className="py-20 h-screen snap-start bg-gray-50">
+      {/* <section className="py-20 h-screen snap-start bg-gray-50">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-light mb-4">
             Meet Our <span className="text-gray-400">Team</span>
@@ -265,154 +277,32 @@ export default function AboutPage() {
             </div>
           ))}
         </div>
-      </section>
-      {/* Timeline Section */}
-      <section className="py-20 h-screen snap-start bg-black text-white">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-light mb-4">
-            Our <span className="text-gray-400">Journey</span>
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            From humble beginnings to becoming a leading name in luxury interior
-            design
-          </p>
-        </div>
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-12">
-            {[
-              {
-                year: "2016",
-                title: "Foundation",
-                description:
-                  "Fourth Dimension was founded with a vision to create exceptional interior spaces that blend contemporary design with timeless elegance.",
-              },
-              {
-                year: "2018",
-                title: "First Major Project",
-                description:
-                  "Completed our first luxury residential project, establishing our reputation for attention to detail and client satisfaction.",
-              },
-              {
-                year: "2020",
-                title: "Team Expansion",
-                description:
-                  "Grew our team to include specialized designers and project managers to handle increasing demand for our services.",
-              },
-              {
-                year: "2022",
-                title: "Award Recognition",
-                description:
-                  "Received multiple design awards and recognition from industry publications for our innovative approach to interior design.",
-              },
-              {
-                year: "2024",
-                title: "International Presence",
-                description:
-                  "Expanded our services internationally, working with clients across different continents while maintaining our commitment to excellence.",
-              },
-            ].map((milestone, index) => (
-              <div key={index} className="flex items-start space-x-8">
-                <div className="flex-shrink-0 w-20 text-right">
-                  <span className="text-2xl font-light text-gray-400">
-                    {milestone.year}
-                  </span>
-                </div>
-                <div className="flex-shrink-0 w-px h-16 bg-gray-600 mt-2"></div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-medium mb-2">
-                    {milestone.title}
-                  </h3>
-                  <p className="text-gray-400 leading-relaxed">
-                    {milestone.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      {/* Awards Section */}
-      <section className="py-20 snap-start h-screen bg-white">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-light mb-4">
-            Awards & <span className="text-gray-400">Recognition</span>
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Our work has been recognized by leading design publications and
-            industry organizations
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            {
-              year: "2024",
-              award: "Best Residential Interior Design",
-              organization: "International Design Awards",
-            },
-            {
-              year: "2023",
-              award: "Excellence in Contemporary Design",
-              organization: "Architectural Digest",
-            },
-            {
-              year: "2023",
-              award: "Luxury Interior Designer of the Year",
-              organization: "Design & Living Magazine",
-            },
-            {
-              year: "2022",
-              award: "Innovation in Space Planning",
-              organization: "Interior Design Society",
-            },
-            {
-              year: "2022",
-              award: "Best Use of Natural Materials",
-              organization: "Sustainable Design Awards",
-            },
-            {
-              year: "2021",
-              award: "Rising Star in Interior Design",
-              organization: "Design Excellence Awards",
-            },
-          ].map((award, index) => (
-            <div
-              key={index}
-              className="p-6 border border-gray-100 rounded-lg text-center"
-            >
-              <div className="text-2xl font-light text-gray-400 mb-2">
-                {award.year}
-              </div>
-              <h3 className="font-medium mb-2">{award.award}</h3>
-              <p className="text-sm text-gray-600">{award.organization}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      </section> */}
+
       {/* CTA Section */}
-      <section className="relative snap-start h-screen py-20 overflow-hidden">
-        <Image
-          src="/placeholder.svg?height=600&width=1920"
-          alt="Modern interior space"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 text-white text-center">
-          <div className="container mx-auto px-6">
-            <h2 className="text-4xl lg:text-6xl font-light mb-8">
-              Ready to create your
-              <br />
-              <span className="text-gray-300">dream space?</span>
-            </h2>
-            <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
-              Let's discuss how we can bring your vision to life with our
-              expertise in contemporary interior design.
-            </p>
-            <button className="inline-flex items-center space-x-2 bg-white text-black px-8 py-3 hover:bg-gray-100 transition-colors">
-              <span className="font-medium">START YOUR PROJECT</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
+      <BackgroundSlider
+        images={[img1.src, img2.src, img3.src, img4.src, img5.src]}
+        duration={5}
+        transition={2}
+      />
+      <section className="relative snap-start h-screen py-20 flex items-center justify-center overflow-hidden bg-black/30">
+        <div className="relative z-10 text-white text-center ">
+          <h2 className="text-4xl lg:text-6xl font-light mb-8">
+            Ready to create your
+            <br />
+            <span className="text-gray-300">dream space?</span>
+          </h2>
+          <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+            Let's discuss how we can bring your vision to life with our
+            expertise in contemporary interior design.
+          </p>
+          <Link
+            href={"/contact"}
+            className="inline-flex items-center space-x-2 bg-white text-black px-8 py-3 hover:bg-gray-100 transition-colors"
+          >
+            <span className="font-medium">START YOUR PROJECT</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
       <Footer />
