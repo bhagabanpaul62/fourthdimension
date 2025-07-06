@@ -167,7 +167,7 @@ export default function ProjectsPage() {
         </div>
       </motion.section>
 
-      <section className="snap-start min-h-screen py-20 px-8 bg-white">
+      <section className="snap-start min-h-screen py-12 px-8 bg-white">
         {/* <div className="container mx-auto px-6"> */}
         {/* Filter Tabs */}
         <div className="flex items-center justify-between mb-8">
