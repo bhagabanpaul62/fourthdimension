@@ -285,14 +285,14 @@ export default function AboutPage() {
         duration={5}
         transition={2}
       />
-      <section className="relative snap-start h-screen py-20 flex items-center justify-center overflow-hidden bg-black/30">
+      <section className="relative px-8 snap-start h-screen py-20 flex items-center justify-center overflow-hidden bg-black/30">
         <div className="relative z-10 text-white text-center ">
-          <h2 className="text-4xl lg:text-6xl font-light mb-8">
+          <h2 className="text-3xl md:text-4xl lg:text-6xl font-light mb-8">
             Ready to create your
             <br />
             <span className="text-gray-300">dream space?</span>
           </h2>
-          <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+          <p className="text-sm md:text-lg opacity-90 mb-8 max-w-2xl mx-auto">
             Let's discuss how we can bring your vision to life with our
             expertise in contemporary interior design.
           </p>
