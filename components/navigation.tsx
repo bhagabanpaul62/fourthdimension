@@ -21,7 +21,7 @@ export default function Navigation() {
 
   return (
     <motion.nav
-      className={`fixed top-2 left-0 right-0 z-50 ${
+      className={`snap-start z-50 w-full ${
         pathname === "/contact" ? "text-black" : "text-white"
       }`}
       initial={{ transform: "translateY(-100px)" }}

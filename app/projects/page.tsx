@@ -138,31 +138,32 @@ export default function ProjectsPage() {
 
   return (
     <div className="mandatory-scroll-snapping h-screen overflow-y-scroll scroll-smooth">
-      <Navigation />
-
       {/* Hero Section */}
       <motion.section
-        className="snap-start relative h-screen flex items-end py-28 px-8 overflow-hidden"
+        className="snap-start relative h-screen flex flex-col w-full overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.1, type: "decay" }}
       >
+        <Navigation />
         <Image
           src="/img5.jpg"
           alt="Modern interior with entertainment center"
           fill
-          className="object-cover"
+          className="object-cover "
           priority
         />
         <div className="absolute inset-0 bg-black/40" />
-        <div className="left-0 z-10 text-white">
-          <h1 className="text-6xl lg:text-8xl font-light mb-8 text-left">
-            Projects.
-          </h1>
-        </div>
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center">
-          <p className="text-xs tracking-wider mb-2">SCROLL DOWN</p>
-          <ChevronDown className="w-4 h-4 mx-auto animate-bounce" />
+        <div className="relative h-full w-full flex items-end py-28 px-8">
+          <div className="left-0 z-10 text-white">
+            <h1 className="text-6xl lg:text-8xl font-light mb-8 text-left">
+              Projects.
+            </h1>
+          </div>
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center">
+            <p className="text-xs tracking-wider mb-2">SCROLL DOWN</p>
+            <ChevronDown className="w-4 h-4 mx-auto animate-bounce" />
+          </div>
         </div>
       </motion.section>
 
@@ -189,13 +190,13 @@ export default function ProjectsPage() {
             ))}
           </div>
         </div>
-        <div className="flex items-center justify-between mb-12">
-          <div className="relative flex items-center space-x-16">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 flex-wrap">
+          <div className="relative flex items-center md:space-x-10 justify-between md:justify-start flex-wrap">
             {subTabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className="relative pb-2 font-medium text-md"
+                className="relative pb-2 font-medium text-sm md:text-lg"
               >
                 <span
                   className={`transition-colors ${
@@ -224,7 +225,7 @@ export default function ProjectsPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="text-2xl text-black font-light"
+            className="md:text-2xl text-lg text-black font-light"
           >
             ({filteredProjects.length})
           </motion.span>

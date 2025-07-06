@@ -28,61 +28,61 @@ import Link from "next/link";
 export default function HomePage() {
   return (
     <div className="mandatory-scroll-snapping h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
-      <NavigationBar />
-
       {/* Hero Section */}
-      <section className="snap-start relative h-screen flex items-center justify-center overflow-hidden">
-        <BackgroundSlider
-          images={[img1.src, img2.src, img3.src, img4.src, img5.src]}
-          duration={5}
-          transition={2}
-        />
+      <BackgroundSlider
+        images={[img1.src, img2.src, img3.src, img4.src, img5.src]}
+        duration={5}
+        transition={2}
+      />
+      <section className="snap-start relative h-full w-full flex flex-col items-center justify-between overflow-hidden">
         <div className="absolute inset-0 bg-black/30" />
+        <NavigationBar />
+        <div className="snap-start relative h-full flex items-center justify-center w-full">
+          <div className="relative z-10 text-white px-6 sm:px-10 md:px-16 w-full">
+            <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between w-full gap-10 lg:gap-0">
+              {/* Left Content */}
+              <div className="text-center lg:text-left">
+                <motion.h1
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-8 sm:mb-12 text-shadow-2xl"
+                  initial={{ scale: 0.8, x: 0 }}
+                  animate={{ scale: 1, x: 0 }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                >
+                  Fourth
+                  <br />
+                  Dimension
+                </motion.h1>
+                <motion.p
+                  className="text-xs sm:text-sm opacity-80 max-w-xs sm:max-w-sm md:max-w-md leading-relaxed mx-auto lg:mx-0"
+                  initial={{ x: -500 }}
+                  animate={{ x: 0 }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                >
+                  AN INTERIOR DESIGN STUDIO
+                  <br />
+                  THAT CREATES COMFORTABLE
+                  <br />
+                  AND PREMIUM SPACES
+                  <br />
+                  USING CONTEMPORARY DESIGN.
+                </motion.p>
+              </div>
 
-        <div className="relative z-10 text-white px-6 sm:px-10 md:px-16 w-full">
-          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between w-full gap-10 lg:gap-0">
-            {/* Left Content */}
-            <div className="text-center lg:text-left">
-              <motion.h1
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-8 sm:mb-12 text-shadow-2xl"
-                initial={{ scale: 0.8, x: 0 }}
-                animate={{ scale: 1, x: 0 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-              >
-                Fourth
-                <br />
-                Dimension
-              </motion.h1>
-              <motion.p
-                className="text-xs sm:text-sm opacity-80 max-w-xs sm:max-w-sm md:max-w-md leading-relaxed mx-auto lg:mx-0"
-                initial={{ x: -500 }}
-                animate={{ x: 0 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-              >
-                AN INTERIOR DESIGN STUDIO
-                <br />
-                THAT CREATES COMFORTABLE
-                <br />
-                AND PREMIUM SPACES
-                <br />
-                USING CONTEMPORARY DESIGN.
-              </motion.p>
-            </div>
-
-            {/* Right Content */}
-            <div className="text-center lg:text-right max-w-xs sm:max-w-sm md:max-w-md lg:max-w-md xl:max-w-lg">
-              <motion.p
-                className="text-sm sm:text-base leading-relaxed mx-auto lg:ml-auto"
-                initial={{ x: 500 }}
-                animate={{ x: 0 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-              >
-                OUR PHILOSOPHY IS RESTRAINED
-                <br />
-                AESTHETICS, PURE FORMS, NATURAL
-                <br />
-                MATERIALS AND DEPTH IN EVERY DETAIL.
-              </motion.p>
+              {/* Right Content */}
+              <div className="text-center lg:text-right max-w-xs sm:max-w-sm md:max-w-md lg:max-w-md xl:max-w-lg">
+                <motion.p
+                  className="text-sm sm:text-base leading-relaxed mx-auto lg:ml-auto"
+                  initial={{ x: 500 }}
+                  animate={{ x: 0 }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                >
+                  OUR PHILOSOPHY IS RESTRAINED
+                  <br />
+                  AESTHETICS, PURE FORMS, NATURAL
+                  <br />
+                  MATERIALS AND DEPTH IN EVERY DETAIL.
+                </motion.p>
+              </div>
             </div>
           </div>
         </div>

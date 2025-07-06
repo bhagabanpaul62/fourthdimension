@@ -80,9 +80,9 @@ export default function AboutPage() {
 
   return (
     <div className="mandatory-scroll-snapping h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
-      <Navigation />
       {/* Hero Section */}
-      <section className="snap-start relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="snap-start relative h-screen flex flex-col justify-center overflow-hidden">
+        <Navigation />
         <Image
           src="/img6.jpg"
           alt="Modern architectural interior"
@@ -91,27 +91,29 @@ export default function AboutPage() {
           priority
         />
         <div className="absolute inset-0 bg-black/40" />
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="relative z-10 text-white text-center max-w-4xl mx-auto px-6"
-        >
-          <h1 className="text-6xl lg:text-8xl font-light mb-8">
-            About <span className="text-gray-300">Fourth</span>
-            <br />
-            Dimension
-            {/* <sup className="text-2xl">N</sup> */}
-          </h1>
-          <p className="text-lg opacity-90 max-w-2xl mx-auto leading-relaxed">
-            Crafting extraordinary spaces through the marriage of contemporary
-            design and timeless elegance since 2016.
-          </p>
-        </motion.div>
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center">
-          <p className="text-xs tracking-wider mb-2">DISCOVER OUR STORY</p>
-          <ChevronDown className="w-4 h-4 mx-auto animate-bounce" />
+        <div className="snap-start relative h-screen flex items-center justify-center overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="relative z-10 text-white text-center max-w-4xl mx-auto px-6"
+          >
+            <h1 className="text-6xl lg:text-8xl font-light mb-8">
+              About <span className="text-gray-300">Fourth</span>
+              <br />
+              Dimension
+              {/* <sup className="text-2xl">N</sup> */}
+            </h1>
+            <p className="text-lg opacity-90 max-w-2xl mx-auto leading-relaxed">
+              Crafting extraordinary spaces through the marriage of contemporary
+              design and timeless elegance since 2016.
+            </p>
+          </motion.div>
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center">
+            <p className="text-xs tracking-wider mb-2">DISCOVER OUR STORY</p>
+            <ChevronDown className="w-4 h-4 mx-auto animate-bounce" />
+          </div>
         </div>
       </section>
       {/* Philosophy Section */}
