@@ -23,6 +23,7 @@ import img5 from "../public/img5.jpg";
 import ProjectProcessSection from "@/section/ImplementationProcess";
 import CompletedProjects from "@/section/CompletedProjects";
 import TestimonialsCarousel from "@/section/TestimonialsCarousel";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
@@ -120,10 +121,13 @@ export default function HomePage() {
           </h2>
         </div>
         <div className="absolute bottom-8 right-8 text-white">
-          <button className="flex items-center space-x-2 hover:opacity-70 transition-opacity">
+          <Link
+            href={"/projects"}
+            className="flex items-center space-x-2 hover:opacity-70 transition-opacity"
+          >
             <span className="text-sm">VIEW DESIGN</span>
             <ArrowRight className="w-4 h-4" />
-          </button>
+          </Link>
         </div>
       </section>
 

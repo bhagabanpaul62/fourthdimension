@@ -61,12 +61,15 @@ export default function CompletedProjects() {
           pauseOnHover
           gradient={false}
           speed={50}
-          className="md:h-[65vh] min-h-[55vh] overflow-visible"
+          className="md:h-[65vh] min-h-[55vh] overflow-hidden"
         >
           {slidesData.map((slide, index) => (
             <div key={index} className="w-[90vw] max-w-[1000px] mx-auto">
               {/* Desktop version */}
-              <div className="hidden md:grid grid-cols-1 lg:grid-cols-2 md:gap-4 gap-2 h-full px-2">
+              <Link
+                href={"/projects"}
+                className="hidden md:grid grid-cols-1 lg:grid-cols-2 md:gap-4 gap-2 h-full px-2"
+              >
                 {/* Left Large Image */}
                 <div className="relative w-full h-full min-h-[300px]">
                   <Image
@@ -109,10 +112,13 @@ export default function CompletedProjects() {
                     />
                   </div>
                 </div>
-              </div>
+              </Link>
 
               {/* Mobile version */}
-              <div className="md:hidden grid grid-cols-2 grid-rows-2 gap-4 px-2">
+              <Link
+                href={"/projects"}
+                className="md:hidden grid grid-cols-2 grid-rows-2 gap-4 px-2"
+              >
                 {/* Main image */}
                 <div className="relative w-full aspect-[4/3] overflow-hidden">
                   <Image
@@ -152,7 +158,7 @@ export default function CompletedProjects() {
                     className="object-cover"
                   />
                 </div>
-              </div>
+              </Link>
             </div>
           ))}
         </Marquee>
