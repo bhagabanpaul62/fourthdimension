@@ -8,22 +8,19 @@ import { ArrowLeft, ArrowRight, ChevronDown, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function ProjectsPage() {
-  const [activeTab, setActiveTab] = useState<
-    "ALL" | "HOUSES" | "APARTMENT" | "RESTAURANT"
-  >("ALL");
   type Project = {
     title: string;
     category: string;
+    categoryGroup: "INTERIOR" | "CONSTRUCTION";
     images: string[];
     description?: string;
   };
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const projects = [
+  const projects: Project[] = [
     {
       title: "LIVING ROOM",
       category: "HOUSES",
+      categoryGroup: "INTERIOR",
       images: [
         "/img2.jpg",
         "/img3.jpg",
@@ -38,6 +35,7 @@ export default function ProjectsPage() {
     {
       title: "DINING AREA",
       category: "HOUSES",
+      categoryGroup: "INTERIOR",
       images: ["/img5.jpg", "/img2.jpg", "/img6.jpg"],
       description:
         "Spacious dining area with a blend of modern furniture and traditional decor, perfect for family gatherings.",
@@ -45,6 +43,7 @@ export default function ProjectsPage() {
     {
       title: "PORCH",
       category: "HOUSES",
+      categoryGroup: "CONSTRUCTION",
       images: ["/img1.jpg", "/img4.jpg", "/img7.jpg"],
       description:
         "An open and breezy porch offering relaxation with a scenic view and minimalist seating arrangement.",
@@ -52,6 +51,7 @@ export default function ProjectsPage() {
     {
       title: "OPEN KITCHEN SEATING",
       category: "RESTAURANT",
+      categoryGroup: "INTERIOR",
       images: ["/img3.jpg", "/img6.jpg", "/img8.jpg"],
       description:
         "Interactive open kitchen seating area where diners can enjoy the cooking experience up close.",
@@ -59,6 +59,7 @@ export default function ProjectsPage() {
     {
       title: "FAMILY ROOM",
       category: "HOUSES",
+      categoryGroup: "INTERIOR",
       images: ["/img4.jpg", "/img2.jpg", "/img5.jpg"],
       description:
         "Warm family room featuring comfortable couches, entertainment zone, and ample natural light.",
@@ -66,6 +67,7 @@ export default function ProjectsPage() {
     {
       title: "STUDIO LAYOUT",
       category: "APARTMENT",
+      categoryGroup: "INTERIOR",
       images: ["/img1.jpg", "/img8.jpg", "/img6.jpg"],
       description:
         "Compact yet functional studio layout designed for creative professionals with open-space aesthetics.",
@@ -73,6 +75,7 @@ export default function ProjectsPage() {
     {
       title: "LOUNGE AREA",
       category: "APARTMENT",
+      categoryGroup: "INTERIOR",
       images: ["/img6.jpg", "/img7.jpg", "/img3.jpg"],
       description:
         "Stylish lounge area with contemporary seating and ambient lighting to unwind or socialize.",
@@ -80,6 +83,7 @@ export default function ProjectsPage() {
     {
       title: "RECEPTION SPACE",
       category: "RESTAURANT",
+      categoryGroup: "CONSTRUCTION",
       images: ["/img8.jpg", "/img2.jpg", "/img1.jpg"],
       description:
         "Chic and welcoming reception space with bold textures and a balanced color palette for first impressions.",
@@ -87,6 +91,7 @@ export default function ProjectsPage() {
     {
       title: "TERRACE VIEW",
       category: "HOUSES",
+      categoryGroup: "CONSTRUCTION",
       images: ["/img7.jpg", "/img3.jpg", "/img5.jpg"],
       description:
         "Terrace with a breathtaking view, furnished for evening gatherings and stargazing.",
@@ -94,64 +99,104 @@ export default function ProjectsPage() {
     {
       title: "BEDROOM DESIGN",
       category: "HOUSES",
+      categoryGroup: "INTERIOR",
       images: ["/img2.jpg", "/img1.jpg", "/img6.jpg"],
       description:
         "Serene bedroom design emphasizing tranquility through soft colors, textures, and layered lighting.",
     },
   ];
 
-  const filteredProjects =
-    activeTab === "ALL"
-      ? projects
-      : projects.filter((p) => p.category === activeTab);
+  const [mainTab, setMainTab] = useState<"INTERIOR" | "CONSTRUCTION">(
+    "INTERIOR"
+  );
 
-  const tabs: ("ALL" | "HOUSES" | "APARTMENT" | "RESTAURANT")[] = [
+  const [activeTab, setActiveTab] = useState<
+    "ALL" | "HOUSES" | "APARTMENT" | "RESTAURANT"
+  >("ALL");
+
+  const mainTabs: ("INTERIOR" | "CONSTRUCTION")[] = [
+    "INTERIOR",
+    "CONSTRUCTION",
+  ];
+
+  const subTabs: ("ALL" | "HOUSES" | "APARTMENT" | "RESTAURANT")[] = [
     "ALL",
     "HOUSES",
     "APARTMENT",
     "RESTAURANT",
   ];
 
+  const filteredProjects =
+    activeTab === "ALL"
+      ? projects.filter((p) => p.categoryGroup === mainTab)
+      : projects.filter(
+          (p) => p.categoryGroup === mainTab && p.category === activeTab
+        );
+
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   return (
     <div className="mandatory-scroll-snapping h-screen overflow-y-scroll scroll-smooth">
-      <Navigation />
-
       {/* Hero Section */}
       <motion.section
-        className="snap-start relative h-screen flex items-end py-28 px-8 overflow-hidden"
+        className="snap-start relative h-screen flex flex-col w-full overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.1, type: "decay" }}
       >
+        <Navigation />
         <Image
           src="/img5.jpg"
           alt="Modern interior with entertainment center"
           fill
-          className="object-cover"
+          className="object-cover "
           priority
         />
         <div className="absolute inset-0 bg-black/40" />
-        <div className="left-0 z-10 text-white">
-          <h1 className="text-6xl lg:text-8xl font-light mb-8 text-left">
-            Projects.
-          </h1>
-        </div>
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center">
-          <p className="text-xs tracking-wider mb-2">SCROLL DOWN</p>
-          <ChevronDown className="w-4 h-4 mx-auto animate-bounce" />
+        <div className="relative h-full w-full flex items-end py-28 px-8">
+          <div className="left-0 z-10 text-white">
+            <h1 className="text-6xl lg:text-8xl font-light mb-8 text-left">
+              Projects.
+            </h1>
+          </div>
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center">
+            <p className="text-xs tracking-wider mb-2">SCROLL DOWN</p>
+            <ChevronDown className="w-4 h-4 mx-auto animate-bounce" />
+          </div>
         </div>
       </motion.section>
 
-      <section className="snap-start min-h-screen py-20 px-8 bg-white">
+      <section className="snap-start min-h-screen py-12 px-8 bg-white">
         {/* <div className="container mx-auto px-6"> */}
         {/* Filter Tabs */}
-        <div className="flex items-center justify-between mb-12">
-          <div className="relative flex items-center space-x-16">
-            {tabs.map((tab) => (
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center space-x-8">
+            {mainTabs.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => {
+                  setMainTab(tab);
+                  setActiveTab("ALL"); // reset sub tab
+                }}
+                className={`pb-2 text-md font-semibold ${
+                  mainTab === tab
+                    ? "text-black border-b-2 border-black"
+                    : "text-gray-400 hover:text-black"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 flex-wrap">
+          <div className="relative flex items-center md:space-x-10 justify-between md:justify-start flex-wrap">
+            {subTabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className="relative pb-2 font-medium text-md"
+                className="relative pb-2 font-medium text-sm md:text-lg"
               >
                 <span
                   className={`transition-colors ${
@@ -180,7 +225,7 @@ export default function ProjectsPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="text-2xl text-black font-light"
+            className="md:text-2xl text-lg text-black font-light"
           >
             ({filteredProjects.length})
           </motion.span>

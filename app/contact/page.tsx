@@ -15,94 +15,93 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen lg:h-screen w-full overflow-clip">
-      <Navigation />
-
       {/* Contact Section */}
-      <section className="md:pt-32 pt-20 md:pb-20 bg-neutral-200  h-full">
-        {/* <div className=" px-6"> */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 md:py-28 px-8 align-middle w-full h-full">
-          <motion.div
-            initial={{ transform: "translateX(-500px)" }}
-            animate={{ transform: "translateX(0px)" }}
-            transition={{ duration: 1.5, type: "decay" }}
-            className="md:col-span-2 mb-8"
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-light md:mb-8 mb-4 text-black">
-              Hey,
-              <br />
-              can we talk?
-            </h1>
-
-            <button
-              className="flex items-center border-b space-x-2 md:mb-16 text-black hover:opacity-70 transition-opacity"
-              onClick={() => setShowDialog(!showDialog)}
+      <section className="flex flex-col justify-between bg-neutral-200 h-full">
+        <Navigation />
+        <div className="px-6 pt-14  md:pb-20 h-full">
+          <div className="grid grid-cols-1 lg:grid-cols-5 md:py-28 px-8 align-middle w-full h-full">
+            <motion.div
+              initial={{ transform: "translateX(-500px)" }}
+              animate={{ transform: "translateX(0px)" }}
+              transition={{ duration: 1.5, type: "decay" }}
+              className="md:col-span-2 mb-8"
             >
-              <span className="text-xl  tracking-wider cursor-pointer">
-                CONTACT US
-              </span>
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </button>
-          </motion.div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-light md:mb-8 mb-4 text-black">
+                Hey,
+                <br />
+                can we talk?
+              </h1>
 
-          <motion.div
-            initial={{ transform: "translateX(1000px)" }}
-            animate={{ transform: "translateX(0px)" }}
-            transition={{ duration: 1.5, type: "decay" }}
-            className="md:space-y-1 space-y-8 md:mb-0 mb-16 text-black flex flex-col-reverse lg:flex-row justify-between md:col-span-3 md:col-start-3"
-          >
-            <div className="m-2">
-              <div className="flex flex-col mb-8">
-                <h3 className="text-xl tracking-wider text-gray-600 md:mb-10 mb-4">
-                  CONTACT INFORMATION
-                </h3>
-                <h4 className="font-black mb-4 text-lg">EMAIL:</h4>
-                <div className="space-y-1 underline text-lg ">
-                  <p className=" ">post@maison-noire.com</p>
-                  <p className=" ">info@maison-noire.com</p>
-                  <p className="">maison.noire@gmail.com</p>
+              <button
+                className="flex items-center border-b space-x-2 md:mb-16 text-black hover:opacity-70 transition-opacity"
+                onClick={() => setShowDialog(!showDialog)}
+              >
+                <span className="text-xl  tracking-wider cursor-pointer">
+                  CONTACT US
+                </span>
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </button>
+            </motion.div>
+
+            <motion.div
+              initial={{ transform: "translateX(1000px)" }}
+              animate={{ transform: "translateX(0px)" }}
+              transition={{ duration: 1.5, type: "decay" }}
+              className="md:space-y-1 space-y-8 md:mb-0 mb-16 text-black flex flex-col-reverse lg:flex-row justify-between md:col-span-3 md:col-start-3"
+            >
+              <div className="m-2">
+                <div className="flex flex-col mb-8">
+                  <h3 className="text-xl tracking-wider text-gray-600 md:mb-10 mb-4">
+                    CONTACT INFORMATION
+                  </h3>
+                  <h4 className="font-black mb-4 text-lg">EMAIL:</h4>
+                  <div className="space-y-1 underline text-lg ">
+                    <p className=" ">post@maison-noire.com</p>
+                    <p className=" ">info@maison-noire.com</p>
+                    <p className="">maison.noire@gmail.com</p>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-black mb-4 text-lg">NUMBER:</h4>
+                  <div className="space-y-1 underline mb-8 text-lg">
+                    <p className=" ">+ 123 456 78 90</p>
+                    <p className=" ">+ 98 76 54 32 10</p>
+                    <p className=" ">+ 01 234 567 890</p>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-black mb-4 text-lg">SOCIAL MEDIA:</h4>
+                  <div className="grid grid-cols-2 space-x-2 space-y-2 text-lg w-fit underline">
+                    <a href="#" className="hover:opacity-70 transition-opacity">
+                      Behance
+                    </a>
+                    <a href="#" className="hover:opacity-70 transition-opacity">
+                      Instagram
+                    </a>
+                    <a href="#" className="hover:opacity-70 transition-opacity">
+                      LinkedIn
+                    </a>
+                    <a href="#" className="hover:opacity-70 transition-opacity">
+                      Pinterest
+                    </a>
+                  </div>
                 </div>
               </div>
-
-              <div>
-                <h4 className="font-black mb-4 text-lg">NUMBER:</h4>
-                <div className="space-y-1 underline mb-8 text-lg">
-                  <p className=" ">+ 123 456 78 90</p>
-                  <p className=" ">+ 98 76 54 32 10</p>
-                  <p className=" ">+ 01 234 567 890</p>
-                </div>
+              <div className="relative lg:h-full max-w-[35rem] mb-4 ">
+                <Image
+                  src="/img5.jpg"
+                  alt="Modern interior hallway"
+                  // fill
+                  className="object-cover  "
+                  height={1000}
+                  width={1000}
+                />
               </div>
-
-              <div>
-                <h4 className="font-black mb-4 text-lg">SOCIAL MEDIA:</h4>
-                <div className="grid grid-cols-2 space-x-2 space-y-2 text-lg w-fit underline">
-                  <a href="#" className="hover:opacity-70 transition-opacity">
-                    Behance
-                  </a>
-                  <a href="#" className="hover:opacity-70 transition-opacity">
-                    Instagram
-                  </a>
-                  <a href="#" className="hover:opacity-70 transition-opacity">
-                    LinkedIn
-                  </a>
-                  <a href="#" className="hover:opacity-70 transition-opacity">
-                    Pinterest
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="relative lg:h-full max-w-[35rem] mb-4 ">
-              <Image
-                src="/img5.jpg"
-                alt="Modern interior hallway"
-                // fill
-                className="object-cover  "
-                height={1000}
-                width={1000}
-              />
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
-        {/* </div> */}
       </section>
 
       <AnimatePresence>
