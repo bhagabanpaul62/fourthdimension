@@ -8,22 +8,19 @@ import { ArrowLeft, ArrowRight, ChevronDown, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function ProjectsPage() {
-  const [activeTab, setActiveTab] = useState<
-    "ALL" | "HOUSES" | "APARTMENT" | "RESTAURANT"
-  >("ALL");
   type Project = {
     title: string;
     category: string;
+    categoryGroup: "INTERIOR" | "CONSTRUCTION";
     images: string[];
     description?: string;
   };
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const projects = [
+  const projects: Project[] = [
     {
       title: "LIVING ROOM",
       category: "HOUSES",
+      categoryGroup: "INTERIOR",
       images: [
         "/img2.jpg",
         "/img3.jpg",
@@ -38,6 +35,7 @@ export default function ProjectsPage() {
     {
       title: "DINING AREA",
       category: "HOUSES",
+      categoryGroup: "INTERIOR",
       images: ["/img5.jpg", "/img2.jpg", "/img6.jpg"],
       description:
         "Spacious dining area with a blend of modern furniture and traditional decor, perfect for family gatherings.",
@@ -45,6 +43,7 @@ export default function ProjectsPage() {
     {
       title: "PORCH",
       category: "HOUSES",
+      categoryGroup: "CONSTRUCTION",
       images: ["/img1.jpg", "/img4.jpg", "/img7.jpg"],
       description:
         "An open and breezy porch offering relaxation with a scenic view and minimalist seating arrangement.",
@@ -52,6 +51,7 @@ export default function ProjectsPage() {
     {
       title: "OPEN KITCHEN SEATING",
       category: "RESTAURANT",
+      categoryGroup: "INTERIOR",
       images: ["/img3.jpg", "/img6.jpg", "/img8.jpg"],
       description:
         "Interactive open kitchen seating area where diners can enjoy the cooking experience up close.",
@@ -59,6 +59,7 @@ export default function ProjectsPage() {
     {
       title: "FAMILY ROOM",
       category: "HOUSES",
+      categoryGroup: "INTERIOR",
       images: ["/img4.jpg", "/img2.jpg", "/img5.jpg"],
       description:
         "Warm family room featuring comfortable couches, entertainment zone, and ample natural light.",
@@ -66,6 +67,7 @@ export default function ProjectsPage() {
     {
       title: "STUDIO LAYOUT",
       category: "APARTMENT",
+      categoryGroup: "INTERIOR",
       images: ["/img1.jpg", "/img8.jpg", "/img6.jpg"],
       description:
         "Compact yet functional studio layout designed for creative professionals with open-space aesthetics.",
@@ -73,6 +75,7 @@ export default function ProjectsPage() {
     {
       title: "LOUNGE AREA",
       category: "APARTMENT",
+      categoryGroup: "INTERIOR",
       images: ["/img6.jpg", "/img7.jpg", "/img3.jpg"],
       description:
         "Stylish lounge area with contemporary seating and ambient lighting to unwind or socialize.",
@@ -80,6 +83,7 @@ export default function ProjectsPage() {
     {
       title: "RECEPTION SPACE",
       category: "RESTAURANT",
+      categoryGroup: "CONSTRUCTION",
       images: ["/img8.jpg", "/img2.jpg", "/img1.jpg"],
       description:
         "Chic and welcoming reception space with bold textures and a balanced color palette for first impressions.",
@@ -87,6 +91,7 @@ export default function ProjectsPage() {
     {
       title: "TERRACE VIEW",
       category: "HOUSES",
+      categoryGroup: "CONSTRUCTION",
       images: ["/img7.jpg", "/img3.jpg", "/img5.jpg"],
       description:
         "Terrace with a breathtaking view, furnished for evening gatherings and stargazing.",
@@ -94,23 +99,42 @@ export default function ProjectsPage() {
     {
       title: "BEDROOM DESIGN",
       category: "HOUSES",
+      categoryGroup: "INTERIOR",
       images: ["/img2.jpg", "/img1.jpg", "/img6.jpg"],
       description:
         "Serene bedroom design emphasizing tranquility through soft colors, textures, and layered lighting.",
     },
   ];
 
-  const filteredProjects =
-    activeTab === "ALL"
-      ? projects
-      : projects.filter((p) => p.category === activeTab);
+  const [mainTab, setMainTab] = useState<"INTERIOR" | "CONSTRUCTION">(
+    "INTERIOR"
+  );
 
-  const tabs: ("ALL" | "HOUSES" | "APARTMENT" | "RESTAURANT")[] = [
+  const [activeTab, setActiveTab] = useState<
+    "ALL" | "HOUSES" | "APARTMENT" | "RESTAURANT"
+  >("ALL");
+
+  const mainTabs: ("INTERIOR" | "CONSTRUCTION")[] = [
+    "INTERIOR",
+    "CONSTRUCTION",
+  ];
+
+  const subTabs: ("ALL" | "HOUSES" | "APARTMENT" | "RESTAURANT")[] = [
     "ALL",
     "HOUSES",
     "APARTMENT",
     "RESTAURANT",
   ];
+
+  const filteredProjects =
+    activeTab === "ALL"
+      ? projects.filter((p) => p.categoryGroup === mainTab)
+      : projects.filter(
+          (p) => p.categoryGroup === mainTab && p.category === activeTab
+        );
+
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   return (
     <div className="mandatory-scroll-snapping h-screen overflow-y-scroll scroll-smooth">
@@ -145,9 +169,29 @@ export default function ProjectsPage() {
       <section className="snap-start min-h-screen py-20 px-8 bg-white">
         {/* <div className="container mx-auto px-6"> */}
         {/* Filter Tabs */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center space-x-8">
+            {mainTabs.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => {
+                  setMainTab(tab);
+                  setActiveTab("ALL"); // reset sub tab
+                }}
+                className={`pb-2 text-md font-semibold ${
+                  mainTab === tab
+                    ? "text-black border-b-2 border-black"
+                    : "text-gray-400 hover:text-black"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        </div>
         <div className="flex items-center justify-between mb-12">
           <div className="relative flex items-center space-x-16">
-            {tabs.map((tab) => (
+            {subTabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
