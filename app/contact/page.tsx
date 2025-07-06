@@ -14,17 +14,18 @@ export default function ContactPage() {
   const tabs = ["START A PROJECT", "WORK WITH US", "OTHER"];
 
   return (
-    <div className="min-h-screen w-full overflow-clip">
+    <div className="min-h-screen lg:h-screen w-full overflow-clip">
       <Navigation />
 
       {/* Contact Section */}
       <section className="md:pt-32 pt-20 md:pb-20 bg-neutral-200  h-full">
         {/* <div className=" px-6"> */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-16 gap-8 md:py-28 px-8 align-middle w-full h-full">
+        <div className="grid grid-cols-1 lg:grid-cols-5 md:py-28 px-8 align-middle w-full h-full">
           <motion.div
             initial={{ transform: "translateX(-500px)" }}
             animate={{ transform: "translateX(0px)" }}
             transition={{ duration: 1.5, type: "decay" }}
+            className="md:col-span-2 mb-8"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-light md:mb-8 mb-4 text-black">
               Hey,
@@ -47,15 +48,15 @@ export default function ContactPage() {
             initial={{ transform: "translateX(1000px)" }}
             animate={{ transform: "translateX(0px)" }}
             transition={{ duration: 1.5, type: "decay" }}
-            className="md:space-y-12 space-y-8 md:mb-0 mb-16 text-black flex flex-col-reverse lg:flex-row justify-between"
+            className="md:space-y-1 space-y-8 md:mb-0 mb-16 text-black flex flex-col-reverse lg:flex-row justify-between md:col-span-3 md:col-start-3"
           >
             <div className="m-2">
               <div className="flex flex-col mb-8">
-                <h3 className="text-lg tracking-wider text-gray-600 md:mb-10 mb-4">
+                <h3 className="text-xl tracking-wider text-gray-600 md:mb-10 mb-4">
                   CONTACT INFORMATION
                 </h3>
-                <h4 className="font-black mb-4 ">EMAIL:</h4>
-                <div className="space-y-1 underline text-md ">
+                <h4 className="font-black mb-4 text-lg">EMAIL:</h4>
+                <div className="space-y-1 underline text-lg ">
                   <p className=" ">post@maison-noire.com</p>
                   <p className=" ">info@maison-noire.com</p>
                   <p className="">maison.noire@gmail.com</p>
@@ -63,8 +64,8 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <h4 className="font-black mb-4">NUMBER:</h4>
-                <div className="space-y-1 underline mb-8 text-md">
+                <h4 className="font-black mb-4 text-lg">NUMBER:</h4>
+                <div className="space-y-1 underline mb-8 text-lg">
                   <p className=" ">+ 123 456 78 90</p>
                   <p className=" ">+ 98 76 54 32 10</p>
                   <p className=" ">+ 01 234 567 890</p>
@@ -72,8 +73,8 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <h4 className="font-black mb-4">SOCIAL MEDIA:</h4>
-                <div className="grid grid-cols-2 space-x-2 space-y-2 text-md w-fit underline">
+                <h4 className="font-black mb-4 text-lg">SOCIAL MEDIA:</h4>
+                <div className="grid grid-cols-2 space-x-2 space-y-2 text-lg w-fit underline">
                   <a href="#" className="hover:opacity-70 transition-opacity">
                     Behance
                   </a>
@@ -111,7 +112,7 @@ export default function ContactPage() {
             animate={{ x: "0%" }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="fixed top-0 right-0 h-full md:w-1/2 w-full bg-stone-300 text-black z-50 shadow-xl md:px-12 md:py-16 px-4 py-10 overflow-y-auto"
+            className="fixed top-0 right-0 h-full md:w-3/5 w-full bg-stone-300 text-black z-50 shadow-xl md:px-12 md:py-16 px-4 py-10 overflow-y-auto"
           >
             <div className="flex justify-between items-center mb-10">
               <h2 className="text-4xl md:text-5xl font-medium">Can we talk?</h2>
