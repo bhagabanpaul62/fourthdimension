@@ -24,6 +24,7 @@ import ProjectProcessSection from "@/section/ImplementationProcess";
 import CompletedProjects from "@/section/CompletedProjects";
 import TestimonialsCarousel from "@/section/TestimonialsCarousel";
 import Link from "next/link";
+import QuoteForm from "@/section/QuoteForm";
 
 export default function HomePage() {
   return (
@@ -109,6 +110,8 @@ export default function HomePage() {
       <ProjectProcessSection />
 
       <TestimonialsCarousel />
+
+      <QuoteForm />
 
       {/* Final CTA Section */}
       <section className="snap-start relative h-screen flex items-center justify-center overflow-hidden">
