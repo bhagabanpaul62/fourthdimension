@@ -57,26 +57,26 @@ export default function AboutPage() {
     },
   ];
 
-  // const team = [
-  //   {
-  //     name: "Alexandra Dubois",
-  //     role: "Founder & Creative Director",
-  //     image: "/placeholder.svg?height=400&width=300",
-  //     bio: "With over 15 years of experience in luxury interior design, Alexandra founded Fourth Dimension with a vision to create spaces that embody sophistication and comfort.",
-  //   },
-  //   {
-  //     name: "Marcus Chen",
-  //     role: "Senior Interior Designer",
-  //     image: "/placeholder.svg?height=400&width=300",
-  //     bio: "Marcus brings a unique blend of contemporary and traditional design sensibilities, specializing in residential and commercial spaces.",
-  //   },
-  //   {
-  //     name: "Sofia Rodriguez",
-  //     role: "Project Manager",
-  //     image: "/placeholder.svg?height=400&width=300",
-  //     bio: "Sofia ensures every project runs seamlessly from conception to completion, maintaining our commitment to excellence and timely delivery.",
-  //   },
-  // ];
+  const team = [
+    {
+      name: "Alexandra Dubois",
+      role: "Founder & Creative Director",
+      image: "/placeholder.svg?height=400&width=300",
+      bio: "With over 15 years of experience in luxury interior design, Alexandra founded Fourth Dimension with a vision to create spaces that embody sophistication and comfort.",
+    },
+    {
+      name: "Marcus Chen",
+      role: "Senior Interior Designer",
+      image: "/placeholder.svg?height=400&width=300",
+      bio: "Marcus brings a unique blend of contemporary and traditional design sensibilities, specializing in residential and commercial spaces.",
+    },
+    {
+      name: "Sofia Rodriguez",
+      role: "Project Manager",
+      image: "/placeholder.svg?height=400&width=300",
+      bio: "Sofia ensures every project runs seamlessly from conception to completion, maintaining our commitment to excellence and timely delivery.",
+    },
+  ];
 
   return (
     <div className="mandatory-scroll-snapping h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
@@ -246,40 +246,53 @@ export default function AboutPage() {
       <ProjectProcessSection />
 
       {/* Team Section */}
-      {/* <section className="py-20 h-screen snap-start bg-gray-50">
+      <section className="py-20 min-h-screen snap-start bg-gray-50">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-light mb-4">
+          <h2 className="text-4xl lg:text-5xl text-black font-light mb-4">
             Meet Our <span className="text-gray-400">Team</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             The creative minds behind every exceptional project
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 px-6 md:px-16">
           {team.map((member, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg overflow-hidden shadow-sm"
+              className={`group bg-white overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-gray-100
+          ${
+            index % 3 === 1
+              ? "translate-y-6"
+              : index % 3 === 2
+              ? "translate-y-12"
+              : ""
+          }`}
             >
+              {/* Image */}
               <div className="relative h-80">
                 <Image
                   src={member.image || "/placeholder.svg"}
                   alt={member.name}
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
+
+              {/* Info */}
               <div className="p-6">
-                <h3 className="text-xl font-medium mb-1">{member.name}</h3>
-                <p className="text-sm text-gray-500 mb-4">{member.role}</p>
-                <p className="text-sm text-gray-700 leading-relaxed">
+                <h3 className="text-xl font-medium text-black mb-1">
+                  {member.name}
+                </h3>
+                <p className="text-sm text-gray-500 mb-3">{member.role}</p>
+                <p className="text-sm text-gray-700 leading-relaxed line-clamp-4">
                   {member.bio}
                 </p>
               </div>
             </div>
           ))}
         </div>
-      </section> */}
+      </section>
 
       {/* CTA Section */}
       <BackgroundSlider
