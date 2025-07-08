@@ -21,6 +21,7 @@ import img4 from "../../public/img4.jpg";
 import img5 from "../../public/img5.jpg";
 import BackgroundSlider from "react-background-slider";
 import Link from "next/link";
+import AwardsSection from "@/section/Awards";
 
 export default function AboutPage() {
   const stats = [
@@ -216,38 +217,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values Section */}
-      {/* <section className="py-20 snap-start h-screen bg-white">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-light mb-4">
-            Our <span className="text-gray-400">Values</span>
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            The principles that guide every project and define our approach to
-            design
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {values.map((value, index) => (
-            <div
-              key={index}
-              className="p-8 border border-gray-100 rounded-lg hover:shadow-lg transition-shadow"
-            >
-              <value.icon className="w-8 h-8 text-black mb-4" />
-              <h3 className="text-xl font-medium mb-4">{value.title}</h3>
-              <p className="text-gray-600 leading-relaxed">
-                {value.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section> */}
-
-      <ProjectProcessSection />
-
       {/* Team Section */}
-      <section className="py-20 min-h-screen snap-start bg-gray-50">
-        <div className="text-center mb-16">
+      <section className="py-12 md:py-20 px-4 min-h-screen snap-start bg-gray-50">
+        <div className="text-center md:mb-16 mb-8">
           <h2 className="text-4xl lg:text-5xl text-black font-light mb-4">
             Meet Our <span className="text-gray-400">Team</span>
           </h2>
@@ -256,11 +228,11 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 px-6 md:px-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 md:gap-12 gap-4 px-6 md:px-16">
           {team.map((member, index) => (
             <div
               key={index}
-              className={`group bg-white overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-gray-100
+              className={`group bg-white overflow-hidden shadow-sm hover:shadow-md transition duration-300
           ${
             index % 3 === 1
               ? "translate-y-6"
@@ -270,7 +242,7 @@ export default function AboutPage() {
           }`}
             >
               {/* Image */}
-              <div className="relative h-80">
+              <div className="relative md:h-80 h-64">
                 <Image
                   src={member.image || "/placeholder.svg"}
                   alt={member.name}
@@ -293,6 +265,9 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
+
+      {/* Awards Section */}
+      <AwardsSection />
 
       {/* CTA Section */}
       <BackgroundSlider
