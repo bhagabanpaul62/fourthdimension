@@ -21,6 +21,7 @@ import img4 from "../../public/img4.jpg";
 import img5 from "../../public/img5.jpg";
 import BackgroundSlider from "react-background-slider";
 import Link from "next/link";
+import AwardsSection from "@/section/Awards";
 
 export default function AboutPage() {
   const stats = [
@@ -216,35 +217,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values Section */}
-      {/* <section className="py-20 snap-start h-screen bg-white">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-light mb-4">
-            Our <span className="text-gray-400">Values</span>
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            The principles that guide every project and define our approach to
-            design
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {values.map((value, index) => (
-            <div
-              key={index}
-              className="p-8 border border-gray-100 rounded-lg hover:shadow-lg transition-shadow"
-            >
-              <value.icon className="w-8 h-8 text-black mb-4" />
-              <h3 className="text-xl font-medium mb-4">{value.title}</h3>
-              <p className="text-gray-600 leading-relaxed">
-                {value.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section> */}
-
-      <ProjectProcessSection />
-
       {/* Team Section */}
       <section className="py-20 min-h-screen snap-start bg-gray-50">
         <div className="text-center mb-16">
@@ -293,6 +265,9 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
+
+      {/* Awards Section */}
+      <AwardsSection />
 
       {/* CTA Section */}
       <BackgroundSlider
