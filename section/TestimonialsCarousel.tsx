@@ -203,6 +203,30 @@ export default function TestimonialsCarousel() {
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
+  // Helper functions to detect YouTube and get thumbnail
+  function isYouTubeUrl(url: string) {
+    // Accepts full YouTube URLs or just video IDs (11 chars)
+    return (
+      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\//.test(url) ||
+      /^[a-zA-Z0-9_-]{11}$/.test(url)
+    );
+  }
+
+  function getYouTubeId(url: string) {
+    // If it's just an ID
+    if (/^[a-zA-Z0-9_-]{11}$/.test(url)) return url;
+    // Try to extract from URL
+    const match = url.match(
+      /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|shorts)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+    );
+    return match ? match[1] : null;
+  }
+
+  function getYouTubeThumbnail(url: string) {
+    const id = getYouTubeId(url);
+    return id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : "/placeholder.svg";
+  }
+
   return (
     <section className="md:py-28 pt-16 pb-4 px-8 snap-start md:h-screen min-h-screen bg-stone-100">
       <h2 className="text-3xl text-black lg:text-4xl font-light text-left md:mb-16 mb-4">
@@ -219,31 +243,50 @@ export default function TestimonialsCarousel() {
             >
               <div className="relative md:h-80 h-48">
                 {testimonial.mediaType === "video" ? (
-                  <div className="relative w-full h-full">
-                    <video
-                      ref={(el) => {
-                        videoRefs.current[testimonial._id] = el;
-                      }}
-                      className="w-full h-full object-cover"
-                      poster={testimonial.mediaUrl}
-                      onEnded={() => setPlayingVideo(null)}
-                    >
-                      <source src={testimonial.mediaUrl} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                    <button
-                      onClick={() => openVideoPopup(testimonial)}
-                      className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
-                    >
-                      <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
-                        {playingVideo === testimonial._id ? (
-                          <Pause className="w-6 h-6 text-black ml-0.5" />
-                        ) : (
+                  isYouTubeUrl(testimonial.mediaUrl) ? (
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={getYouTubeThumbnail(testimonial.mediaUrl)}
+                        alt={testimonial.clientName}
+                        fill
+                        className="object-cover"
+                      />
+                      <button
+                        onClick={() => openVideoPopup(testimonial)}
+                        className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
+                      >
+                        <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
                           <Play className="w-6 h-6 text-black ml-1" />
-                        )}
-                      </div>
-                    </button>
-                  </div>
+                        </div>
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="relative w-full h-full">
+                      <video
+                        ref={(el) => {
+                          videoRefs.current[testimonial._id] = el;
+                        }}
+                        className="w-full h-full object-cover"
+                        poster={testimonial.mediaUrl}
+                        onEnded={() => setPlayingVideo(null)}
+                      >
+                        <source src={testimonial.mediaUrl} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                      <button
+                        onClick={() => openVideoPopup(testimonial)}
+                        className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
+                      >
+                        <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
+                          {playingVideo === testimonial._id ? (
+                            <Pause className="w-6 h-6 text-black ml-0.5" />
+                          ) : (
+                            <Play className="w-6 h-6 text-black ml-1" />
+                          )}
+                        </div>
+                      </button>
+                    </div>
+                  )
                 ) : (
                   <Image
                     src={testimonial.mediaUrl || "/placeholder.svg"}
@@ -329,17 +372,29 @@ export default function TestimonialsCarousel() {
                 </button>
               </div>
             </div>
-
-            {/* YouTube Video */}
+            {/* Video or YouTube */}
             <div className="relative aspect-video w-full">
-              <iframe
-                className="w-full h-full"
-                src={`https://youtube.com/embed/${popupVideo.mediaUrl}?autoplay=1&controls=1&modestbranding=1&rel=0`}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                allowFullScreen
-              ></iframe>
+              {isYouTubeUrl(popupVideo.mediaUrl) ? (
+                <iframe
+                  className="w-full h-full"
+                  src={`https://youtube.com/embed/${getYouTubeId(popupVideo.mediaUrl)}?autoplay=1&controls=1&modestbranding=1&rel=0`}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <video
+                  ref={popupVideoRef}
+                  className="w-full h-full object-cover"
+                  controls
+                  autoPlay
+                  poster={popupVideo.mediaUrl}
+                  src={popupVideo.mediaUrl}
+                >
+                  Your browser does not support the video tag.
+                </video>
+              )}
             </div>
           </div>
         </div>
