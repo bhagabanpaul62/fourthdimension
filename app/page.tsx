@@ -1,10 +1,10 @@
 "use client";
-
+import Head from "next/head";
 import NavigationBar from "@/components/navigation";
 import Footer from "@/components/footer";
-import { ChevronDown, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
 import BackgroundSlider from "react-background-slider";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import DesignProcess from "@/section/DesignProcess";
 import ProjectProcessSection from "@/section/ImplementationProcess";
 import CompletedProjects from "@/section/CompletedProjects";
@@ -18,18 +18,31 @@ export default function HomePage() {
 
   useEffect(() => {
     async function fetchImages() {
-      const res = await fetch("/api/hero-images"); // Adjust if API is hosted elsewhere
-      const data = await res.json();
-      setImages(data);
+      try {
+        const res = await fetch("/api/hero-images");
+        const data = await res.json();
+        setImages(data);
+      } catch (error) {
+        console.error("Failed to fetch images:", error);
+      }
     }
-
     fetchImages();
   }, []);
 
-  // if (images.length === 0) return null;
-
   return (
     <div className="mandatory-scroll-snapping h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
+      <Head>
+        <title>Fourth Dimensions | Premium Interior Design & Construction</title>
+        <meta name="description" content="Fourth Dimensions is a leading interior design and construction company, crafting comfortable and premium spaces with contemporary design and precision." />
+        <meta name="keywords" content="interior design, construction, premium spaces, contemporary design, Fourth Dimensions" />
+        <meta name="author" content="Fourth Dimensions" />
+        <link rel="canonical" href="https://fourthdimensions.in/" />
+        <meta property="og:title" content="Fourth Dimensions | Premium Interior Design & Construction" />
+        <meta property="og:description" content="Discover how Fourth Dimensions creates comfortable and premium spaces with contemporary design and precision in interior design and construction." />
+        <meta property="og:url" content="https://fourthdimensions.in/" />
+        <meta property="og:type" content="website" />
+      </Head>
+
       {/* Hero Section */}
       <BackgroundSlider images={images} duration={5} transition={2} />
       <section className="snap-start relative h-full w-full flex flex-col items-center justify-between overflow-hidden">
@@ -46,9 +59,7 @@ export default function HomePage() {
                   animate={{ scale: 1, x: 0 }}
                   transition={{ duration: 1.5, ease: "easeInOut" }}
                 >
-                  Fourth
-                  <br />
-                  Dimension
+                  Fourth Dimensions
                 </motion.h1>
                 <motion.p
                   className="text-xs sm:text-sm opacity-80 max-w-xs sm:max-w-sm md:max-w-md leading-relaxed mx-auto lg:mx-0"
@@ -65,7 +76,6 @@ export default function HomePage() {
                   USING CONTEMPORARY DESIGN.
                 </motion.p>
               </div>
-
               {/* Right Content */}
               <div className="text-center lg:text-right max-w-xs sm:max-w-sm md:max-w-md lg:max-w-md xl:max-w-lg">
                 <motion.p
@@ -84,7 +94,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-
         {/* Scroll Down Prompt */}
         <motion.div
           className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center"
@@ -102,12 +111,16 @@ export default function HomePage() {
       {/* Design Process Section */}
       <DesignProcess />
 
+      {/* Completed Projects Section */}
       <CompletedProjects />
 
+      {/* Project Process Section */}
       <ProjectProcessSection />
 
+      {/* Testimonials Section */}
       <TestimonialsCarousel />
 
+      {/* Quote Form Section */}
       <QuoteForm />
 
       {/* Final CTA Section */}
@@ -119,14 +132,12 @@ export default function HomePage() {
             <br />
             look <span className="text-gray-300">like</span>
           </h2>
-        </div>
-        <div className="absolute bottom-8 right-8 text-white">
           <Link
-            href={"/projects"}
-            className="flex items-center space-x-2 hover:opacity-70 transition-opacity"
+            href="/projects"
+            className="inline-flex items-center px-4 py-2 border border-white text-sm font-medium rounded-md text-white hover:bg-white hover:text-black transition-colors"
           >
-            <span className="text-sm">VIEW DESIGN</span>
-            <ArrowRight className="w-4 h-4" />
+            VIEW DESIGN
+            <ArrowRight className="ml-2 w-4 h-4" />
           </Link>
         </div>
       </section>
