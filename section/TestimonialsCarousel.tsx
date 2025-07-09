@@ -15,88 +15,36 @@ import {
 } from "lucide-react";
 
 interface Testimonial {
-  id: number;
-  name: string;
+  _id: string;
+  clientName: string;
   location: string;
   content: string;
-  image: string;
-  hasVideo?: boolean;
-  videoUrl?: string;
+  mediaType: "image" | "video";
+  mediaUrl: string;
+  isActive: boolean;
+  displayOrder: number;
 }
-
-const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: "Bala Shanmugakumar",
-    location: "Plutus Residence, Chennai",
-    content:
-      "Bala was looking for a match in wavelength and vision for his home. He found that in HomeLane. HomeLane's well-structured workflow helped him stay abreast of the process at all times, from design to production to delivery. The 3D design software, Spacecraft Pro, also gave him a clear picture of how his home would look like. Book your consultation with HomeLane today!",
-    image: "/img4.jpg",
-    hasVideo: false,
-  },
-  {
-    id: 2,
-    name: "Joytilak and Anushua",
-    location: "Sobha Silicon Oasis, Bengaluru",
-    content:
-      "Joytilak and Anushua tried to find designers but they could find none, that matched their vision. HomeLane provided them with a designer who understood their vision and made it a reality even before the promised delivery date. The material quality and execution of the design were in their words 'top-notch'. The glowing compliments received about their home interiors from friends and family were a cherry on the cake.",
-    image: "/placeholder.svg?height=300&width=400",
-    hasVideo: true,
-    videoUrl:
-      "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4",
-  },
-  {
-    id: 3,
-    name: "V. Anithamahendiran",
-    location: "Parappalayam, Tirupur, Coimbatore",
-    content:
-      "HomeLane brought Anitha's dream home to life for her, just the way she envisioned it. After doing some research she chose HomeLane where she got the best price and the quality she was looking for. The HomeLane designer delivered all the requirements before time and with the highest quality possible.",
-    image: "/placeholder.svg?height=300&width=400",
-    hasVideo: false,
-  },
-  {
-    id: 4,
-    name: "Rajesh Kumar",
-    location: "DLF Phase 2, Gurgaon",
-    content:
-      "The attention to detail and quality of work exceeded our expectations. The team was professional and delivered exactly what was promised within the timeline.",
-    image: "/placeholder.svg?height=300&width=400",
-    hasVideo: false,
-  },
-  {
-    id: 5,
-    name: "Priya Sharma",
-    location: "Whitefield, Bangalore",
-    content:
-      "Amazing experience with the design team. They understood our requirements perfectly and created a beautiful space that we absolutely love.",
-    image: "/placeholder.svg?height=300&width=400",
-    hasVideo: true,
-    videoUrl: "/placeholder-video.mp4",
-  },
-  {
-    id: 6,
-    name: "Amit Patel",
-    location: "Satellite, Ahmedabad",
-    content:
-      "Professional service from start to finish. The quality of materials and craftsmanship is outstanding. Highly recommended!",
-    image: "/placeholder.svg?height=300&width=400",
-    hasVideo: false,
-  },
-  {
-    id: 7,
-    name: "Amit ",
-    location: "Satellite, Ahmedabad",
-    content:
-      "Professional service from start to finish. The quality of materials and craftsmanship is outstanding. Highly recommended!",
-    image: "/placeholder.svg?height=300&width=400",
-    hasVideo: false,
-  },
-];
 
 export default function TestimonialsCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [playingVideo, setPlayingVideo] = useState<number | null>(null);
-  const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
+  const [playingVideo, setPlayingVideo] = useState<string | null>(null);
+  const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
+
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+
+  useEffect(() => {
+    async function fetchTestimonials() {
+      try {
+        const res = await fetch("/api/testimonials");
+        const data = await res.json();
+        setTestimonials(data);
+      } catch (err) {
+        console.error("Failed to fetch testimonials", err);
+      }
+    }
+
+    fetchTestimonials();
+  }, []);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupVideo, setPopupVideo] = useState<Testimonial | null>(null);
@@ -266,21 +214,21 @@ export default function TestimonialsCarousel() {
         <div className="flex ">
           {testimonials.map((testimonial) => (
             <div
-              key={testimonial.id}
+              key={testimonial._id}
               className="flex-shrink-0 w-full md:w-1/3 overflow-hidden text-black md:h-[35rem] flex flex-col md:px-6 "
             >
               <div className="relative md:h-80 h-48">
-                {testimonial.hasVideo && testimonial.videoUrl ? (
+                {testimonial.mediaType === "video" ? (
                   <div className="relative w-full h-full">
                     <video
                       ref={(el) => {
-                        videoRefs.current[testimonial.id] = el;
+                        videoRefs.current[testimonial._id] = el;
                       }}
                       className="w-full h-full object-cover"
-                      poster={testimonial.image}
+                      poster={testimonial.mediaUrl}
                       onEnded={() => setPlayingVideo(null)}
                     >
-                      <source src={testimonial.videoUrl} type="video/mp4" />
+                      <source src={testimonial.mediaUrl} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                     <button
@@ -288,7 +236,7 @@ export default function TestimonialsCarousel() {
                       className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
                     >
                       <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
-                        {playingVideo === testimonial.id ? (
+                        {playingVideo === testimonial._id ? (
                           <Pause className="w-6 h-6 text-black ml-0.5" />
                         ) : (
                           <Play className="w-6 h-6 text-black ml-1" />
@@ -298,15 +246,17 @@ export default function TestimonialsCarousel() {
                   </div>
                 ) : (
                   <Image
-                    src={testimonial.image || "/placeholder.svg"}
-                    alt={testimonial.name}
+                    src={testimonial.mediaUrl || "/placeholder.svg"}
+                    alt={testimonial.clientName}
                     fill
                     className="object-cover"
                   />
                 )}
               </div>
               <div className="py-2 flex flex-col ">
-                <h3 className="font-medium text-lg mb-1">{testimonial.name}</h3>
+                <h3 className="font-medium text-lg mb-1">
+                  {testimonial.clientName}
+                </h3>
                 <p className="text-xs text-gray-500 mb-4">
                   {testimonial.location}
                 </p>
@@ -366,7 +316,9 @@ export default function TestimonialsCarousel() {
             <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent p-4">
               <div className="flex items-center justify-between text-white">
                 <div>
-                  <h3 className="font-medium text-lg">{popupVideo.name}</h3>
+                  <h3 className="font-medium text-lg">
+                    {popupVideo.clientName}
+                  </h3>
                   <p className="text-sm opacity-80">{popupVideo.location}</p>
                 </div>
                 <button
@@ -383,7 +335,7 @@ export default function TestimonialsCarousel() {
               <video
                 ref={popupVideoRef}
                 className="w-full h-full object-cover"
-                src={popupVideo.videoUrl}
+                src={popupVideo.mediaUrl}
                 onTimeUpdate={handleTimeUpdate}
                 onLoadedMetadata={handleLoadedMetadata}
                 onEnded={() => setIsPlaying(false)}
