@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import Image from "next/image";
@@ -9,117 +9,47 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export default function ProjectsPage() {
   type Project = {
+    _id: string;
     title: string;
-    category: string;
-    categoryGroup: "INTERIOR" | "CONSTRUCTION";
+    description: string;
     images: string[];
-    description?: string;
+    type: "INTERIOR" | "CONSTRUCTION";
+    category: string;
   };
 
-  const projects: Project[] = [
-    {
-      title: "LIVING ROOM",
-      category: "HOUSES",
-      categoryGroup: "INTERIOR",
-      images: [
-        "/img2.jpg",
-        "/img3.jpg",
-        "/img7.jpg",
-        "/img2.jpg",
-        "/img3.jpg",
-        "/img7.jpg",
-      ],
-      description:
-        "A cozy and elegant living room designed with natural tones and soft lighting for comfort and conversation.",
-    },
-    {
-      title: "DINING AREA",
-      category: "HOUSES",
-      categoryGroup: "INTERIOR",
-      images: ["/img5.jpg", "/img2.jpg", "/img6.jpg"],
-      description:
-        "Spacious dining area with a blend of modern furniture and traditional decor, perfect for family gatherings.",
-    },
-    {
-      title: "PORCH",
-      category: "HOUSES",
-      categoryGroup: "CONSTRUCTION",
-      images: ["/img1.jpg", "/img4.jpg", "/img7.jpg"],
-      description:
-        "An open and breezy porch offering relaxation with a scenic view and minimalist seating arrangement.",
-    },
-    {
-      title: "OPEN KITCHEN SEATING",
-      category: "RESTAURANT",
-      categoryGroup: "INTERIOR",
-      images: ["/img3.jpg", "/img6.jpg", "/img8.jpg"],
-      description:
-        "Interactive open kitchen seating area where diners can enjoy the cooking experience up close.",
-    },
-    {
-      title: "FAMILY ROOM",
-      category: "HOUSES",
-      categoryGroup: "INTERIOR",
-      images: ["/img4.jpg", "/img2.jpg", "/img5.jpg"],
-      description:
-        "Warm family room featuring comfortable couches, entertainment zone, and ample natural light.",
-    },
-    {
-      title: "STUDIO LAYOUT",
-      category: "APARTMENT",
-      categoryGroup: "INTERIOR",
-      images: ["/img1.jpg", "/img8.jpg", "/img6.jpg"],
-      description:
-        "Compact yet functional studio layout designed for creative professionals with open-space aesthetics.",
-    },
-    {
-      title: "LOUNGE AREA",
-      category: "APARTMENT",
-      categoryGroup: "INTERIOR",
-      images: ["/img6.jpg", "/img7.jpg", "/img3.jpg"],
-      description:
-        "Stylish lounge area with contemporary seating and ambient lighting to unwind or socialize.",
-    },
-    {
-      title: "RECEPTION SPACE",
-      category: "RESTAURANT",
-      categoryGroup: "CONSTRUCTION",
-      images: ["/img8.jpg", "/img2.jpg", "/img1.jpg"],
-      description:
-        "Chic and welcoming reception space with bold textures and a balanced color palette for first impressions.",
-    },
-    {
-      title: "TERRACE VIEW",
-      category: "HOUSES",
-      categoryGroup: "CONSTRUCTION",
-      images: ["/img7.jpg", "/img3.jpg", "/img5.jpg"],
-      description:
-        "Terrace with a breathtaking view, furnished for evening gatherings and stargazing.",
-    },
-    {
-      title: "BEDROOM DESIGN",
-      category: "HOUSES",
-      categoryGroup: "INTERIOR",
-      images: ["/img2.jpg", "/img1.jpg", "/img6.jpg"],
-      description:
-        "Serene bedroom design emphasizing tranquility through soft colors, textures, and layered lighting.",
-    },
-  ];
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const [mainTab, setMainTab] = useState<"INTERIOR" | "CONSTRUCTION">(
-    "INTERIOR"
-  );
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await fetch("/api/projects");
+        const data = await res.json();
+        console.log(data);
+        setProjects(data);
+      } catch (err) {
+        console.error("Failed to fetch:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   const [activeTab, setActiveTab] = useState<
     "ALL" | "HOUSES" | "APARTMENT" | "RESTAURANT"
   >("ALL");
 
+  const [mainTab, setMainTab] = useState<"INTERIOR" | "CONSTRUCTION">(
+    "INTERIOR"
+  );
+
   const mainTabs: ("INTERIOR" | "CONSTRUCTION")[] = [
     "INTERIOR",
     "CONSTRUCTION",
   ];
-
-  const subTabs: ("ALL" | "HOUSES" | "APARTMENT" | "RESTAURANT")[] = [
+  const subTabs: Array<"ALL" | "HOUSES" | "APARTMENT" | "RESTAURANT"> = [
     "ALL",
     "HOUSES",
     "APARTMENT",
@@ -128,10 +58,8 @@ export default function ProjectsPage() {
 
   const filteredProjects =
     activeTab === "ALL"
-      ? projects.filter((p) => p.categoryGroup === mainTab)
-      : projects.filter(
-          (p) => p.categoryGroup === mainTab && p.category === activeTab
-        );
+      ? projects.filter((p) => p.type === mainTab)
+      : projects.filter((p) => p.type === mainTab && p.category === activeTab);
 
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -262,9 +190,7 @@ export default function ProjectsPage() {
                   <h3 className="font-medium text-lg text-black">
                     {project.title}
                   </h3>
-                  <span className="text-xs text-gray-600">
-                    {project.category}
-                  </span>
+                  <span className="text-xs text-gray-600">{project.type}</span>
                 </div>
                 <hr className="mb-2 text-gray-400" />
                 <span className="text-gray-400 text-xs">{activeTab}</span>
@@ -363,7 +289,7 @@ export default function ProjectsPage() {
                       {selectedProject.title}
                     </h2>
                     <p className="md:text-sm text-xs text-gray-500 mb-4">
-                      {selectedProject.category}
+                      {selectedProject.type}
                     </p>
                     <p className="text-gray-800 leading-relaxed text-sm">
                       {selectedProject.description}

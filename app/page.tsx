@@ -6,35 +6,32 @@ import { ChevronDown, ArrowRight, ArrowUpRight } from "lucide-react";
 import BackgroundSlider from "react-background-slider";
 import { motion } from "motion/react";
 import DesignProcess from "@/section/DesignProcess";
-
-// import "swiper/css";
-// import "swiper/css/pagination";
-// import "swiper/css/navigation";
-// import "swiper/css/autoplay";
-// import "swiper/css/grid";
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import { Pagination, Navigation, Autoplay, Grid } from "swiper/modules";
-
-import img1 from "../public/img1.jpg";
-import img2 from "../public/img2.jpg";
-import img3 from "../public/img3.jpg";
-import img4 from "../public/img4.jpg";
-import img5 from "../public/img5.jpg";
 import ProjectProcessSection from "@/section/ImplementationProcess";
 import CompletedProjects from "@/section/CompletedProjects";
 import TestimonialsCarousel from "@/section/TestimonialsCarousel";
 import Link from "next/link";
 import QuoteForm from "@/section/QuoteForm";
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
+  const [images, setImages] = useState<string[]>([]);
+
+  useEffect(() => {
+    async function fetchImages() {
+      const res = await fetch("/api/hero-images"); // Adjust if API is hosted elsewhere
+      const data = await res.json();
+      setImages(data);
+    }
+
+    fetchImages();
+  }, []);
+
+  // if (images.length === 0) return null;
+
   return (
     <div className="mandatory-scroll-snapping h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
       {/* Hero Section */}
-      <BackgroundSlider
-        images={[img1.src, img2.src, img3.src, img4.src, img5.src]}
-        duration={5}
-        transition={2}
-      />
+      <BackgroundSlider images={images} duration={5} transition={2} />
       <section className="snap-start relative h-full w-full flex flex-col items-center justify-between overflow-hidden">
         <div className="absolute inset-0 bg-black/30" />
         <NavigationBar />
