@@ -330,86 +330,16 @@ export default function TestimonialsCarousel() {
               </div>
             </div>
 
-            {/* Video */}
-            <div className="relative aspect-video">
-              <video
-                ref={popupVideoRef}
-                className="w-full h-full object-cover"
-                src={popupVideo.mediaUrl}
-                onTimeUpdate={handleTimeUpdate}
-                onLoadedMetadata={handleLoadedMetadata}
-                onEnded={() => setIsPlaying(false)}
-                onClick={togglePlayPause}
-              />
-
-              {/* Play/Pause Overlay */}
-              {!isPlaying && (
-                <button
-                  onClick={togglePlayPause}
-                  className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
-                >
-                  <div className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
-                    <Play className="w-8 h-8 text-black ml-1" />
-                  </div>
-                </button>
-              )}
-            </div>
-
-            {/* Controls */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-              {/* Progress Bar */}
-              <div className="mb-4">
-                <input
-                  type="range"
-                  min="0"
-                  max={duration || 0}
-                  value={currentTime}
-                  onChange={handleSeek}
-                  className="w-full h-1 bg-white/30 rounded-lg appearance-none cursor-pointer slider"
-                />
-              </div>
-
-              {/* Control Buttons */}
-              <div className="flex items-center justify-between text-white">
-                <div className="flex items-center space-x-4">
-                  <button
-                    onClick={togglePlayPause}
-                    className="p-2 hover:bg-white/20 rounded-full transition-colors"
-                  >
-                    {isPlaying ? (
-                      <Pause className="w-5 h-5" />
-                    ) : (
-                      <Play className="w-5 h-5 ml-0.5" />
-                    )}
-                  </button>
-
-                  <button
-                    onClick={toggleMute}
-                    className="p-2 hover:bg-white/20 rounded-full transition-colors"
-                  >
-                    {isMuted ? (
-                      <VolumeX className="w-5 h-5" />
-                    ) : (
-                      <Volume2 className="w-5 h-5" />
-                    )}
-                  </button>
-
-                  <span className="text-sm">
-                    {formatTime(currentTime)} / {formatTime(duration)}
-                  </span>
-                </div>
-
-                <button
-                  onClick={toggleFullscreen}
-                  className="p-2 hover:bg-white/20 rounded-full transition-colors"
-                >
-                  {isFullscreen ? (
-                    <Minimize className="w-5 h-5" />
-                  ) : (
-                    <Maximize className="w-5 h-5" />
-                  )}
-                </button>
-              </div>
+            {/* YouTube Video */}
+            <div className="relative aspect-video w-full">
+              <iframe
+                className="w-full h-full"
+                src={`https://youtube.com/embed/${popupVideo.mediaUrl}?autoplay=1&controls=1&modestbranding=1&rel=0`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowFullScreen
+              ></iframe>
             </div>
           </div>
         </div>
