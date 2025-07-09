@@ -13,6 +13,42 @@ export default function ContactPage() {
 
   const tabs = ["START A PROJECT", "WORK WITH US", "OTHER"];
 
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    comment: "",
+    type: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setForm((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...form, type: tab }),
+    });
+
+    if (res.ok) {
+      alert("Message sent!");
+      setForm({ name: "", phone: "", email: "", comment: "", type: "" });
+      setShowDialog(false);
+    } else {
+      const error = await res.json();
+      alert(`Error: ${error.message || "Something went wrong"}`);
+    }
+  };
+
   return (
     <div className="min-h-screen lg:h-screen w-full overflow-clip">
       {/* Contact Section */}
@@ -140,15 +176,16 @@ export default function ContactPage() {
                 </button>
               ))}
             </div>
-
             {/* Form */}
-            <form className="space-y-8 text-sm">
+            <form className="space-y-8 text-sm" onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-6">
                 <div className="flex flex-col space-y-2">
                   <label htmlFor="name">Name*</label>
                   <input
                     type="text"
                     id="name"
+                    value={form.name}
+                    onChange={handleChange}
                     className="border-b border-black bg-transparent outline-none py-1"
                     placeholder="John Doe"
                   />
@@ -158,6 +195,8 @@ export default function ContactPage() {
                   <input
                     type="text"
                     id="phone"
+                    value={form.phone}
+                    onChange={handleChange}
                     className="border-b border-black bg-transparent outline-none py-1"
                     placeholder="+91 XXXXX XXXXX"
                   />
@@ -168,6 +207,8 @@ export default function ContactPage() {
                 <input
                   type="email"
                   id="email"
+                  value={form.email}
+                  onChange={handleChange}
                   className="border-b border-black bg-transparent outline-none py-1"
                   placeholder="johndoe@email.com"
                 />
@@ -177,6 +218,8 @@ export default function ContactPage() {
                 <textarea
                   id="comment"
                   rows={4}
+                  value={form.comment}
+                  onChange={handleChange}
                   className="border-b border-black bg-transparent outline-none py-1 resize-none"
                   placeholder="Description"
                 ></textarea>
