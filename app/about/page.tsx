@@ -26,7 +26,7 @@ import AwardsSection from "@/section/Awards";
 export default function AboutPage() {
   const stats = [
     { number: "150+", label: "Projects Completed" },
-    { number: "8+", label: "Years of Excellence" },
+    { number: "5+", label: "Years of Excellence" },
     { number: "50+", label: "Happy Clients" },
     { number: "15+", label: "Design Awards" },
   ];
@@ -62,21 +62,16 @@ export default function AboutPage() {
     {
       name: "Alexandra Dubois",
       role: "Founder & Creative Director",
-      image: "/placeholder.svg?height=400&width=300",
+      image: "/p1.jpg",
       bio: "With over 15 years of experience in luxury interior design, Alexandra founded Fourth Dimension with a vision to create spaces that embody sophistication and comfort.",
     },
     {
       name: "Marcus Chen",
       role: "Senior Interior Designer",
-      image: "/placeholder.svg?height=400&width=300",
+      image: "/p2.png",
       bio: "Marcus brings a unique blend of contemporary and traditional design sensibilities, specializing in residential and commercial spaces.",
     },
-    {
-      name: "Sofia Rodriguez",
-      role: "Project Manager",
-      image: "/placeholder.svg?height=400&width=300",
-      bio: "Sofia ensures every project runs seamlessly from conception to completion, maintaining our commitment to excellence and timely delivery.",
-    },
+
   ];
 
   return (
@@ -85,7 +80,7 @@ export default function AboutPage() {
       <section className="snap-start relative h-screen flex flex-col justify-center overflow-hidden">
         <Navigation />
         <Image
-          src="/img6.jpg"
+          src="/img5.jpg"
           alt="Modern architectural interior"
           fill
           className="object-cover"
@@ -166,7 +161,7 @@ export default function AboutPage() {
             className="relative flex items-center w-full h-[400px] md:h-[500px] lg:h-[600px]"
           >
             <Image
-              src="/img4.jpg"
+              src="/img8.jpg"
               alt="Design philosophy visualization"
               fill
               className="object-cover shadow-md"
@@ -227,40 +222,26 @@ export default function AboutPage() {
             The creative minds behind every exceptional project
           </p>
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 md:gap-12 gap-4 px-6 md:px-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-2 md:px-6">
           {team.map((member, index) => (
             <div
               key={index}
-              className={`group bg-white overflow-hidden shadow-sm hover:shadow-md transition duration-300
-          ${
-            index % 3 === 1
-              ? "translate-y-6"
-              : index % 3 === 2
-              ? "translate-y-12"
-              : ""
-          }`}
+              className="group bg-white/70 backdrop-blur-lg rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col items-center p-10 w-full max-w-sm mx-auto border border-gray-200 hover:-translate-y-2"
+              style={{ boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)' }}
             >
-              {/* Image */}
-              <div className="relative md:h-80 h-64">
+              <div className="relative w-32 h-32 mb-6 flex items-center justify-center">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-indigo-400 via-pink-300 to-yellow-200 blur-sm opacity-60"></div>
                 <Image
                   src={member.image || "/placeholder.svg"}
                   alt={member.name}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover rounded-full border-4 border-white shadow-lg group-hover:scale-105 transition-transform duration-500 relative z-10"
+                  style={{ objectPosition: 'center' }}
                 />
               </div>
-
-              {/* Info */}
-              <div className="p-6">
-                <h3 className="text-xl font-medium text-black mb-1">
-                  {member.name}
-                </h3>
-                <p className="text-sm text-gray-500 mb-3">{member.role}</p>
-                <p className="text-sm text-gray-700 leading-relaxed line-clamp-4">
-                  {member.bio}
-                </p>
-              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-1 tracking-tight drop-shadow-sm">{member.name}</h3>
+              <p className="text-base text-indigo-500 font-semibold mb-3 tracking-wide uppercase">{member.role}</p>
+              <p className="text-sm text-gray-700 text-center max-w-xs leading-relaxed">{member.bio}</p>
             </div>
           ))}
         </div>
