@@ -33,9 +33,9 @@ export default function HomePage() {
     <div className="mandatory-scroll-snapping h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
       <Head>
         <title>Fourth Dimensions | Premium Interior Design & Construction</title>
-        <meta name="description" content="Fourth Dimensions is a leading interior design and construction company, crafting comfortable and premium spaces with contemporary design and precision." />
+        <meta name="description" content="Fourth Dimension is a leading interior design and construction company, crafting comfortable and premium spaces with contemporary design and precision." />
         <meta name="keywords" content="interior design, construction, premium spaces, contemporary design, Fourth Dimensions" />
-        <meta name="author" content="Fourth Dimensions" />
+        <meta name="author" content="Fourth Dimension" />
         <link rel="canonical" href="https://fourthdimensions.in/" />
         <meta property="og:title" content="Fourth Dimensions | Premium Interior Design & Construction" />
         <meta property="og:description" content="Discover how Fourth Dimensions creates comfortable and premium spaces with contemporary design and precision in interior design and construction." />
@@ -59,7 +59,7 @@ export default function HomePage() {
                   animate={{ scale: 1, x: 0 }}
                   transition={{ duration: 1.5, ease: "easeInOut" }}
                 >
-                  Fourth Dimensions
+                  Fourth Dimension
                 </motion.h1>
                 <motion.p
                   className="text-xs sm:text-sm opacity-80 max-w-xs sm:max-w-sm md:max-w-md leading-relaxed mx-auto lg:mx-0"
