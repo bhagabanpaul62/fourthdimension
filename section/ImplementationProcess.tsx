@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
@@ -10,10 +9,13 @@ type TabKey = "interior" | "construction";
 export default function ProjectProcessSection() {
   const [activeTab, setActiveTab] = useState<TabKey>("interior");
 
-  const tabData: Record<
-    TabKey,
-    { number: string; title: string; desc: string }[]
-  > = {
+  // Define image sources for each tab
+  const tabImages = {
+    interior: "/img5.jpg",
+    construction: "/img9.jpg", // Replace with the actual image path for construction
+  };
+
+  const tabData = {
     interior: [
       {
         number: "01",
@@ -85,7 +87,7 @@ export default function ProjectProcessSection() {
   return (
     <section className="snap-start py-14 bg-neutral-100 min-h-screen px-8">
       {/* Header */}
-      <div className="flex flex-col md:flex-row  justify-between md:items-end items-center mb-8 text-sm uppercase tracking-wider font-medium">
+      <div className="flex flex-col md:flex-row justify-between md:items-end items-center mb-8 text-sm uppercase tracking-wider font-medium">
         <div>
           <h2 className="md:text-3xl text-xl text-black lg:text-4xl font-light mb-4">
             Step-by-step project
@@ -122,13 +124,12 @@ export default function ProjectProcessSection() {
         {/* IMAGE: row 1, col-span 2 */}
         <div className="col-span-2 row-span-2 row-start-1 relative min-h-80 overflow-hidden group">
           <Image
-            src="/img5.jpg"
+            src={tabImages[activeTab]}
             alt="Project implementation"
             fill
             className="object-cover h-full transition-transform duration-500 group-hover:scale-105"
           />
         </div>
-
         {/* First 2 cards (row 1) - enter from left */}
         {currentData.slice(0, 2).map((step, i) => (
           <div
@@ -152,6 +153,7 @@ export default function ProjectProcessSection() {
           </div>
         ))}
       </motion.div>
+
       <motion.div
         className="hidden md:grid grid-cols-4 grid-rows-1 gap-4 mt-4 min-h-80"
         initial={{ x: 1000, opacity: 0 }}
@@ -188,13 +190,12 @@ export default function ProjectProcessSection() {
         {/* Image */}
         <div className="relative w-full h-64 overflow-hidden">
           <Image
-            src="/img5.jpg"
+            src={tabImages[activeTab]}
             alt="Project implementation"
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
-
         {/* All cards in a single vertical list */}
         {currentData.map((step) => (
           <div
