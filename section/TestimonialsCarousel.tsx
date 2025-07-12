@@ -84,12 +84,6 @@ export default function TestimonialsCarousel() {
     return () => window.removeEventListener("resize", updateVisibleCount);
   }, []);
 
-  useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.style.transform = `translateX(-${currentSlide * (100 / visibleCount)}%)`;
-    }
-  }, [currentSlide, visibleCount]);
-
   const openVideoPopup = (testimonial: Testimonial) => {
     setPopupVideo(testimonial);
     setIsPopupOpen(true);
@@ -184,10 +178,10 @@ export default function TestimonialsCarousel() {
       <h2 className="text-3xl text-black lg:text-4xl font-light text-left md:mb-16 mb-4">
         Client Testimonials
       </h2>
-      <div className="w-full overflow-hidden" ref={containerRef}>
-        <div className="flex transition-transform duration-300 ease-in-out" style={{ width: `${100 * totalSlides}%` }}>
+      <div className="w-full overflow-x-hidden" ref={containerRef}>
+        <div className="flex">
           {testimonials.map((testimonial) => (
-            <div key={testimonial._id} className="flex-shrink-0 overflow-hidden text-black md:h-[35rem] flex flex-col md:px-6" style={{ width: `${100 / visibleCount}%` }}>
+            <div key={testimonial._id} className="flex-shrink-0 w-full md:w-1/3 overflow-hidden text-black md:h-[35rem] flex flex-col md:px-6">
               <div className="relative md:h-80 h-48">
                 {testimonial.mediaType === "video" ? (
                   isYouTubeUrl(testimonial.mediaUrl) ? (
