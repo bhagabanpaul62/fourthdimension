@@ -38,7 +38,7 @@ export default function ProjectsPage() {
   }, []);
 
   const [activeTab, setActiveTab] = useState<
-    "ALL" | "HOUSES" | "APARTMENT" | "RESTAURANT"
+    "ALL" |  "RESIDENTIAL" | "COMMERCIAL" 
   >("ALL");
 
   const [mainTab, setMainTab] = useState<"INTERIOR" | "CONSTRUCTION">(
