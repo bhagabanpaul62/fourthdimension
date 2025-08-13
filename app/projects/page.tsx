@@ -49,11 +49,10 @@ export default function ProjectsPage() {
     "INTERIOR",
     "CONSTRUCTION",
   ];
-  const subTabs: Array<"ALL" | "HOUSES" | "APARTMENT" | "RESTAURANT"> = [
+  const subTabs: Array<"ALL" |"RESIDENTIAL" |"COMMERCIAL"> = [
     "ALL",
-    "HOUSES",
-    "APARTMENT",
-    "RESTAURANT",
+    "RESIDENTIAL",
+    "COMMERCIAL",
   ];
 
   const filteredProjects =
@@ -78,6 +77,7 @@ export default function ProjectsPage() {
           src="/img5.jpg"
           alt="Modern interior with entertainment center"
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover "
           priority
         />
@@ -183,6 +183,7 @@ export default function ProjectsPage() {
                     src={project.images[0] || "/placeholder.svg"}
                     alt={project.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover group-hover:scale-105 border-0 transition-transform duration-300"
                   />
                 </div>
@@ -225,6 +226,7 @@ export default function ProjectsPage() {
                     src={selectedProject.images[currentImageIndex]}
                     alt={selectedProject.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="md:object-contain "
                   />
                   <div className="md:hidden absolute right-2 top-2 z-50  justify-end">
@@ -313,6 +315,7 @@ export default function ProjectsPage() {
                             src={img}
                             alt={`Thumbnail ${i + 1}`}
                             fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             className="object-cover"
                           />
                         </div>

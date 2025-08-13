@@ -76,6 +76,7 @@ export default function CompletedProjects() {
                     src={slide.main}
                     alt="Main project"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
                   />
                 </div>
@@ -88,6 +89,7 @@ export default function CompletedProjects() {
                       src={slide.topRight}
                       alt="Top right large"
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover"
                     />
                   </div>
@@ -98,6 +100,7 @@ export default function CompletedProjects() {
                       src={slide.bottomLeft}
                       alt="Bottom left small"
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover"
                     />
                   </div>
@@ -108,6 +111,7 @@ export default function CompletedProjects() {
                       src={slide.bottomRight}
                       alt="Bottom right small"
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover"
                     />
                   </div>
@@ -125,6 +129,7 @@ export default function CompletedProjects() {
                     src={slide.main}
                     alt="Main project mobile"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
                   />
                 </div>
@@ -135,6 +140,7 @@ export default function CompletedProjects() {
                     src={slide.topRight}
                     alt="Top right mobile"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
                   />
                 </div>
@@ -145,6 +151,7 @@ export default function CompletedProjects() {
                     src={slide.bottomLeft}
                     alt="Bottom left mobile"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
                   />
                 </div>
@@ -155,6 +162,7 @@ export default function CompletedProjects() {
                     src={slide.bottomRight}
                     alt="Bottom right mobile"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
                   />
                 </div>
