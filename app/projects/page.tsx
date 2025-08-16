@@ -183,6 +183,7 @@ export default function ProjectsPage() {
                     src={project.images[0] || "/placeholder.svg"}
                     alt={project.title}
                     fill
+                    unoptimized={project.images[0]?.endsWith('.heic')}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover group-hover:scale-105 border-0 transition-transform duration-300"
                   />
@@ -217,19 +218,21 @@ export default function ProjectsPage() {
                 exit={{ scale: 0.98 }}
                 transition={{ duration: 0.3 }}
                 className="bg-white w-[90vw] h-[90vh] flex md:flex-row flex-col overflow-hidden"
+                style={{ maxHeight: '90vh' }}
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Left: Large Image */}
 
-                <div className="relative md:h-full md:w-2/3 h-2/3  w-full">
+                <div className="relative md:h-full md:w-2/3 h-2/3 w-full">
                   <Image
                     src={selectedProject.images[currentImageIndex]}
                     alt={selectedProject.title}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="md:object-contain "
+                    className="object-contain"
+                    unoptimized={selectedProject.images[currentImageIndex].endsWith('.heic')}
                   />
-                  <div className="md:hidden absolute right-2 top-2 z-50  justify-end">
+                  <div className="md:hidden absolute right-2 top-2 z-50 justify-end">
                     <button
                       onClick={() => setSelectedProject(null)}
                       className="text-white drop-shadow-sm drop-shadow-black text-xl text-right"
@@ -272,7 +275,7 @@ export default function ProjectsPage() {
                 </div>
 
                 {/* Right: Info + Thumbnails */}
-                <div className="flex flex-col md:w-1/3 h-1/3 md:h-full px-6 py-4 overflow-y-auto">
+                <div className="flex flex-col md:w-1/3 h-1/3 md:h-full w-full px-6 py-4 overflow-y-auto">
                   {/* Close Button */}
                   <div className="flex flex-col justify-end mb-2">
                     <div className="hidden md:flex justify-end">
@@ -317,6 +320,7 @@ export default function ProjectsPage() {
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             className="object-cover"
+                            unoptimized={img.endsWith('.heic')}
                           />
                         </div>
                       ))}
