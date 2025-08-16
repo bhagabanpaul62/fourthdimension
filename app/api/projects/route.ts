@@ -5,7 +5,12 @@ export async function GET() {
   try {
     const client = await connectToDatabase();
     const db = client.db("archicontrol");
-    const projects = await db.collection("categories").find({}).toArray();
+   const projects = await db
+  .collection("categories")
+  .find({})
+  .sort({ sortOrder: 1 })
+  .toArray();
+
     return NextResponse.json(projects, { status: 200 });
   } catch (err) {
     console.error("Fetch error:", err);
