@@ -235,7 +235,7 @@ export default function ProjectsPage() {
                   <div className="md:hidden absolute right-2 top-2 z-50 justify-end">
                     <button
                       onClick={() => setSelectedProject(null)}
-                      className="text-white drop-shadow-sm drop-shadow-black text-xl text-right"
+                      className="text-white drop-shadow-sm drop-shadow-black text-xl text-right mt-10"
                     >
                       <X />
                     </button>
