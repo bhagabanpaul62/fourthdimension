@@ -12,14 +12,150 @@ import {
   Target,
 } from "lucide-react";
 import { motion } from "framer-motion";
-      <section className="snap-start min-h-screen bg-[#f8f8f8] px-6 md:px-10 lg:px-20 py-28">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="max-w-7xl mx-auto"
+import Link from "next/link";
+import BackgroundSlider from "react-background-slider";
+
+// Import images
+import img1 from "../../public/img1.jpg";
+import img2 from "../../public/img2.jpg";
+import img3 from "../../public/img3.jpg";
+import img4 from "../../public/img4.jpg";
+import img5 from "../../public/img5.jpg";
+import Link from "next/link";
+import BackgroundSlider from "react-background-slider";
+
+// Import images
+import img1 from "../public/img1.jpg";
+import img2 from "../public/img2.jpg";
+import img3 from "../public/img3.jpg";
+import img4 from "../public/img4.jpg";
+import img5 from "../public/img5.jpg";
+
+export default function AboutPage() {
+  return (
+    <div className="mandatory-scroll-snapping h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
+      <Navigation />
+
+      {/* Hero Section */}
+      <section className="snap-start h-screen relative overflow-hidden flex items-center justify-center">
+        <div className="absolute inset-0 bg-black/50 z-10"></div>
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
         >
+          <source src="/about-video.mp4" type="video/mp4" />
+        </video>
+        <div className="relative z-20 text-white text-center px-6">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-light mb-6"
+          >
+            Our <span className="text-gray-300">Story</span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="max-w-3xl mx-auto text-sm md:text-lg mb-10 leading-relaxed"
+          >
+            We transform spaces into experiences through thoughtful design and
+            meticulous craftsmanship.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+          >
+            <button
+              onClick={() => {
+                document
+                  .querySelector("#about-content")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="flex items-center mx-auto space-x-2 bg-transparent border border-white/30 text-white px-5 py-2 hover:bg-white/10 transition-colors"
+            >
+              <span>SCROLL DOWN</span>
+              <ChevronDown className="w-4 h-4" />
+            </button>
+          </motion.div>
+        </div>
+      </section>
+                  
+                  <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, ease: "easeInOut", delay: 0.2 }}
+                    className="text-4xl lg:text-5xl font-light mb-10 leading-tight text-black"
+                  >
+                    Let's Build <span className="text-black/50">Something That Lasts</span>
+                  </motion.h2>
+
+                  <div className="space-y-7 text-gray-700 text-base lg:text-lg leading-relaxed">
+                    <motion.p
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.3 }}
+                      className="italic font-medium"
+                    >
+                      In an industry full of noise, we choose clarity.<br />
+                      In a market full of shortcuts, we choose consistency.<br />
+                      And in a business full of transactions, we choose relationships.
+                    </motion.p>
+                    
+                    <motion.p
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.5 }}
+                    >
+                      At Fourth Dimension, we don't just finish projects —<br />
+                      we stand by you till the very end.<br />
+                      We're here to deliver value, partnership, and spaces that speak for themselves.
+                    </motion.p>
+                    
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.7 }}
+                      className="pt-8 border-t border-black/10"
+                    >
+                      <p className="text-sm font-medium mb-4">📍 Bangalore | 💼 Commercial + Residential Interiors</p>
+                      <p className="text-base font-medium text-black">+91-9980008943 / 91-8553388412 / 91-9611067263</p>
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Image */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut" }}
+                  className="relative flex items-center justify-center w-full h-[400px] md:h-[500px] lg:h-[600px] order-1 lg:order-2"
+                >
+                  <div className="relative w-full h-full" style={{ boxShadow: '0 15px 30px rgba(0,0,0,0.08)' }}>
+                    <Image
+                      src="/about4.png"
+                      alt="Fourth Dimension CEO and Founder"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover object-center"
+                    />
+                    <div className="absolute inset-0 border border-white/10 pointer-events-none"></div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </section>
+
+      {/* CTA Section */}        >
           <div className="text-center mb-16">
             <motion.div
               initial={{ opacity: 0 }}
@@ -641,95 +777,9 @@ export default function AboutPage() {
 
             {/* Let’s Build Something That Lasts */}
 
-      {/* Let's Build Something That Lasts */}
-      <section className="snap-start min-h-screen bg-white px-6 md:px-10 lg:px-20 py-28 flex items-center">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 h-full w-full max-w-7xl mx-auto"
-        >
-          {/* Text Content */}
-          <div className="max-w-xl order-2 lg:order-1">
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, ease: "easeInOut", delay: 0.1 }}
-            >
-              <span className="text-sm tracking-widest uppercase text-black/60 font-medium mb-2 inline-block">Our Promise</span>
-            </motion.div>
-            
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: "easeInOut", delay: 0.2 }}
-              className="text-4xl lg:text-5xl font-light mb-10 leading-tight text-black"
-            >
-              Let's Build <span className="text-black/50">Something That Lasts</span>
-            </motion.h2>
 
-            <div className="space-y-7 text-gray-700 text-base lg:text-lg leading-relaxed">
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="italic font-medium"
-              >
-                In an industry full of noise, we choose clarity.<br />
-                In a market full of shortcuts, we choose consistency.<br />
-                And in a business full of transactions, we choose relationships.
-              </motion.p>
-              
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
-                At Fourth Dimension, we don't just finish projects —<br />
-                we stand by you till the very end.<br />
-                We're here to deliver value, partnership, and spaces that speak for themselves.
-              </motion.p>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.7 }}
-                className="pt-8 border-t border-black/10"
-              >
-                <p className="text-sm font-medium mb-4">📍 Bangalore | 💼 Commercial + Residential Interiors</p>
-                <p className="text-base font-medium text-black">+91-9980008943 / 91-8553388412 / 91-9611067263</p>
-              </motion.div>
-            </div>
-          </div>
 
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut" }}
-            className="relative flex items-center justify-center w-full h-[400px] md:h-[500px] lg:h-[600px] order-1 lg:order-2"
-          >
-            <div className="relative w-full h-full" style={{ boxShadow: '0 15px 30px rgba(0,0,0,0.08)' }}>
-              <Image
-                src="/about4.png"
-                alt="Fourth Dimension CEO and Founder"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                style={{
-                  objectFit: "cover",
-                }}
-              />
-            </div>
-          </motion.div>
-        </motion.div>
-      </section>
+
 
       {/* CTA Section */}
       <BackgroundSlider

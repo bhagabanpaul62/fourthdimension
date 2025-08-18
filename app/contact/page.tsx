@@ -92,36 +92,30 @@ export default function ContactPage() {
                   </h3>
                   <h4 className="font-black mb-4 text-lg">EMAIL:</h4>
                   <div className="space-y-1 underline text-lg ">
-                    <p className=" ">post@maison-noire.com</p>
-                    <p className=" ">info@maison-noire.com</p>
-                    <p className="">maison.noire@gmail.com</p>
+                    <p className=" ">suresh66ar@gmail.com</p>
+                    <p className=" ">nikkysuresh2001@gmail.com</p>
+                    <p className="">rhemaconsultants3@gmail.com</p>
                   </div>
                 </div>
 
                 <div>
                   <h4 className="font-black mb-4 text-lg">NUMBER:</h4>
                   <div className="space-y-1 underline mb-8 text-lg">
-                    <p className=" ">+ 123 456 78 90</p>
-                    <p className=" ">+ 98 76 54 32 10</p>
-                    <p className=" ">+ 01 234 567 890</p>
+                    <p className=" ">+91- 9980008943</p>
+                    <p className=" ">+91-9620640889</p>
+                    <p className=" ">+91-9611067263</p>
                   </div>
                 </div>
 
                 <div>
                   <h4 className="font-black mb-4 text-lg">SOCIAL MEDIA:</h4>
                   <div className="grid grid-cols-2 space-x-2 space-y-2 text-lg w-fit underline">
-                    <a href="#" className="hover:opacity-70 transition-opacity">
-                      Behance
-                    </a>
-                    <a href="#" className="hover:opacity-70 transition-opacity">
+                   
+                    <a href="https://www.instagram.com/fourth_dimension_in?igsh=c3dvNHYwczhzcG43&utm_source=qr " className="hover:opacity-70 transition-opacity">
                       Instagram
                     </a>
-                    <a href="#" className="hover:opacity-70 transition-opacity">
-                      LinkedIn
-                    </a>
-                    <a href="#" className="hover:opacity-70 transition-opacity">
-                      Pinterest
-                    </a>
+                    
+                   
                   </div>
                 </div>
               </div>
