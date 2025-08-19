@@ -12,95 +12,6 @@ import {
   Target,
 } from "lucide-react";
 import { motion } from "framer-motion";
-      <section className="snap-start min-h-screen bg-[#f8f8f8] px-6 md:px-10 lg:px-20 py-28">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="max-w-7xl mx-auto"
-        >
-          <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-            >
-              <span className="text-sm tracking-widest uppercase text-black/60 font-medium mb-2 inline-block">Our Difference</span>
-            </motion.div>
-            
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: "easeInOut", delay: 0.1 }}
-              className="text-4xl lg:text-5xl font-light mb-6 leading-tight text-black"
-            >
-              What <span className="text-black/50">Sets Us Apart</span>
-            </motion.h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-            {[
-              {
-                title: "Client-First Always",
-                description: "We listen, involve, and update our clients throughout the journey — because building trust is as important as building spaces.",
-                icon: "/globe.svg"
-              },
-              {
-                title: "Built In-House, Delivered In-House",
-                description: "No random subcontractors. Our trusted team — from carpenters to electricians — handles every detail with consistency and care.",
-                icon: "/window.svg"
-              },
-              {
-                title: "Precision at the Core",
-                description: "Our modular furniture is built in our own factory using imported German machinery — ensuring unmatched quality and timelines.",
-                icon: "/file.svg"
-              },
-              {
-                title: "Design That Lasts",
-                description: "We choose materials that age beautifully and budgets that make long-term sense — not short-term compromises.",
-                icon: "/window.svg"
-              },
-              {
-                title: "We Don't Disappear After Handover",
-                description: "Our clients know they can count on us — even years later. One call, and we're there.",
-                icon: "/file.svg"
-              },
-              {
-                title: "People Over Profits",
-                description: "Our skilled workers have been with us from day one — their craft is our backbone, and their loyalty is our strength.",
-                icon: "/globe.svg"
-              },
-              {
-                title: "We're Here to Raise the Bar",
-                description: "This is not just work — it's what we love. We take on only what we can do well, and refer the rest to peers we trust. Growth means rising together.",
-                icon: "/file.svg"
-              }
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                className="bg-white p-8 border border-gray-100 flex flex-col h-full"
-                style={{ boxShadow: '0 15px 30px rgba(0,0,0,0.05)' }}
-              >
-                <div className="mb-5 flex items-center">
-                  <span className="text-sm font-medium tracking-widest text-black/30 mr-3">0{index + 1}</span>
-                  <div className="h-px bg-black/10 flex-grow"></div>
-                </div>
-                <h3 className="text-xl font-light text-black mb-4">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed font-light flex-grow">{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* CTA Section */}
 import ProjectProcessSection from "@/section/ImplementationProcess";
 
 import img1 from "../../public/img1.jpg";
@@ -202,7 +113,7 @@ export default function AboutPage() {
         </div>
       </section>
       {/* Philosophy Section */}
-      <section className="snap-start min-h-screen bg-gray-50 px-6 md:px-10 lg:px-20 py-28 flex items-center">
+      <section className="snap-start min-h-screen bg-gray-50 px-6 md:px-10 lg:px-20 py-10 flex items-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -273,7 +184,7 @@ export default function AboutPage() {
       </section>
 
       {/* About us */}
-      <section className="snap-start min-h-screen bg-white px-6 md:px-10 lg:px-20 py-28 flex items-center">
+      <section className="snap-start min-h-screen bg-white px-6 md:px-10 lg:px-20 py-10 flex items-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -367,7 +278,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16 md:py-28 px-6 min-h-screen snap-start bg-[#f8f8f8]">
+      <section className="py-16  px-6 min-h-screen snap-start bg-[#f8f8f8]">
         <div className="text-center md:mb-20 mb-12 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -429,7 +340,7 @@ export default function AboutPage() {
       </section>
 
      {/* Our Purpose and promise */}
-      <section className="snap-start min-h-screen bg-white px-6 md:px-10 lg:px-20 py-28 flex items-center">
+      <section className="snap-start min-h-screen bg-white px-6 md:px-10 lg:px-20 py-10 flex items-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -544,14 +455,14 @@ export default function AboutPage() {
         </motion.div>
       </section>
 
-                  {/* What sets us apart */}
+                
 
 
 
 
 
       {/* What Sets Us Apart Section */}
-      <section className="snap-start min-h-screen bg-[#f8f8f8] px-6 md:px-10 lg:px-20 py-28">
+      <section className="snap-start min-h-screen bg-[#f8f8f8] px-6 md:px-10 lg:px-20 py-10 md:py-16 lg:py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -639,10 +550,10 @@ export default function AboutPage() {
         </motion.div>
       </section>
 
-            {/* Let’s Build Something That Lasts */}
+            
 
       {/* Let's Build Something That Lasts */}
-      <section className="snap-start min-h-screen bg-white px-6 md:px-10 lg:px-20 py-28 flex items-center">
+      <section className="snap-start min-h-screen bg-white px-6 md:px-10 lg:px-20 py-5 flex items-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}

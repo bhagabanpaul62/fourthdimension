@@ -355,13 +355,13 @@ export default function TestimonialsCarousel() {
                 width: '100%'
               }}
             >
-              <div className="flex flex-col md:flex-row flex-1 bg-white shadow-lg rounded-lg overflow-hidden mx-2 relative">
+              <div className="flex flex-col md:flex-row flex-1 bg-white shadow-lg rounded-lg overflow-hidden mx-1 sm:mx-2 relative">
                 {/* Debug indicator */}
                 <div className="absolute top-2 right-2 bg-black text-white px-2 py-1 rounded text-xs z-10">
                   {index + 1} of {testimonials.length}
                 </div>
                 {/* Left side: Image/Video */}
-                <div className="md:w-1/2 relative h-48 md:h-auto min-h-0">
+                <div className="md:w-1/2 relative h-100 sm:h-72 md:h-auto min-h-0">
                   {testimonial.mediaType === "video" ? (
                     isYouTubeUrl(testimonial.mediaUrl) ? (
                       <div className="relative w-full h-full">
@@ -377,8 +377,8 @@ export default function TestimonialsCarousel() {
                           className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors"
                           aria-label="Play video testimonial"
                         >
-                          <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg">
-                            <Play className="w-6 h-6 text-black ml-1" />
+                          <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-16 md:h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg">
+                            <Play className="w-8 h-8 sm:w-10 sm:h-10 md:w-6 md:h-6 text-black ml-1" />
                           </div>
                         </button>
                       </div>
@@ -400,8 +400,8 @@ export default function TestimonialsCarousel() {
                           className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors"
                           aria-label="Play video testimonial"
                         >
-                          <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg">
-                            <Play className="w-6 h-6 text-black ml-1" />
+                          <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-16 md:h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg">
+                            <Play className="w-8 h-8 sm:w-10 sm:h-10 md:w-6 md:h-6 text-black ml-1" />
                           </div>
                         </button>
                       </div>
@@ -421,19 +421,19 @@ export default function TestimonialsCarousel() {
                 </div>
                 
                 {/* Right side: Testimonial text */}
-                <div className="md:w-1/2 p-4 md:p-6 lg:p-8 flex flex-col justify-center min-h-0">
-                  <svg className="w-8 h-8 md:w-10 md:h-10 text-gray-300 mb-3 md:mb-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <div className="md:w-1/2 p-5 sm:p-6 md:p-6 lg:p-8 flex flex-col justify-center min-h-0">
+                  <svg className="w-10 h-10 sm:w-12 sm:h-12 md:w-10 md:h-10 text-gray-300 mb-4 sm:mb-5 md:mb-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                   </svg>
                   
                   <div className="flex-1 min-h-0 flex flex-col justify-center">
-                    <p className="text-base md:text-lg text-gray-800 leading-relaxed mb-4 md:mb-6 font-light line-clamp-4 md:line-clamp-none">
+                    <p className="text-lg sm:text-xl md:text-lg text-gray-800 leading-relaxed mb-5 sm:mb-6 md:mb-6 font-light line-clamp-4 md:line-clamp-none">
                       "{testimonial.content}"
                     </p>
                     
                     <div className="flex-shrink-0">
-                      <h3 className="font-medium text-base md:text-lg text-black mb-1">{testimonial.clientName}</h3>
-                      <p className="text-xs md:text-sm text-gray-500">{testimonial.location}</p>
+                      <h3 className="font-medium text-lg sm:text-xl md:text-lg text-black mb-1">{testimonial.clientName}</h3>
+                      <p className="text-sm sm:text-base md:text-sm text-gray-500">{testimonial.location}</p>
                     </div>
                   </div>
                 </div>
