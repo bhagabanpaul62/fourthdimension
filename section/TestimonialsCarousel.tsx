@@ -38,51 +38,192 @@ export default function TestimonialsCarousel() {
   const [duration, setDuration] = useState(0);
   const popupVideoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [visibleCount, setVisibleCount] = useState(3);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStartX, setDragStartX] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [autoplayEnabled, setAutoplayEnabled] = useState(true);
+  const [visibleCount, setVisibleCount] = useState(1);
 
   useEffect(() => {
     async function fetchTestimonials() {
       try {
         const res = await fetch("/api/testimonials");
         const data = await res.json();
-        setTestimonials(data);
+        
+        if (data && Array.isArray(data) && data.length > 0) {
+          console.log("Fetched testimonials:", data.length);
+          setTestimonials(data);
+        } else {
+          console.log("No testimonials from API, using fallback");
+          // Fallback testimonials for testing
+          setTestimonials([
+            {
+              _id: "1",
+              clientName: "John Smith",
+              location: "New York, NY",
+              content: "Fourth Dimension transformed our home completely. Their attention to detail and creative vision exceeded all our expectations.",
+              mediaType: "image",
+              mediaUrl: "/img1.jpg",
+              isActive: true,
+              displayOrder: 1
+            },
+            {
+              _id: "2",
+              clientName: "Sarah Johnson",
+              location: "Los Angeles, CA",
+              content: "Working with Fourth Dimension was an absolute pleasure. They understood our vision perfectly and delivered stunning results.",
+              mediaType: "image",
+              mediaUrl: "/img2.jpg",
+              isActive: true,
+              displayOrder: 2
+            },
+            {
+              _id: "3",
+              clientName: "Michael Brown",
+              location: "Chicago, IL",
+              content: "The team's professionalism and expertise shone through every aspect of the project. Highly recommended!",
+              mediaType: "image",
+              mediaUrl: "/img3.jpg",
+              isActive: true,
+              displayOrder: 3
+            }
+          ]);
+        }
       } catch (err) {
         console.error("Failed to fetch testimonials", err);
+        // Use fallback on error
+        setTestimonials([
+          {
+            _id: "1",
+            clientName: "John Smith",
+            location: "New York, NY",
+            content: "Fourth Dimension transformed our home completely. Their attention to detail and creative vision exceeded all our expectations.",
+            mediaType: "image",
+            mediaUrl: "/img1.jpg",
+            isActive: true,
+            displayOrder: 1
+          },
+          {
+            _id: "2",
+            clientName: "Sarah Johnson",
+            location: "Los Angeles, CA",
+            content: "Working with Fourth Dimension was an absolute pleasure. They understood our vision perfectly and delivered stunning results.",
+            mediaType: "image",
+            mediaUrl: "/img2.jpg",
+            isActive: true,
+            displayOrder: 2
+          },
+          {
+            _id: "3",
+            clientName: "Michael Brown",
+            location: "Chicago, IL",
+            content: "The team's professionalism and expertise shone through every aspect of the project. Highly recommended!",
+            mediaType: "image",
+            mediaUrl: "/img3.jpg",
+            isActive: true,
+            displayOrder: 3
+          }
+        ]);
       }
     }
     fetchTestimonials();
   }, []);
 
-  const totalSlides = Math.ceil(testimonials.length / visibleCount);
-  const canGoPrev = currentSlide > 0;
-  const canGoNext = currentSlide < totalSlides - 1;
+  // Simplified carousel logic - each testimonial is one slide
+  const totalSlides = testimonials.length;
+  // For infinite loop carousel, we can always go prev/next if we have testimonials
+  const canGoPrev = testimonials.length > 1;
+  const canGoNext = testimonials.length > 1;
 
   const prev = () => {
-    if (canGoPrev) setCurrentSlide(currentSlide - 1);
+    if (testimonials.length === 0) return;
+    const newSlide = currentSlide > 0 ? currentSlide - 1 : testimonials.length - 1;
+    console.log(`Previous: ${currentSlide} -> ${newSlide}`);
+    setCurrentSlide(newSlide);
   };
 
   const next = () => {
-    if (canGoNext) setCurrentSlide(currentSlide + 1);
+    if (testimonials.length === 0) return;
+    const newSlide = currentSlide < testimonials.length - 1 ? currentSlide + 1 : 0;
+    console.log(`Next: ${currentSlide} -> ${newSlide}`);
+    setCurrentSlide(newSlide);
   };
 
   const goToSlide = (index: number) => {
-    if (index >= 0 && index < totalSlides) {
+    if (index >= 0 && index < testimonials.length) {
+      console.log(`Go to slide: ${currentSlide} -> ${index}`);
       setCurrentSlide(index);
     }
   };
 
+  // Safety check to ensure currentSlide is within bounds
+  useEffect(() => {
+    if (testimonials.length > 0 && currentSlide >= testimonials.length) {
+      console.log(`Current slide ${currentSlide} is out of bounds, resetting to 0`);
+      setCurrentSlide(0);
+    }
+    console.log(`Current slide: ${currentSlide}, Total testimonials: ${testimonials.length}`);
+  }, [testimonials.length, currentSlide]);
+
+  // Handle responsive sizing
   useEffect(() => {
     const updateVisibleCount = () => {
       const width = window.innerWidth;
-      if (width < 640) setVisibleCount(1);
-      else if (width < 1024) setVisibleCount(2);
-      else setVisibleCount(3);
+      // For this design we want 1 testimonial per view
+      setVisibleCount(1);
     };
 
     updateVisibleCount();
     window.addEventListener("resize", updateVisibleCount);
     return () => window.removeEventListener("resize", updateVisibleCount);
   }, []);
+  
+  // Simplified auto-scroll functionality
+  useEffect(() => {
+    if (!autoplayEnabled || testimonials.length <= 1) return;
+    
+    const interval = setInterval(() => {
+      setCurrentSlide(prev => {
+        const nextSlide = prev < testimonials.length - 1 ? prev + 1 : 0;
+        console.log(`Auto-scroll: ${prev} -> ${nextSlide}`);
+        return nextSlide;
+      });
+    }, 6000);
+    
+    return () => clearInterval(interval);
+  }, [autoplayEnabled, testimonials.length]);
+  
+  // Improved touch navigation handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (testimonials.length <= 1) return;
+    setIsDragging(true);
+    setDragStartX(e.touches[0].clientX);
+    setAutoplayEnabled(false);
+  };
+  
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || testimonials.length <= 1) return;
+    const currentX = e.touches[0].clientX;
+    const diff = currentX - dragStartX;
+    setDragOffset(diff);
+  };
+  
+  const handleTouchEnd = () => {
+    if (!isDragging || testimonials.length <= 1) return;
+    
+    const threshold = 50;
+    if (Math.abs(dragOffset) > threshold) {
+      if (dragOffset > 0) {
+        prev(); // Swipe right - go to previous
+      } else {
+        next(); // Swipe left - go to next
+      }
+    }
+    
+    setIsDragging(false);
+    setDragOffset(0);
+    setTimeout(() => setAutoplayEnabled(true), 1000);
+  };
 
   const openVideoPopup = (testimonial: Testimonial) => {
     setPopupVideo(testimonial);
@@ -174,108 +315,201 @@ export default function TestimonialsCarousel() {
   }
 
   return (
-    <section className="md:py-28 pt-16 pb-4 px-8 snap-start md:h-screen min-h-screen bg-stone-100">
-      <h2 className="text-3xl text-black lg:text-4xl font-light text-left md:mb-16 mb-4">
-        Client Testimonials
-      </h2>
-      <div className="w-full overflow-x-hidden" ref={containerRef}>
-        <div className="flex">
-          {testimonials.map((testimonial) => (
-            <div key={testimonial._id} className="flex-shrink-0 w-full md:w-1/3 overflow-hidden text-black md:h-[35rem] flex flex-col md:px-6">
-              <div className="relative md:h-80 h-48">
-                {testimonial.mediaType === "video" ? (
-                  isYouTubeUrl(testimonial.mediaUrl) ? (
-                    <div className="relative w-full h-full">
-                      <Image
-                        src={getYouTubeThumbnail(testimonial.mediaUrl)}
-                        alt={testimonial.clientName}
-                        fill
-                        className="object-cover"
-                      />
-                      <button
-                        onClick={() => openVideoPopup(testimonial)}
-                        className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
-                      >
-                        <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
-                          <Play className="w-6 h-6 text-black ml-1" />
-                        </div>
-                      </button>
-                    </div>
+    <section className="h-screen px-4 md:px-6 lg:px-10 snap-start bg-stone-100 flex flex-col overflow-hidden">
+      <div className="py-6 md:py-8 max-w-7xl mx-auto w-full flex-shrink-0">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl text-black font-light mb-2 md:mb-4">
+          Client <span className="text-black/50">Testimonials</span>
+        </h2>
+        <p className="text-gray-600 max-w-2xl text-sm md:text-base">
+          Hear what our clients have to say about their experience working with Fourth Dimension.
+        </p>
+      </div>
+      
+      <div 
+        className="w-full max-w-7xl mx-auto flex-1 flex flex-col min-h-0 overflow-hidden"
+        ref={containerRef}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        <div 
+          className="flex flex-1 transition-transform duration-700 ease-out"
+          style={{ 
+            transform: `translateX(-${currentSlide * 100}%)`,
+          }}
+        >
+          {/* Debug info */}
+          {/* {process.env.NODE_ENV === 'development' && (
+            <div className="fixed top-4 left-4 bg-red-500 text-white p-2 rounded z-50">
+              Slide: {currentSlide} / {testimonials.length - 1}
+              <br />
+              Transform: translateX(-{currentSlide * 100}%)
+            </div>
+          )} */}
+          {testimonials.map((testimonial, index) => (
+            <div 
+              key={testimonial._id} 
+              className="w-full flex-shrink-0 flex flex-col min-w-full"
+              style={{ 
+                minWidth: '100%',
+                width: '100%'
+              }}
+            >
+              <div className="flex flex-col md:flex-row flex-1 bg-white shadow-lg rounded-lg overflow-hidden mx-2 relative">
+                {/* Debug indicator */}
+                <div className="absolute top-2 right-2 bg-black text-white px-2 py-1 rounded text-xs z-10">
+                  {index + 1} of {testimonials.length}
+                </div>
+                {/* Left side: Image/Video */}
+                <div className="md:w-1/2 relative h-48 md:h-auto min-h-0">
+                  {testimonial.mediaType === "video" ? (
+                    isYouTubeUrl(testimonial.mediaUrl) ? (
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={getYouTubeThumbnail(testimonial.mediaUrl)}
+                          alt={`${testimonial.clientName} video thumbnail`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover"
+                        />
+                        <button
+                          onClick={() => openVideoPopup(testimonial)}
+                          className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors"
+                          aria-label="Play video testimonial"
+                        >
+                          <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg">
+                            <Play className="w-6 h-6 text-black ml-1" />
+                          </div>
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="relative w-full h-full">
+                        <video
+                          ref={(el) => {
+                            videoRefs.current[testimonial._id] = el;
+                          }}
+                          className="w-full h-full object-cover"
+                          poster={testimonial.mediaUrl}
+                          onError={(e) => console.error("Video error:", e)}
+                        >
+                          <source src={testimonial.mediaUrl} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+                        <button
+                          onClick={() => openVideoPopup(testimonial)}
+                          className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors"
+                          aria-label="Play video testimonial"
+                        >
+                          <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg">
+                            <Play className="w-6 h-6 text-black ml-1" />
+                          </div>
+                        </button>
+                      </div>
+                    )
                   ) : (
                     <div className="relative w-full h-full">
-                      <video
-                        ref={(el) => {
-                          videoRefs.current[testimonial._id] = el;
-                        }}
-                        className="w-full h-full object-cover"
-                        poster={testimonial.mediaUrl}
-                        onError={(e) => console.error("Video error:", e)}
-                      >
-                        <source src={testimonial.mediaUrl} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                      <button
-                        onClick={() => openVideoPopup(testimonial)}
-                        className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
-                      >
-                        <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
-                          {playingVideo === testimonial._id ? (
-                            <Pause className="w-6 h-6 text-black ml-0.5" />
-                          ) : (
-                            <Play className="w-6 h-6 text-black ml-1" />
-                          )}
-                        </div>
-                      </button>
+                      <Image
+                        src={testimonial.mediaUrl || "/placeholder.svg"}
+                        alt={testimonial.clientName}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent"></div>
                     </div>
-                  )
-                ) : (
-                  <Image
-                    src={testimonial.mediaUrl || "/placeholder.svg"}
-                    alt={testimonial.clientName}
-                    fill
-                    className="object-cover"
-                  />
-                )}
-              </div>
-              <div className="py-2 flex flex-col">
-                <h3 className="font-medium text-lg mb-1">{testimonial.clientName}</h3>
-                <p className="text-xs text-gray-500 mb-4">{testimonial.location}</p>
-                <p className="text-sm text-gray-700 leading-relaxed flex-grow">"{testimonial.content}"</p>
+                  )}
+                </div>
+                
+                {/* Right side: Testimonial text */}
+                <div className="md:w-1/2 p-4 md:p-6 lg:p-8 flex flex-col justify-center min-h-0">
+                  <svg className="w-8 h-8 md:w-10 md:h-10 text-gray-300 mb-3 md:mb-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
+                  
+                  <div className="flex-1 min-h-0 flex flex-col justify-center">
+                    <p className="text-base md:text-lg text-gray-800 leading-relaxed mb-4 md:mb-6 font-light line-clamp-4 md:line-clamp-none">
+                      "{testimonial.content}"
+                    </p>
+                    
+                    <div className="flex-shrink-0">
+                      <h3 className="font-medium text-base md:text-lg text-black mb-1">{testimonial.clientName}</h3>
+                      <p className="text-xs md:text-sm text-gray-500">{testimonial.location}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <div className="flex items-center justify-center space-x-8 text-black">
-        <button
-          onClick={prev}
-          disabled={!canGoPrev}
-          className={`p-2 rounded-full border border-gray-400 transition-colors ${
-            canGoPrev ? "hover:bg-gray-200 cursor-pointer" : "opacity-40 cursor-not-allowed"
-          }`}
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-        <div className="flex space-x-2">
-          {Array.from({ length: totalSlides }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-2 h-2 rounded-full transition-colors ${
-                index === currentSlide ? "bg-red-500" : "bg-gray-300"
-              }`}
-            />
-          ))}
+      <div className="pt-4 md:pt-6 pb-4 md:pb-6 max-w-7xl mx-auto w-full flex-shrink-0">
+        <div className="flex items-center justify-between md:justify-center">
+          {/* Left control */}
+          <button
+            onClick={prev}
+            disabled={!canGoPrev}
+            aria-label="Previous testimonial"
+            className={`p-2 md:p-3 rounded-full border border-gray-300 bg-white shadow transition-all ${
+              canGoPrev 
+                ? "hover:bg-gray-50 hover:shadow-md cursor-pointer" 
+                : "opacity-40 cursor-not-allowed"
+            }`}
+          >
+            <ChevronLeft className="w-4 h-4 md:w-5 md:h-5 text-black" />
+          </button>
+          
+          {/* Pagination dots - visible on larger screens */}
+          <div className="hidden md:flex space-x-2 mx-6">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to testimonial ${index + 1}`}
+                className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
+                  index === currentSlide 
+                    ? "bg-black scale-110" 
+                    : "bg-gray-300 hover:bg-gray-400"
+                }`}
+              />
+            ))}
+          </div>
+          
+          {/* Current/total indicator - visible on mobile */}
+          <div className="flex md:hidden items-center">
+            <span className="font-medium text-xs md:text-sm">
+              {currentSlide + 1} <span className="text-gray-500 font-normal">/ {testimonials.length}</span>
+            </span>
+          </div>
+          
+          {/* Right control */}
+          <button
+            onClick={next}
+            disabled={!canGoNext}
+            aria-label="Next testimonial"
+            className={`p-2 md:p-3 rounded-full border border-gray-300 bg-white shadow transition-all ${
+              canGoNext 
+                ? "hover:bg-gray-50 hover:shadow-md cursor-pointer" 
+                : "opacity-40 cursor-not-allowed"
+            }`}
+          >
+            <ChevronRight className="w-4 h-4 md:w-5 md:h-5 text-black" />
+          </button>
         </div>
-        <button
-          onClick={next}
-          disabled={!canGoNext}
-          className={`p-2 rounded-full border border-gray-400 transition-colors ${
-            canGoNext ? "hover:bg-gray-200 cursor-pointer" : "opacity-40 cursor-not-allowed"
-          }`}
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
+        
+        {/* Auto-play toggle */}
+        <div className="flex justify-center mt-3 md:mt-4">
+          <button
+            onClick={() => setAutoplayEnabled(!autoplayEnabled)}
+            className={`text-xs md:text-sm flex items-center gap-1 md:gap-2 px-2 py-1 md:px-3 md:py-1.5 rounded-full transition-colors ${
+              autoplayEnabled ? "text-black" : "text-gray-500"
+            }`}
+            aria-pressed={autoplayEnabled}
+            aria-label={autoplayEnabled ? "Disable auto-play" : "Enable auto-play"}
+          >
+            <span className={`block w-2 h-2 md:w-3 md:h-3 rounded-full ${autoplayEnabled ? "bg-black" : "bg-gray-400"}`}></span>
+            {autoplayEnabled ? "Auto-play on" : "Auto-play off"}
+          </button>
+        </div>
       </div>
       {isPopupOpen && popupVideo && (
         <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4">
