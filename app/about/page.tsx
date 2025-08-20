@@ -462,11 +462,14 @@ export default function AboutPage() {
 
 
       {/* What Sets Us Apart Section */}
-      <section className="snap-start min-h-screen bg-[#f8f8f8] px-6 md:px-10 lg:px-20 py-10 md:py-16 lg:py-20">
+      <section 
+        className="snap-start min-h-screen bg-[#f8f8f8] px-6 md:px-10 lg:px-20 py-10 md:py-16 lg:py-20"
+        style={{ opacity: 1 }} // Ensure visibility
+      >
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1, margin: "0px 0px -10% 0px" }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
           className="max-w-7xl mx-auto"
         >
@@ -474,7 +477,7 @@ export default function AboutPage() {
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
             >
               <span className="text-sm tracking-widest uppercase text-black/60 font-medium mb-2 inline-block">Our Difference</span>
@@ -483,7 +486,7 @@ export default function AboutPage() {
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.6, ease: "easeInOut", delay: 0.1 }}
               className="text-4xl lg:text-5xl font-light mb-6 leading-tight text-black"
             >
@@ -491,7 +494,7 @@ export default function AboutPage() {
             </motion.h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
             {[
               {
                 title: "Client-First Always",
@@ -530,12 +533,12 @@ export default function AboutPage() {
               }
             ].map((item, index) => (
               <motion.div
-                key={index}
+                key={`apart-${index}-${item.title.replace(/\s+/g, '-').toLowerCase()}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                className="bg-white p-8 border border-gray-100 flex flex-col h-full"
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
+                className="bg-white p-6 md:p-8 border border-gray-100 flex flex-col h-full"
                 style={{ boxShadow: '0 15px 30px rgba(0,0,0,0.05)' }}
               >
                 <div className="mb-5 flex items-center">
