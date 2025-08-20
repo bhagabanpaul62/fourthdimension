@@ -315,7 +315,7 @@ export default function TestimonialsCarousel() {
   }
 
   return (
-    <section className="h-screen px-4 md:px-6 lg:px-10 snap-start bg-stone-100 flex flex-col overflow-hidden">
+    <section className="min-h-screen md:h-screen px-4 md:px-6 lg:px-10 snap-start bg-stone-100 flex flex-col md:overflow-hidden">
       <div className="py-6 md:py-8 max-w-7xl mx-auto w-full flex-shrink-0">
         <h2 className="text-3xl md:text-4xl lg:text-5xl text-black font-light mb-2 md:mb-4">
           Client <span className="text-black/50">Testimonials</span>
@@ -326,7 +326,7 @@ export default function TestimonialsCarousel() {
       </div>
       
       <div 
-        className="w-full max-w-7xl mx-auto flex-1 flex flex-col min-h-0 overflow-hidden"
+        className="w-full max-w-7xl mx-auto flex-1 flex flex-col min-h-0 md:overflow-hidden"
         ref={containerRef}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -427,7 +427,7 @@ export default function TestimonialsCarousel() {
                   </svg>
                   
                   <div className="flex-1 min-h-0 flex flex-col justify-center">
-                    <p className="text-lg sm:text-xl md:text-lg text-gray-800 leading-relaxed mb-5 sm:mb-6 md:mb-6 font-light line-clamp-4 md:line-clamp-none">
+                    <p className="text-lg sm:text-xl md:text-lg text-gray-800 leading-relaxed mb-5 sm:mb-6 md:mb-6 font-light">
                       "{testimonial.content}"
                     </p>
                     
