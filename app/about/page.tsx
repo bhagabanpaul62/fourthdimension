@@ -75,7 +75,7 @@ export default function AboutPage() {
   },
 ];
   return (
-    <div className="mandatory-scroll-snapping h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
+    <div className="h-screen overflow-y-scroll overflow-x-hidden scroll-smooth md:mandatory-scroll-snapping">
       {/* Hero Section */}
       <section className="snap-start relative h-screen flex flex-col justify-center overflow-hidden">
         <Navigation />
@@ -102,8 +102,7 @@ export default function AboutPage() {
               {/* <sup className="text-2xl">N</sup> */}
             </h1>
             <p className="text-lg opacity-90 max-w-2xl mx-auto leading-relaxed">
-              Crafting extraordinary spaces through the marriage of contemporary
-              design and timeless elegance since 2016.
+              Transforming interiors with a seamless blend of modern innovation and classic sophistication since 2016.
             </p>
           </motion.div>
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center">
@@ -463,7 +462,7 @@ export default function AboutPage() {
 
       {/* What Sets Us Apart Section */}
       <section 
-        className="snap-start min-h-screen bg-[#f8f8f8] px-6 md:px-10 lg:px-20 py-10 md:py-16 lg:py-20"
+        className="md:snap-start py-16 md:min-h-screen bg-[#f8f8f8] px-6 md:px-10 lg:px-20 md:py-16 lg:py-20"
         style={{ opacity: 1 }} // Ensure visibility
       >
         <motion.div
@@ -473,7 +472,7 @@ export default function AboutPage() {
           transition={{ duration: 0.8, ease: "easeInOut" }}
           className="max-w-7xl mx-auto"
         >
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-16">
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -488,7 +487,7 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.6, ease: "easeInOut", delay: 0.1 }}
-              className="text-4xl lg:text-5xl font-light mb-6 leading-tight text-black"
+              className="text-3xl md:text-4xl lg:text-5xl font-light mb-4 md:mb-6 leading-tight text-black"
             >
               What <span className="text-black/50">Sets Us Apart</span>
             </motion.h2>
@@ -538,15 +537,15 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
-                className="bg-white p-6 md:p-8 border border-gray-100 flex flex-col h-full"
+                className="bg-white p-5 sm:p-6 md:p-8 border border-gray-100 flex flex-col h-full"
                 style={{ boxShadow: '0 15px 30px rgba(0,0,0,0.05)' }}
               >
-                <div className="mb-5 flex items-center">
-                  <span className="text-sm font-medium tracking-widest text-black/30 mr-3">0{index + 1}</span>
+                <div className="mb-4 md:mb-5 flex items-center">
+                  <span className="text-xs md:text-sm font-medium tracking-widest text-black/30 mr-3">0{index + 1}</span>
                   <div className="h-px bg-black/10 flex-grow"></div>
                 </div>
-                <h3 className="text-xl font-light text-black mb-4">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed font-light flex-grow">{item.description}</p>
+                <h3 className="text-lg md:text-xl font-light text-black mb-3 md:mb-4">{item.title}</h3>
+                <p className="text-sm md:text-base text-gray-600 leading-relaxed font-light flex-grow">{item.description}</p>
               </motion.div>
             ))}
           </div>
