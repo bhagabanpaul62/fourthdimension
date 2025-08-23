@@ -3,11 +3,75 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Menu, X } from "lucide-react";
 
 export default function Navigation() {
   const pathname = usePathname();
+  const [viewNav, setViewNav] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = (event: Event) => {
+      // Get scroll position from the actual scrolling element
+      let currentScrollY = 0;
+      
+      if (event.target instanceof HTMLElement) {
+        // Scroll event from a container div
+        currentScrollY = event.target.scrollTop;
+      } else {
+        // Scroll event from window
+        currentScrollY = window.scrollY;
+      }
+      
+      console.log("Scroll detected:", currentScrollY, "from", event.target);
+      
+      // Only update if there's a significant scroll difference (reduces flickering)
+      const scrollDifference = Math.abs(currentScrollY - lastScrollY.current);
+      
+      if (scrollDifference > 5) {
+        if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+          // Scrolling down, hide nav
+          console.log("Hiding nav - scroll down", currentScrollY);
+          setViewNav(false);
+        } else if (currentScrollY < lastScrollY.current) {
+          // Scrolling up, show nav
+          console.log("Showing nav - scroll up", currentScrollY);
+          setViewNav(true);
+        }
+        
+        lastScrollY.current = currentScrollY;
+      }
+    };
+
+    // Throttle scroll events for better performance
+    let ticking = false;
+    const throttledScroll = (event: Event) => {
+      if (!ticking) {
+        requestAnimationFrame(() => handleScroll(event));
+        ticking = true;
+        setTimeout(() => { ticking = false; }, 16); // ~60fps
+      }
+    };
+
+    // Add scroll listener to both window and scroll containers
+    const scrollContainers = document.querySelectorAll('.mandatory-scroll-snapping, .overflow-y-scroll');
+    
+    scrollContainers.forEach(container => {
+      container.addEventListener("scroll", throttledScroll, { passive: true });
+    });
+    window.addEventListener("scroll", throttledScroll, { passive: true });
+    
+    return () => {
+      scrollContainers.forEach(container => {
+        container.removeEventListener("scroll", throttledScroll);
+      });
+      window.removeEventListener("scroll", throttledScroll);
+    };
+  }, []);
+
+
+
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,17 +82,18 @@ export default function Navigation() {
   ];
 
   const isContact = pathname === "/contact";
-
+  
   return (
-    <motion.nav
-      className={`snap-start z-50 w-full ${
+    <nav
+      className={`z-50 w-full ${
         pathname === "/contact" ? "text-black" : "text-white"
-      }`}
-      initial={{ transform: "translateY(-100px)" }}
-      animate={{ transform: "translateY(0px)" }}
-      transition={{ duration: 1.1, type: "decay" }}
+      } fixed top-0 left-0 bg-black/50 backdrop-blur-sm py-4 flex justify-between items-center transition-transform duration-300 ease-in-out`}
+      style={{
+        transform: viewNav ? "translateY(0)" : "translateY(-100%)"
+      }}
     >
-      <div className="px-8 py-4 w-full">
+
+      <div className="px-10 w-full ">
         <div className="flex items-center justify-between">
           <Link
             href="/"
@@ -104,6 +169,6 @@ export default function Navigation() {
         </AnimatePresence>
         {/* </div> */}
       </div>
-    </motion.nav>
+    </nav>
   );
 }

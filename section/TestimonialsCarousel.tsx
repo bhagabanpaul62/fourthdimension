@@ -51,10 +51,8 @@ export default function TestimonialsCarousel() {
         const data = await res.json();
         
         if (data && Array.isArray(data) && data.length > 0) {
-          console.log("Fetched testimonials:", data.length);
           setTestimonials(data);
         } else {
-          console.log("No testimonials from API, using fallback");
           // Fallback testimonials for testing
           setTestimonials([
             {
@@ -138,20 +136,17 @@ export default function TestimonialsCarousel() {
   const prev = () => {
     if (testimonials.length === 0) return;
     const newSlide = currentSlide > 0 ? currentSlide - 1 : testimonials.length - 1;
-    console.log(`Previous: ${currentSlide} -> ${newSlide}`);
     setCurrentSlide(newSlide);
   };
 
   const next = () => {
     if (testimonials.length === 0) return;
     const newSlide = currentSlide < testimonials.length - 1 ? currentSlide + 1 : 0;
-    console.log(`Next: ${currentSlide} -> ${newSlide}`);
     setCurrentSlide(newSlide);
   };
 
   const goToSlide = (index: number) => {
     if (index >= 0 && index < testimonials.length) {
-      console.log(`Go to slide: ${currentSlide} -> ${index}`);
       setCurrentSlide(index);
     }
   };
@@ -159,10 +154,8 @@ export default function TestimonialsCarousel() {
   // Safety check to ensure currentSlide is within bounds
   useEffect(() => {
     if (testimonials.length > 0 && currentSlide >= testimonials.length) {
-      console.log(`Current slide ${currentSlide} is out of bounds, resetting to 0`);
       setCurrentSlide(0);
     }
-    console.log(`Current slide: ${currentSlide}, Total testimonials: ${testimonials.length}`);
   }, [testimonials.length, currentSlide]);
 
   // Handle responsive sizing
@@ -185,7 +178,6 @@ export default function TestimonialsCarousel() {
     const interval = setInterval(() => {
       setCurrentSlide(prev => {
         const nextSlide = prev < testimonials.length - 1 ? prev + 1 : 0;
-        console.log(`Auto-scroll: ${prev} -> ${nextSlide}`);
         return nextSlide;
       });
     }, 6000);
