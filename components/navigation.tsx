@@ -38,6 +38,7 @@ export default function Navigation() {
           // Scrolling up, show nav
           console.log("Showing nav - scroll up", currentScrollY);
           setViewNav(true);
+       
         }
         
         lastScrollY.current = currentScrollY;
@@ -86,8 +87,8 @@ export default function Navigation() {
   return (
     <nav
       className={`z-50 w-full ${
-        pathname === "/contact" ? "text-black" : "text-white"
-      } fixed top-0 left-0 bg-black/50 backdrop-blur-sm py-4 flex justify-between items-center transition-transform duration-300 ease-in-out`}
+        pathname === "/contact" ? "text-black/50" : "text-white"
+      } fixed top-0 left-0 bg-black/50 h-15 py-4 flex justify-between items-center transition-transform duration-300 ease-in-out`}
       style={{
         transform: viewNav ? "translateY(0)" : "translateY(-100%)"
       }}
