@@ -88,7 +88,7 @@ export default function Navigation() {
     <nav
       className={`z-50 w-full ${
         pathname === "/contact" ? "text-black/50" : "text-white"
-      } fixed top-0 left-0 bg-black/50 h-15 py-4 flex justify-between items-center transition-transform duration-300 ease-in-out`}
+      } fixed top-0 left-0 bg-black/50  py-4 flex justify-between items-center transition-transform duration-300 ease-in-out`}
       style={{
         transform: viewNav ? "translateY(0)" : "translateY(-100%)"
       }}
@@ -149,7 +149,7 @@ export default function Navigation() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -10, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className={`md:hidden px-6 pb-4 pt-2 bg-black/80 backdrop-blur text-white`}
+              className={`md:hidden mt-5 px-6 pb-4 pt-2 bg-black/80 backdrop-blur text-white`}
             >
               <div className="flex flex-col space-y-4">
                 {navItems.map((item) => (
