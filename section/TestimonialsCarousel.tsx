@@ -53,7 +53,6 @@ export default function TestimonialsCarousel() {
         if (data && Array.isArray(data) && data.length > 0) {
           setTestimonials(data);
         } else {
-          // Fallback testimonials for testing
           setTestimonials([
             {
               _id: "1",

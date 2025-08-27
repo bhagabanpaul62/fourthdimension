@@ -214,12 +214,13 @@ export default function AboutPage() {
 
             <div className="space-y-6 text-gray-700 text-base lg:text-lg leading-relaxed">
               {[
-                `Fourth Dimension is a Bangalore-based interiors and construction company built on the pillars of integrity, precision, and long-term value.`,
-                `We go beyond just design — we create high-performance, lasting spaces for both homes and businesses, delivered through end-to-end turnkey solutions powered by our in-house modular factory and a skilled, in-house team.`,
-                `In a market full of shortcuts, we stand for something different: Substance over show, Precision over speed, Partnership over profit.`,
-                `We don't outsource to unknown vendors. Every project is executed by our own trained professionals — ensuring seamless quality from start to finish.`,
-                `We are not just designers — we are space thinkers and execution specialists, building interiors that are made to last, inspire, and reflect your values.`,
-              ].map((text, index) => (
+  `Fourth Dimension is a Bangalore-based interiors and construction company built on the pillars of integrity, precision, and long-term value.`,
+  `We go beyond design — creating high-performance, lasting spaces for both homes and businesses.`,
+  `In a market full of shortcuts, we stand for something different: Substance over show, Precision over speed, Partnership over profit.`,
+  `We don't outsource to unknown vendors. Every project is executed by our own trained professionals — ensuring seamless quality from start to finish.`,
+  
+]
+.map((text, index) => (
                 <motion.p
                   key={index}
                   initial={{ opacity: 0, y: 10 }}

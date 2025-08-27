@@ -38,7 +38,7 @@ const slidesData = [
 
 export default function CompletedProjects() {
   return (
-    <section className="snap-start py-14 md:h-screen bg-black text-white">
+    <section className="snap-start py-20 md:h-screen bg-black text-white mt-16">
       <div className="  px-8">
         <div className="flex md:flex-row flex-col items-start justify-between md:mb-8 mb-2">
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-light mb-2">

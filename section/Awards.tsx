@@ -41,7 +41,7 @@ export default function AwardsSection() {
     <section className="snap-start md:h-screen bg-white py-12 px-8 flex flex-col ">
       {/* Header */}
       <div className="text-center mb-10">
-        <h2 className="md:text-4xl text-3xl text-black font-medium">
+    <h2 className="md:text-4xl text-3xl text-black font-medium mt-17">
           Awards
           <span className="text-gray-400"> & </span>
           Recognition

@@ -221,7 +221,8 @@ export default function QuoteForm() {
   }
 
   return (
-    <section className="py-12 snap-start bg-gray-50 md:h-screen min-h-screen px-8">
+  <section className="py-18
+   snap-start bg-gray-50 md:h-screen h-full px-8">
       <motion.div
         className="w-full"
         initial={{ opacity: 0, y: 30 }}

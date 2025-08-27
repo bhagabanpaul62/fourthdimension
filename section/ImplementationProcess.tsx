@@ -85,7 +85,7 @@ export default function ProjectProcessSection() {
   const currentData = tabData[activeTab];
 
   return (
-    <section className="snap-start py-14 bg-neutral-100 min-h-screen px-8">
+    <section className="snap-start py-20 bg-neutral-100 min-h-screen px-8">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between md:items-end items-center mb-8 text-sm uppercase tracking-wider font-medium">
         <div>

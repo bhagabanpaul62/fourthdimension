@@ -86,34 +86,35 @@ export default function Navigation() {
   
   return (
     <nav
-      className={`z-50 w-full ${
-        pathname === "/contact" ? "text-black/50" : "text-white"
-      } fixed top-0 left-0 bg-black/50  py-4 flex justify-between items-center transition-transform duration-300 ease-in-out`}
+      className={`z-50 w-full fixed top-0 left-0 transition-transform duration-300 ease-in-out ${
+        pathname === "/contact" ? "text-black/80 bg-white/80" : "text-white bg-black/80"
+      } shadow-lg backdrop-blur-lg`}
       style={{
         transform: viewNav ? "translateY(0)" : "translateY(-100%)"
       }}
+      aria-label="Main Navigation"
     >
-
-      <div className="px-10 w-full ">
-        <div className="flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 w-full">
+        <div className="flex items-center justify-between h-16">
           <Link
             href="/"
-            className=" text-4xl font-black text-shadow-xs text-shadow-black"
+            className="text-3xl sm:text-4xl font-extrabold tracking-tight flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            aria-label="Home"
           >
             F
             <sup>
-              <sup className="text-lg">D</sup>
+              <sup className="text-lg font-bold">D</sup>
             </sup>
           </Link>
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <Link
                 key={item.href + item.label}
                 href={item.href}
-                className={`${
+                className={`px-4 py-2 rounded-lg text-base font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
                   pathname === "/contact" ? "text-black" : "text-white"
-                } text-sm tracking-wider hover:opacity-70 hover:backdrop-blur-3xl duration-150 px-4 py-2 transition-opacity text-shadow-2xs text-shadow-black ${
-                  pathname === item.href && "bg-neutral-400/40"
+                } ${
+                  pathname === item.href ? "bg-indigo-500/20 shadow" : "hover:bg-indigo-500/10 hover:text-indigo-300"
                 }`}
               >
                 {item.label}
@@ -123,33 +124,38 @@ export default function Navigation() {
           {/* Mobile Toggle Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden focus:outline-none z-50"
+            className="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 z-50 bg-transparent"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
           >
             {isOpen ? (
-              <X
-                className={`w-6 h-6 ${isContact ? "text-black" : "text-white"}`}
-              />
+              <X className={`w-7 h-7 ${isContact ? "text-black" : "text-white"}`} />
             ) : (
-              <Menu
-                className={`w-6 h-6  ${
-                  isContact
-                    ? "text-black"
-                    : "text-white drop-shadow-sm drop-shadow-black"
-                }`}
-              />
+              <Menu className={`w-7 h-7 ${isContact ? "text-black" : "text-white"}`} />
             )}
           </button>
         </div>
-
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
+              onClick={() => setIsOpen(false)}
+            />
+          )}
+        </AnimatePresence>
         {/* Mobile Menu */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ y: -20, opacity: 0 }}
+              initial={{ y: -30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -10, opacity: 0 }}
+              exit={{ y: -20, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className={`md:hidden mt-5 px-6 pb-4 pt-2 bg-black/80 backdrop-blur text-white`}
+              className={`absolute top-16 left-0 w-full px-6 pb-6 pt-4 bg-black/90 backdrop-blur-lg text-white rounded-b-xl shadow-xl md:hidden z-50`}
             >
               <div className="flex flex-col space-y-4">
                 {navItems.map((item) => (
@@ -157,8 +163,8 @@ export default function Navigation() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className={`text-sm tracking-wider hover:opacity-70 transition-opacity ${
-                      pathname === item.href && "bg-white/10 px-3 py-2 rounded"
+                    className={`text-base font-medium px-4 py-2 rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                      pathname === item.href ? "bg-indigo-500/30 text-indigo-100" : "hover:bg-indigo-500/20 hover:text-indigo-300"
                     }`}
                   >
                     {item.label}
@@ -168,7 +174,6 @@ export default function Navigation() {
             </motion.div>
           )}
         </AnimatePresence>
-        {/* </div> */}
       </div>
     </nav>
   );

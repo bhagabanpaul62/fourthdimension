@@ -50,7 +50,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen lg:h-screen w-full overflow-clip">
+    <div className="min-h-screen py-10 lg:h-screen w-full overflow-clip">
       {/* Contact Section */}
       <section className="flex flex-col justify-between bg-neutral-200 h-full">
         <Navigation />

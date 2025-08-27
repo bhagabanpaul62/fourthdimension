@@ -108,7 +108,7 @@ const DesignProcess = (props: Props) => {
     }
   };
   return (
-    <section className="snap-start py-16 bg-stone-100 md:h-screen min-h-screen">
+    <section className="snap-start py-20 bg-stone-100 md:h-screen min-h-screen ">
       <div className="flex  md:flex-row flex-col-reverse justify-between items-start md:items-center md:mb-14 md:px-8 px-4">
         <div className="flex flex-col justify-between">
           <p className="text-xs text-gray-600 font-medium leading-relaxed md:max-w-md">
