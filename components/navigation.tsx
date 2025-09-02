@@ -77,9 +77,10 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { href: "/projects", label: "PROJECTS" },
-    { href: "/about", label: "ABOUT" },
-    { href: "/contact", label: "CONTACT" },
+    {href:"/", label:"HOME"},
+    { href: "/projects", label: "OUR WORK" },
+    { href: "/about", label: "ABOUT US" },
+    { href: "/contact", label: "CONTACT US" },
   ];
 
   const isContact = pathname === "/contact";
@@ -98,7 +99,7 @@ export default function Navigation() {
         <div className="flex items-center justify-between h-16">
           <Link
             href="/"
-            className="text-3xl sm:text-4xl font-extrabold tracking-tight flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="text-3xl sm:text-4xl font-extrabold tracking-tight flex items-center gap-1 focus:outline-none   "
             aria-label="Home"
           >
             F
@@ -111,7 +112,7 @@ export default function Navigation() {
               <Link
                 key={item.href + item.label}
                 href={item.href}
-                className={`px-4 py-2 rounded-lg text-base font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+                className={`px-4 py-2 rounded-lg text-base font-medium transition-all duration-150 focus:outline-none  ${
                   pathname === "/contact" ? "text-black" : "text-white"
                 } ${
                   pathname === item.href ? "bg-indigo-500/20 shadow" : "hover:bg-indigo-500/10 hover:text-indigo-300"
