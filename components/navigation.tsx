@@ -13,29 +13,29 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleScroll = (event: Event) => {
-      // Get scroll position from the actual scrolling element
+      //Get scroll position from the actual scrolling element
       let currentScrollY = 0;
       
       if (event.target instanceof HTMLElement) {
-        // Scroll event from a container div
+        //Scroll event from a container div
         currentScrollY = event.target.scrollTop;
       } else {
-        // Scroll event from window
+        //Scroll event from window
         currentScrollY = window.scrollY;
       }
       
       console.log("Scroll detected:", currentScrollY, "from", event.target);
       
-      // Only update if there's a significant scroll difference (reduces flickering)
+      //Only update if there's a significant scroll difference (reduces flickering)
       const scrollDifference = Math.abs(currentScrollY - lastScrollY.current);
       
       if (scrollDifference > 5) {
         if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-          // Scrolling down, hide nav
+          //Scrolling down, hide nav
           console.log("Hiding nav - scroll down", currentScrollY);
           setViewNav(false);
         } else if (currentScrollY < lastScrollY.current) {
-          // Scrolling up, show nav
+          //Scrolling up, show nav
           console.log("Showing nav - scroll up", currentScrollY);
           setViewNav(true);
        
@@ -164,7 +164,7 @@ export default function Navigation() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className={`text-base font-medium px-4 py-2 rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                    className={`text-base font-medium px-4 py-2 rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500${
                       pathname === item.href ? "bg-indigo-500/30 text-indigo-100" : "hover:bg-indigo-500/20 hover:text-indigo-300"
                     }`}
                   >

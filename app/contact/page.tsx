@@ -50,7 +50,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen py-10 lg:h-screen w-full overflow-clip">
+    <div className="min-h-screen  lg:h-screen w-full overflow-clip">
       {/* Contact Section */}
       <section className="flex flex-col justify-between bg-neutral-200 h-full">
         <Navigation />
@@ -231,9 +231,9 @@ export default function ContactPage() {
       </AnimatePresence>
 
       <motion.div
-        className="md:fixed w-full bottom-2 h-12 flex justify-between bg-neutral-200 md:bg-transparent text-gray-600 md:opacity-80 px-8 text-xs md:text-lg"
+        className="md:fixed w-full bottom-2  h-12 flex justify-between bg-neutral-200 md:bg-transparent text-gray-600 md:opacity-80 px-8 text-xs md:text-lg"
         initial={{ transform: "translateY(100px)" }}
-        animate={{ transform: "translateY(0px)" }}
+        animate={{ transform: "translateY(25px)" }}
         transition={{ duration: 0.8, delay: 0.5, type: "decay" }}
       >
         <p>© 2025 | Fourth Dimension</p>

@@ -1,6 +1,6 @@
 "use client";
 import Head from "next/head";
-import NavigationBar from "@/components/navigation";
+
 import Footer from "@/components/footer";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import BackgroundSlider from "react-background-slider";
@@ -12,6 +12,7 @@ import TestimonialsCarousel from "@/section/TestimonialsCarousel";
 import Link from "next/link";
 import QuoteForm from "@/section/QuoteForm";
 import { useEffect, useState } from "react";
+
 
 export default function HomePage() {
   const [images, setImages] = useState<string[]>([]);
@@ -47,7 +48,7 @@ export default function HomePage() {
       <BackgroundSlider images={images} duration={5} transition={2} />
       <section className="snap-start relative h-full w-full flex flex-col items-center justify-between overflow-hidden">
         <div className="absolute inset-0 bg-black/30" />
-        <NavigationBar />
+        
         <div className="snap-start relative h-full flex items-center justify-center w-full">
           <div className="relative z-10 text-white px-6 sm:px-10 md:px-16 w-full">
             <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between w-full gap-10 lg:gap-0">
@@ -91,6 +92,32 @@ export default function HomePage() {
                   MATERIALS AND DEPTH IN EVERY DETAIL.
                 </motion.p>
               </div>
+              
+            </div>
+            <div className="mt-10 flex gap-5">
+              <Link href="/book-now" className="block">
+                <motion.span
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  className="relative inline-flex items-center rounded-md bg-orange-500/90 hover:bg-orange-500 px-5 py-3 text-sm sm:text-base font-semibold tracking-wide text-white uppercase transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400 focus:ring-offset-black group select-none"
+                >
+                  <span>Book A Consultation</span>
+                  <span
+                    aria-hidden
+                    className="absolute bottom-1 left-3 right-3 h-[2px] bg-white/80 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"
+                  />
+                </motion.span>
+              </Link>
+              <Link
+                href="/projects"
+                className="inline-flex items-center px-4 py-2 border border-white text-sm font-medium rounded-md text-white hover:bg-white hover:text-black transition-colors"
+              >
+                VIEW DESIGN
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
             </div>
           </div>
         </div>
