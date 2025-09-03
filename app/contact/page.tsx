@@ -53,7 +53,7 @@ export default function ContactPage() {
     <div className="min-h-screen  lg:h-screen w-full overflow-clip">
       {/* Contact Section */}
       <section className="flex flex-col justify-between bg-neutral-200 h-full">
-        <Navigation />
+     
         <div className="px-6 pt-14  md:pb-20 h-full">
           <div className="grid grid-cols-1 lg:grid-cols-5 md:py-28 px-8 align-middle w-full h-full">
             <motion.div

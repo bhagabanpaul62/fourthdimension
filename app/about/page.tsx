@@ -75,10 +75,10 @@ export default function AboutPage() {
   },
 ];
   return (
-    <div className="h-screen overflow-y-scroll overflow-x-hidden scroll-smooth md:mandatory-scroll-snapping">
+    <div className="mandatory-scroll-snapping h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
       {/* Hero Section */}
       <section className="snap-start relative h-screen flex flex-col justify-center overflow-hidden">
-        <Navigation />
+        
         <Image
           src="/img5.jpg"
           alt="Modern architectural interior"

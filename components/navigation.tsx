@@ -10,66 +10,126 @@ export default function Navigation() {
   const pathname = usePathname();
   const [viewNav, setViewNav] = useState(true);
   const lastScrollY = useRef(0);
+  const rafRef = useRef<number | null>(null);
+  const isTabActive = useRef(true);
 
   useEffect(() => {
-    const handleScroll = (event: Event) => {
-      //Get scroll position from the actual scrolling element
-      let currentScrollY = 0;
-      
-      if (event.target instanceof HTMLElement) {
-        //Scroll event from a container div
-        currentScrollY = event.target.scrollTop;
-      } else {
-        //Scroll event from window
-        currentScrollY = window.scrollY;
-      }
-      
-      console.log("Scroll detected:", currentScrollY, "from", event.target);
-      
-      //Only update if there's a significant scroll difference (reduces flickering)
-      const scrollDifference = Math.abs(currentScrollY - lastScrollY.current);
-      
-      if (scrollDifference > 5) {
-        if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-          //Scrolling down, hide nav
-          console.log("Hiding nav - scroll down", currentScrollY);
-          setViewNav(false);
-        } else if (currentScrollY < lastScrollY.current) {
-          //Scrolling up, show nav
-          console.log("Showing nav - scroll up", currentScrollY);
-          setViewNav(true);
-       
-        }
-        
+    // Handle tab visibility changes
+    const handleVisibilityChange = () => {
+      isTabActive.current = !document.hidden;
+      if (isTabActive.current) {
+        // Reset scroll position when tab becomes active again
+        const container = getScrollContainer();
+        const currentScrollY = container !== window ? (container as HTMLElement).scrollTop : window.scrollY;
         lastScrollY.current = currentScrollY;
       }
     };
 
-    // Throttle scroll events for better performance
-    let ticking = false;
-    const throttledScroll = (event: Event) => {
-      if (!ticking) {
-        requestAnimationFrame(() => handleScroll(event));
-        ticking = true;
-        setTimeout(() => { ticking = false; }, 16); // ~60fps
+    // Handle window focus/blur events as backup
+    const handleFocus = () => {
+      isTabActive.current = true;
+      // Re-sync scroll position
+      const container = getScrollContainer();
+      const currentScrollY = container !== window ? (container as HTMLElement).scrollTop : window.scrollY;
+      lastScrollY.current = currentScrollY;
+    };
+
+    const handleBlur = () => {
+      isTabActive.current = false;
+    };
+
+    // Helper function to find the correct scroll container
+    const getScrollContainer = (): HTMLElement | Window => {
+      // Try to find scroll containers in order of preference
+      const containers = [
+        '.mandatory-scroll-snapping',
+        '[class*="mandatory-scroll-snapping"]', // Matches any element with class containing "mandatory-scroll-snapping"
+        '.overflow-y-scroll',
+        '[class*="overflow-y-scroll"]'
+      ];
+      
+      for (const selector of containers) {
+        const element = document.querySelector(selector) as HTMLElement;
+        if (element) {
+          return element;
+        }
+      }
+      
+      return window; // Fallback to window
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('focus', handleFocus);
+    window.addEventListener('blur', handleBlur);
+
+    // Improved scroll handler
+    const handleScroll = () => {
+      // Don't process scroll events if tab is not active
+      if (!isTabActive.current) return;
+      
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+
+      rafRef.current = requestAnimationFrame(() => {
+        const container = getScrollContainer();
+        const currentScrollY = container !== window ? (container as HTMLElement).scrollTop : window.scrollY;
+        
+        const scrollDifference = Math.abs(currentScrollY - lastScrollY.current);
+        
+        // Only react to significant scroll movements
+        if (scrollDifference > 8) {
+          if (currentScrollY > lastScrollY.current && currentScrollY > 120) {
+            // Scrolling down, hide nav
+            setViewNav(false);
+          } else if (currentScrollY < lastScrollY.current) {
+            // Scrolling up, show nav
+            setViewNav(true);
+          }
+          lastScrollY.current = currentScrollY;
+        }
+      });
+    };
+
+    // Wait for DOM to be ready and attach listeners
+    const setupScrollListeners = () => {
+      const container = getScrollContainer();
+      
+      if (container !== window) {
+        (container as HTMLElement).addEventListener('scroll', handleScroll, { passive: true });
+        // Initialize scroll position
+        lastScrollY.current = (container as HTMLElement).scrollTop;
+      } else {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        lastScrollY.current = window.scrollY;
       }
     };
 
-    // Add scroll listener to both window and scroll containers
-    const scrollContainers = document.querySelectorAll('.mandatory-scroll-snapping, .overflow-y-scroll');
-    
-    scrollContainers.forEach(container => {
-      container.addEventListener("scroll", throttledScroll, { passive: true });
-    });
-    window.addEventListener("scroll", throttledScroll, { passive: true });
-    
+    // Setup listeners immediately if DOM is ready, otherwise wait
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupScrollListeners);
+    } else {
+      setupScrollListeners();
+    }
+
     return () => {
-      scrollContainers.forEach(container => {
-        container.removeEventListener("scroll", throttledScroll);
-      });
-      window.removeEventListener("scroll", throttledScroll);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('blur', handleBlur);
+      document.removeEventListener('DOMContentLoaded', setupScrollListeners);
+      
+      const container = getScrollContainer();
+      if (container !== window) {
+        (container as HTMLElement).removeEventListener('scroll', handleScroll);
+      } else {
+        window.removeEventListener('scroll', handleScroll);
+      }
+      
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
     };
-  }, []);
+  }, [pathname]); // Re-run when pathname changes
 
 
 
@@ -115,7 +175,7 @@ export default function Navigation() {
                 className={`px-4 py-2 rounded-lg text-base font-medium transition-all duration-150 focus:outline-none  ${
                   pathname === "/contact" ? "text-black" : "text-white"
                 } ${
-                  pathname === item.href ? "bg-indigo-500/20 shadow" : "hover:bg-indigo-500/10 hover:text-indigo-300"
+                  pathname === item.href ? "bg-orange-500/20 shadow" : "hover:bg-orange-500/10 hover:text-orange-300"
                 }`}
               >
                 {item.label}
@@ -125,7 +185,7 @@ export default function Navigation() {
           {/* Mobile Toggle Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 z-50 bg-transparent"
+            className="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-500 z-50 bg-transparent"
             aria-label={isOpen ? "Close menu" : "Open menu"}
           >
             {isOpen ? (
@@ -164,8 +224,8 @@ export default function Navigation() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className={`text-base font-medium px-4 py-2 rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500${
-                      pathname === item.href ? "bg-indigo-500/30 text-indigo-100" : "hover:bg-indigo-500/20 hover:text-indigo-300"
+                    className={`text-base font-medium px-4 py-2 rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-orange-500${
+                      pathname === item.href ? "bg-orange-500/30 text-orange-100" : "hover:bg-orange-500/20 hover:text-orange-300"
                     }`}
                   >
                     {item.label}

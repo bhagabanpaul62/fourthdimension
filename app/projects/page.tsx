@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Navigation from "@/components/navigation";
+
 import Footer from "@/components/footer";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, ChevronDown, X } from "lucide-react";
@@ -72,7 +72,7 @@ export default function ProjectsPage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1.1, type: "decay" }}
       >
-        <Navigation />
+       
         <Image
           src="/img5.jpg"
           alt="Modern interior with entertainment center"
