@@ -92,7 +92,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
             className="relative z-10 text-white text-center max-w-4xl mx-auto px-6"
           >
             <h1 className="text-6xl lg:text-8xl font-light mb-8">
@@ -117,7 +117,7 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          transition={{ duration: 0.2, ease: "easeInOut" }}
           className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 h-full w-full max-w-7xl mx-auto"
         >
           {/* Text Content */}
@@ -126,7 +126,7 @@ export default function AboutPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, ease: "easeInOut", delay: 0.1 }}
+              transition={{ duration: 0.1, ease: "easeInOut", delay: 0.1 }}
             >
               <span className="text-sm tracking-widest uppercase text-black/60 font-medium mb-2 inline-block">Our Vision</span>
             </motion.div>
@@ -135,7 +135,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: "easeInOut", delay: 0.2 }}
+              transition={{ duration: 0.15, ease: "easeInOut", delay: 0.2 }}
               className="text-4xl lg:text-5xl font-light mb-10 leading-tight text-black"
             >
               Design <span className="text-black/50">Philosophy</span>
@@ -152,7 +152,7 @@ export default function AboutPage() {
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.2 }}
+                  transition={{ duration: 0.15, delay: 0.2 + index * 0.2 }}
                 >
                   {text}
                 </motion.p>
@@ -165,7 +165,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.2, delay: 0.3, ease: "easeInOut" }}
             className="relative flex items-center w-full h-[400px] md:h-[500px] lg:h-[600px]"
           >
             <div className="absolute inset-0 w-full h-full" style={{ boxShadow: '0 15px 30px rgba(0,0,0,0.08)' }}>
@@ -188,7 +188,7 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          transition={{ duration: 0.2, ease: "easeInOut" }}
           className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 h-full w-full max-w-7xl mx-auto"
         >
           {/* Text Content */}
@@ -197,7 +197,7 @@ export default function AboutPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, ease: "easeInOut", delay: 0.1 }}
+              transition={{ duration: 0.1, ease: "easeInOut", delay: 0.1 }}
             >
               <span className="text-sm tracking-widest uppercase text-black/60 font-medium mb-2 inline-block">Our Method</span>
             </motion.div>
@@ -206,7 +206,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: "easeInOut", delay: 0.2 }}
+              transition={{ duration: 0.15, ease: "easeInOut", delay: 0.2 }}
               className="text-4xl lg:text-5xl font-light mb-10 leading-tight text-black"
             >
               The <span className="text-black/50">Approach</span>
@@ -226,7 +226,7 @@ export default function AboutPage() {
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.2 }}
+                  transition={{ duration: 0.15, delay: 0.2 + index * 0.2 }}
                 >
                   {text}
                 </motion.p>
@@ -239,7 +239,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.2, delay: 0.3, ease: "easeInOut" }}
             className="relative flex flex-col space-y-10"
           >
             <div className="relative w-full h-[350px] md:h-[400px]" style={{ boxShadow: '0 15px 30px rgba(0,0,0,0.08)' }}>
@@ -264,7 +264,7 @@ export default function AboutPage() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.2 }}
+                  transition={{ duration: 0.15, delay: 0.3 + index * 0.2 }}
                   className="p-6 bg-white border border-gray-100"
                   style={{ boxShadow: '0 10px 20px rgba(0,0,0,0.04)' }}
                 >
@@ -284,7 +284,7 @@ export default function AboutPage() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
+            transition={{ duration: 0.1, ease: "easeInOut" }}
           >
             <span className="text-sm tracking-widest uppercase text-black/60 font-medium mb-2 inline-block">The Experts</span>
           </motion.div>
@@ -293,7 +293,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeInOut", delay: 0.1 }}
+            transition={{ duration: 0.15, ease: "easeInOut", delay: 0.1 }}
             className="text-4xl lg:text-5xl text-black font-light mb-6"
           >
             Leadership <span className="text-black/50">Team</span>
@@ -303,7 +303,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.15, delay: 0.2 }}
             className="text-gray-600 max-w-2xl mx-auto font-light"
           >
             The minds and hands behind our exceptional spaces
@@ -316,7 +316,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 + index * 0.2 }}
+              transition={{ duration: 0.15, delay: 0.2 + index * 0.2 }}
               className="group bg-white flex flex-col items-center p-12 w-full max-w-md mx-auto border-t border-gray-100 hover:-translate-y-1 transition-all duration-500"
               style={{ boxShadow: '0 15px 30px rgba(0,0,0,0.08)' }}
             >
@@ -345,7 +345,7 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          transition={{ duration: 0.2, ease: "easeInOut" }}
           className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 h-full w-full max-w-7xl mx-auto"
         >
           {/* Images Section */}
@@ -353,7 +353,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.2, delay: 0.3, ease: "easeInOut" }}
             className="relative flex flex-col space-y-12"
           >
             <div className="relative w-full h-[280px] md:h-[320px] overflow-hidden" style={{ boxShadow: '0 15px 30px rgba(0,0,0,0.08)' }}>
@@ -385,7 +385,7 @@ export default function AboutPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, ease: "easeInOut", delay: 0.1 }}
+              transition={{ duration: 0.1, ease: "easeInOut", delay: 0.1 }}
             >
               <span className="text-sm tracking-widest uppercase text-black/60 font-medium mb-2 inline-block">Our Commitment</span>
             </motion.div>
@@ -394,7 +394,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: "easeInOut", delay: 0.2 }}
+              transition={{ duration: 0.15, ease: "easeInOut", delay: 0.2 }}
               className="text-4xl lg:text-5xl font-light mb-10 leading-tight text-black"
             >
               Purpose <span className="text-black/50">&</span> Promise
@@ -411,7 +411,7 @@ export default function AboutPage() {
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.2 }}
+                  transition={{ duration: 0.15, delay: 0.3 + index * 0.2 }}
                 >
                   {text}
                 </motion.p>
@@ -421,7 +421,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.8 }}
+                transition={{ duration: 0.15, delay: 0.8 }}
                 className="pt-2"
               >
                 <h3 className="font-light text-2xl mb-6 text-black border-b border-black/10 pb-2">Our Commitments</h3>
@@ -445,7 +445,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 1.0 }}
+                transition={{ duration: 0.15, delay: 1.0 }}
                 className="font-medium pt-3 italic text-black"
               >
                 We don't chase quick profits — we build spaces that stand the test of time and relationships that go beyond the project.
@@ -470,7 +470,7 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1, margin: "0px 0px -10% 0px" }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          transition={{ duration: 0.2, ease: "easeInOut" }}
           className="max-w-7xl mx-auto"
         >
           <div className="text-center mb-12 md:mb-16">
@@ -478,7 +478,7 @@ export default function AboutPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
+              transition={{ duration: 0.1, ease: "easeInOut" }}
             >
               <span className="text-sm tracking-widest uppercase text-black/60 font-medium mb-2 inline-block">Our Difference</span>
             </motion.div>
@@ -487,7 +487,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.6, ease: "easeInOut", delay: 0.1 }}
+              transition={{ duration: 0.15, ease: "easeInOut", delay: 0.1 }}
               className="text-3xl md:text-4xl lg:text-5xl font-light mb-4 md:mb-6 leading-tight text-black"
             >
               What <span className="text-black/50">Sets Us Apart</span>
@@ -537,7 +537,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
+                transition={{ duration: 0.15, delay: 0.1 + index * 0.05 }}
                 className="bg-white p-5 sm:p-6 md:p-8 border border-gray-100 flex flex-col h-full"
                 style={{ boxShadow: '0 15px 30px rgba(0,0,0,0.05)' }}
               >
@@ -561,7 +561,7 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          transition={{ duration: 0.2, ease: "easeInOut" }}
           className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 h-full w-full max-w-7xl mx-auto"
         >
           {/* Text Content */}
@@ -570,7 +570,7 @@ export default function AboutPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, ease: "easeInOut", delay: 0.1 }}
+              transition={{ duration: 0.1, ease: "easeInOut", delay: 0.1 }}
             >
               <span className="text-sm tracking-widest uppercase text-black/60 font-medium mb-2 inline-block">Our Promise</span>
             </motion.div>
@@ -579,7 +579,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: "easeInOut", delay: 0.2 }}
+              transition={{ duration: 0.15, ease: "easeInOut", delay: 0.2 }}
               className="text-4xl lg:text-5xl font-light mb-10 leading-tight text-black"
             >
               Let's Build <span className="text-black/50">Something That Lasts</span>
@@ -590,7 +590,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
+                transition={{ duration: 0.15, delay: 0.3 }}
                 className="italic font-medium"
               >
                 In an industry full of noise, we choose clarity.<br />
@@ -602,7 +602,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5 }}
+                transition={{ duration: 0.15, delay: 0.5 }}
               >
                 At Fourth Dimension, we don't just finish projects —<br />
                 we stand by you till the very end.<br />
@@ -613,7 +613,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.7 }}
+                transition={{ duration: 0.15, delay: 0.7 }}
                 className="pt-8 border-t border-black/10"
               >
                 <p className="text-sm font-medium mb-4">📍 Bangalore | 💼 Commercial + Residential Interiors</p>
@@ -627,7 +627,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.2, delay: 0.3, ease: "easeInOut" }}
             className="relative flex items-center justify-center w-full h-[400px] md:h-[500px] lg:h-[600px] order-1 lg:order-2"
           >
             <div className="relative w-full h-full" style={{ boxShadow: '0 15px 30px rgba(0,0,0,0.08)' }}>

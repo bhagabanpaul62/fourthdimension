@@ -92,18 +92,48 @@ export default function ContactPage() {
                   </h3>
                   <h4 className="font-black mb-4 text-lg">EMAIL:</h4>
                   <div className="space-y-1 underline text-lg ">
-                    <p className=" ">suresh66ar@gmail.com</p>
-                    <p className=" ">nikkysuresh2001@gmail.com</p>
-                    <p className="">rhemaconsultants3@gmail.com</p>
+                    <a 
+                      href="mailto:suresh66ar@gmail.com" 
+                      className="block hover:text-blue-600 transition-colors cursor-pointer"
+                    >
+                      suresh66ar@gmail.com
+                    </a>
+                    <a 
+                      href="mailto:nikkysuresh2001@gmail.com" 
+                      className="block hover:text-blue-600 transition-colors cursor-pointer"
+                    >
+                      nikkysuresh2001@gmail.com
+                    </a>
+                    <a 
+                      href="mailto:rhemaconsultants3@gmail.com" 
+                      className="block hover:text-blue-600 transition-colors cursor-pointer"
+                    >
+                      rhemaconsultants3@gmail.com
+                    </a>
                   </div>
                 </div>
 
                 <div>
                   <h4 className="font-black mb-4 text-lg">NUMBER:</h4>
                   <div className="space-y-1 underline mb-8 text-lg">
-                    <p className=" ">+91- 9980008943</p>
-                    <p className=" ">+91-9620640889</p>
-                    <p className=" ">+91-9611067263</p>
+                    <a 
+                      href="tel:+919980008943" 
+                      className="block hover:text-blue-600 transition-colors cursor-pointer"
+                    >
+                      +91- 9980008943
+                    </a>
+                    <a 
+                      href="tel:+919620640889" 
+                      className="block hover:text-blue-600 transition-colors cursor-pointer"
+                    >
+                      +91-9620640889
+                    </a>
+                    <a 
+                      href="tel:+919611067263" 
+                      className="block hover:text-blue-600 transition-colors cursor-pointer"
+                    >
+                      +91-9611067263
+                    </a>
                   </div>
                 </div>
 
