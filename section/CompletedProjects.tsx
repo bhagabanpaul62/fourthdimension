@@ -38,7 +38,7 @@ const slidesData = [
 
 export default function CompletedProjects() {
   return (
-    <section className="snap-start py-20 md:h-screen bg-black text-white mt-16">
+    <section className="snap-start py-20 md:h-screen bg-black text-white ">
       <div className="  px-8">
         <div className="flex md:flex-row flex-col items-start justify-between md:mb-8 mb-2">
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-light mb-2">
@@ -173,7 +173,7 @@ export default function CompletedProjects() {
 
         <div className="mt-8 flex  justify-end mx-8 -my-8">
           <Link href={"/projects"} className="border-b">
-            <button className="flex items-center space-x-2 text-white hover:opacity-70 transition-opacity">
+            <button className=" flex items-center space-x-2 text-white hover:opacity-70 transition-opacity">
               <span>ALL COMPLETED PROJECTS</span>
               <ArrowRight className="w-4 h-4" />
             </button>
