@@ -306,7 +306,7 @@ export default function TestimonialsCarousel() {
   }
 
   return (
-    <section className="min-h-screen md:h-screen px-4 md:px-6 lg:px-10 snap-start bg-stone-100 flex flex-col md:overflow-hidden">
+    <section className="min-h-screen md:h-screen  px-4 md:px-6 lg:px-10 snap-start bg-stone-100 flex flex-col md:overflow-hidden">
       <div className="py-6 md:py-8 max-w-7xl mx-auto w-full flex-shrink-0">
         <h2 className="text-3xl md:text-4xl lg:text-5xl text-black font-light mb-2 md:mb-4">
           Client <span className="text-black/50">Testimonials</span>

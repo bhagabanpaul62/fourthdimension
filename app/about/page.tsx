@@ -75,9 +75,9 @@ export default function AboutPage() {
   },
 ];
   return (
-    <div className="mandatory-scroll-snapping h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
+    <div className="h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
       {/* Hero Section */}
-      <section className="snap-start relative h-screen flex flex-col justify-center overflow-hidden">
+      <section className="relative h-screen flex flex-col justify-center overflow-hidden">
         
         <Image
           src="/img5.jpg"
@@ -87,7 +87,7 @@ export default function AboutPage() {
           priority
         />
         <div className="absolute inset-0 bg-black/40" />
-        <div className="snap-start relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="relative h-screen flex items-center justify-center overflow-hidden">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -112,7 +112,7 @@ export default function AboutPage() {
         </div>
       </section>
       {/* Philosophy Section */}
-      <section className="snap-start min-h-screen bg-gray-50 px-6 md:px-10 lg:px-20 py-10 flex items-center">
+      <section className="min-h-screen bg-gray-50 px-6 md:px-10 lg:px-20 py-10 flex items-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -183,7 +183,7 @@ export default function AboutPage() {
       </section>
 
       {/* About us */}
-      <section className="snap-start min-h-screen bg-white px-6 md:px-10 lg:px-20 py-10 flex items-center">
+      <section className="min-h-screen bg-white px-6 md:px-10 lg:px-20 py-10 flex items-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -278,7 +278,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16  px-6 min-h-screen snap-start bg-[#f8f8f8]">
+      <section className="py-16  px-6 min-h-screen bg-[#f8f8f8]">
         <div className="text-center md:mb-20 mb-12 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -340,7 +340,7 @@ export default function AboutPage() {
       </section>
 
      {/* Our Purpose and promise */}
-      <section className="snap-start min-h-screen bg-white px-6 md:px-10 lg:px-20 py-10 flex items-center">
+      <section className="min-h-screen bg-white px-6 md:px-10 lg:px-20 py-10 flex items-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -463,7 +463,7 @@ export default function AboutPage() {
 
       {/* What Sets Us Apart Section */}
       <section 
-        className="md:snap-start py-16 md:min-h-screen bg-[#f8f8f8] px-6 md:px-10 lg:px-20 md:py-16 lg:py-20"
+        className="py-16 md:min-h-screen bg-[#f8f8f8] px-6 md:px-10 lg:px-20 md:py-16 lg:py-20"
         style={{ opacity: 1 }} // Ensure visibility
       >
         <motion.div
@@ -556,7 +556,7 @@ export default function AboutPage() {
             
 
       {/* Let's Build Something That Lasts */}
-      <section className="snap-start min-h-screen bg-white px-6 md:px-10 lg:px-20 py-5 flex items-center">
+      <section className="min-h-screen bg-white px-6 md:px-10 lg:px-20 py-5 flex items-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -651,7 +651,7 @@ export default function AboutPage() {
         duration={5}
         transition={2}
       />
-      <section className="relative px-8 snap-start h-screen py-20 flex items-center justify-center overflow-hidden bg-black/30">
+      <section className="relative px-8 h-screen py-20 flex items-center justify-center overflow-hidden bg-black/30">
         <div className="relative z-10 text-white text-center ">
           <h2 className="text-3xl md:text-4xl lg:text-6xl font-light mb-8">
             Ready to create your
