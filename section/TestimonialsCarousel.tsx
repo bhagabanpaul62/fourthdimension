@@ -418,7 +418,7 @@ export default function TestimonialsCarousel() {
                   </svg>
                   
                   <div className="flex-1 min-h-0 flex flex-col justify-center">
-                    <p className="text-lg sm:text-xl md:text-lg text-gray-800 leading-relaxed mb-5 sm:mb-6 md:mb-6 font-light">
+                    <p className="text-sm sm:text-sm md:text-sm text-gray-800 leading-relaxed mb-5 sm:mb-6 md:mb-6 font-light">
                       "{testimonial.content}"
                     </p>
                     
